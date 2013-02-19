@@ -15,8 +15,13 @@ public class Inscription extends javax.swing.JFrame {
     /**
      * Creates new form Inscription
      */
-    public Inscription() {
+    private java.awt.Frame parent;
+
+    public Inscription(java.awt.Frame parent) {
+        parent.setVisible(false);
         initComponents();
+        this.parent = parent;
+
     }
 
     /**
@@ -53,6 +58,11 @@ public class Inscription extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setText("Nom utilisateur :");
 
@@ -222,9 +232,9 @@ public class Inscription extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
-        if (jTextField1.getForeground()==Color.LIGHT_GRAY) {
+        if (jTextField1.getForeground() == Color.LIGHT_GRAY) {
             jTextField1.setText(null);
-            jTextField1.setForeground(Color.black);            
+            jTextField1.setForeground(Color.black);
         }
     }//GEN-LAST:event_jTextField1MouseClicked
 
@@ -237,32 +247,37 @@ public class Inscription extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
-        if (jTextField2.getForeground()==Color.LIGHT_GRAY) {
+        if (jTextField2.getForeground() == Color.LIGHT_GRAY) {
             jTextField2.setText(null);
-            jTextField2.setForeground(Color.black);            
+            jTextField2.setForeground(Color.black);
         }
     }//GEN-LAST:event_jTextField2MouseClicked
 
     private void jTextField3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField3MouseClicked
-        if (jTextField3.getForeground()==Color.LIGHT_GRAY) {
+        if (jTextField3.getForeground() == Color.LIGHT_GRAY) {
             jTextField3.setText(null);
-            jTextField3.setForeground(Color.black);            
+            jTextField3.setForeground(Color.black);
         }
     }//GEN-LAST:event_jTextField3MouseClicked
 
     private void jTextField4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField4MouseClicked
-        if (jTextField4.getForeground()==Color.LIGHT_GRAY) {
+        if (jTextField4.getForeground() == Color.LIGHT_GRAY) {
             jTextField4.setText(null);
-            jTextField4.setForeground(Color.black);            
+            jTextField4.setForeground(Color.black);
         }
     }//GEN-LAST:event_jTextField4MouseClicked
 
     private void jTextField5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField5MouseClicked
-        if (jTextField5.getForeground()==Color.LIGHT_GRAY) {
+        if (jTextField5.getForeground() == Color.LIGHT_GRAY) {
             jTextField5.setText(null);
-            jTextField5.setForeground(Color.black);            
+            jTextField5.setForeground(Color.black);
         }
     }//GEN-LAST:event_jTextField5MouseClicked
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        parent.setVisible(true);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -301,7 +316,7 @@ public class Inscription extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new Inscription().setVisible(true);
+                //new Inscription().setVisible(true);
             }
         });
     }
