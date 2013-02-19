@@ -13,9 +13,16 @@ public class MessageBox extends javax.swing.JDialog {
     /**
      * Creates new form MessageBox
      */
-    public MessageBox(java.awt.Frame parent, boolean modal) {
+    private static String message;
+    java.awt.Frame parent;
+    public MessageBox(java.awt.Frame parent, boolean modal, String message) {
+    
         super(parent, modal);
         initComponents();
+        this.message=message;
+        this.parent=parent;   
+        this.jLabel1.setText(message);
+        
     }
 
     /**
@@ -86,7 +93,13 @@ public class MessageBox extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         this.dispose();
+        if (message=="Quitter ?")
+            System.exit(0);
+        else if(message=="Quitter le salon?")
+            this.parent.dispose();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -126,7 +139,7 @@ public class MessageBox extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                MessageBox dialog = new MessageBox(new javax.swing.JFrame(), true);
+                MessageBox dialog = new MessageBox(new javax.swing.JFrame(), true, message);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 
                     @Override
