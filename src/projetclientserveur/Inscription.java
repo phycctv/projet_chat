@@ -16,9 +16,12 @@ public class Inscription extends javax.swing.JFrame {
     /**
      * Creates new form Inscription
      */
-    public Inscription(Controleur controleur) {
+    private java.awt.Frame parent;
+
+    public Inscription(java.awt.Frame parent, Controleur controleur) {
         this.setControleur(controleur);
         initComponents();
+        parent.setVisible(false);
         this.parent = parent;
 
     }
@@ -30,8 +33,6 @@ public class Inscription extends javax.swing.JFrame {
     public void setControleur(Controleur controleur) {
         this.controleur = controleur;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,6 +64,11 @@ public class Inscription extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Nom utilisateur :");
 
@@ -244,6 +250,7 @@ public class Inscription extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
+        parent.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
@@ -274,10 +281,10 @@ public class Inscription extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextField5MouseClicked
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         parent.setVisible(true);
-    }//GEN-LAST:event_formWindowClosed
+    }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;

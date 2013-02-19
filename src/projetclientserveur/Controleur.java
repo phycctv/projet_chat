@@ -9,17 +9,17 @@ package projetclientserveur;
  * @author bodinjo
  */
 public class Controleur {
-
+    private FenetrePrincipal fp;
     public Controleur() {
     }
     
     public void fenetrePrincipal() {
-        FenetrePrincipal fp = new FenetrePrincipal(this);
+        this.fp = new FenetrePrincipal(this);
         fp.setVisible(true);
     }
     
     public void fenetreInscription() {
-        Inscription fIns = new Inscription(this);
+        Inscription fIns = new Inscription(fp,this);
         fIns.setVisible(true);
     }
     
