@@ -62,9 +62,6 @@ public class Inscription extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField1MouseClicked(evt);
             }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jTextField1MouseReleased(evt);
-            }
         });
 
         jButton1.setText("Vérifier");
@@ -225,14 +222,11 @@ public class Inscription extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
-        jTextField1.setText(null);
-        jTextField5.setForeground(Color.black);
+        if (jTextField1.getForeground()==Color.LIGHT_GRAY) {
+            jTextField1.setText(null);
+            jTextField1.setForeground(Color.black);            
+        }
     }//GEN-LAST:event_jTextField1MouseClicked
-
-    private void jTextField1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseReleased
-
-        jTextField1.setText("Choisir un login");
-    }//GEN-LAST:event_jTextField1MouseReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -243,23 +237,31 @@ public class Inscription extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
-        jTextField2.setText(null);
-        jTextField5.setForeground(Color.black);
+        if (jTextField2.getForeground()==Color.LIGHT_GRAY) {
+            jTextField2.setText(null);
+            jTextField2.setForeground(Color.black);            
+        }
     }//GEN-LAST:event_jTextField2MouseClicked
 
     private void jTextField3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField3MouseClicked
-        jTextField3.setText(null);
-        jTextField5.setForeground(Color.black);
+        if (jTextField3.getForeground()==Color.LIGHT_GRAY) {
+            jTextField3.setText(null);
+            jTextField3.setForeground(Color.black);            
+        }
     }//GEN-LAST:event_jTextField3MouseClicked
 
     private void jTextField4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField4MouseClicked
-        jTextField4.setText(null);
-        jTextField5.setForeground(Color.black);
+        if (jTextField4.getForeground()==Color.LIGHT_GRAY) {
+            jTextField4.setText(null);
+            jTextField4.setForeground(Color.black);            
+        }
     }//GEN-LAST:event_jTextField4MouseClicked
 
     private void jTextField5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField5MouseClicked
-        jTextField5.setText(null);
-        jTextField5.setForeground(Color.black);
+        if (jTextField5.getForeground()==Color.LIGHT_GRAY) {
+            jTextField5.setText(null);
+            jTextField5.setForeground(Color.black);            
+        }
     }//GEN-LAST:event_jTextField5MouseClicked
 
     /**

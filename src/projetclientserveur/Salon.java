@@ -11,5 +11,19 @@ package projetclientserveur;
 public class Salon {
 
     private String identSalon;
+
+    public Salon(String identSalon) {
+        this.identSalon = identSalon;
+    }
+
+    public String getIdentSalon() {
+        return identSalon;
+    }
+
+    public void setIdentSalon(String identSalon) {
+        this.identSalon = identSalon;
+    }
+    
+    
     
 }
