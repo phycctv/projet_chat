@@ -4,6 +4,8 @@
  */
 package projetclientserveur;
 
+import javax.swing.UIManager;
+
 /**
  *
  * @author zhangxi
@@ -14,7 +16,18 @@ public class ProjetClientServeur {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        FenetrePrincipal fp = new FenetrePrincipal();
-        fp.setVisible(true);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FenetrePrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FenetrePrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FenetrePrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FenetrePrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        Controleur controleur = new Controleur();
+        controleur.fenetrePrincipal();
     }
 }
