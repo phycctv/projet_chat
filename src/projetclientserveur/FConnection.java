@@ -56,11 +56,6 @@ public class FConnection extends javax.swing.JFrame {
 
         jTextField1.setForeground(java.awt.Color.lightGray);
         jTextField1.setText("Votre login");
-        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField1MouseClicked(evt);
-            }
-        });
         jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField1FocusGained(evt);
@@ -138,14 +133,12 @@ public class FConnection extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
-    }//GEN-LAST:event_jTextField1MouseClicked
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (true) {
             this.controleur.setNomUtilisateur(jTextField1.getText().toString());
             this.controleur.setConncte(true);
+            controleur.connection();
             this.dispose();
             parent.getmItemConnection().setEnabled(false);
             parent.getmItemDeconnection().setEnabled(true);
