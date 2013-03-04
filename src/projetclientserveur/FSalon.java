@@ -8,7 +8,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.Socket;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
@@ -24,7 +23,6 @@ public class FSalon extends javax.swing.JFrame {
     private Controleur controleur;
     private java.awt.Frame parent;
     private DefaultListModel listModel1;
-
 
     public FSalon(java.awt.Frame parent, Controleur controleur) {
         this.setControleur(controleur);
@@ -149,7 +147,21 @@ public class FSalon extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        //this.controleur.connection();
+        try {
+            // Récupération du flot d'entrée
+            InputStream in = this.controleur.getSocket().getInputStream();
+            // Création du flot d'entrée pour données typées
+            DataInputStream entree = new DataInputStream(in);
+            // Récupération du flot de sortie
+            OutputStream out = this.controleur.getSocket().getOutputStream();
+            // Création du flot de sortie pour données typées
+            DataOutputStream sortie = new DataOutputStream(out);
+            sortie.writeUTF(controleur.getNomUtilisateur());
+            sortie.writeUTF(jTextField1.getText());
+        } catch (Exception e) {
+            MessageBox mb = new MessageBox(this, true, "Probleme de connection");
+            mb.setVisible(true);
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
