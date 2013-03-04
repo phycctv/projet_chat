@@ -4,9 +4,8 @@
  */
 package projetclientserveur;
 
-import java.io.DataInputStream;
+import java.awt.event.KeyEvent;
 import java.io.DataOutputStream;
-import java.io.InputStream;
 import java.io.OutputStream;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -37,8 +36,8 @@ public class FSalon extends javax.swing.JFrame {
         this.jList1 = new JList(listModel1);
         jScrollPane2.setViewportView(jList1);
         this.jLabel1.setText(this.controleur.getNomUtilisateur() + " : ");
-
-
+        SimpleThread messages = new SimpleThread("messageArea", messageArea, controleur);
+        messages.start();
     }
 
     public Controleur getControleur() {
@@ -75,6 +74,12 @@ public class FSalon extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(jList1);
 
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
+
         jButton1.setText("Envoyer");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +88,7 @@ public class FSalon extends javax.swing.JFrame {
         });
 
         messageArea.setColumns(20);
+        messageArea.setEditable(false);
         messageArea.setLineWrap(true);
         messageArea.setRows(5);
         messageArea.setAutoscrolls(true);
@@ -147,28 +153,46 @@ public class FSalon extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        try {
-            // Récupération du flot d'entrée
-            InputStream in = this.controleur.getSocket().getInputStream();
-            // Création du flot d'entrée pour données typées
-            DataInputStream entree = new DataInputStream(in);
-            // Récupération du flot de sortie
-            OutputStream out = this.controleur.getSocket().getOutputStream();
-            // Création du flot de sortie pour données typées
-            DataOutputStream sortie = new DataOutputStream(out);
-            sortie.writeUTF(controleur.getNomUtilisateur());
-            sortie.writeUTF(jTextField1.getText());
-        } catch (Exception e) {
-            MessageBox mb = new MessageBox(this, true, "Probleme de connection");
-            mb.setVisible(true);
-        }
+        if (!jTextField1.getText().isEmpty()) {
+            try {
 
+                // Récupération du flot de sortie
+                OutputStream out = this.controleur.getSocket().getOutputStream();
+                // Création du flot de sortie pour données typées
+                DataOutputStream sortie = new DataOutputStream(out);
+                sortie.writeUTF(controleur.getNomUtilisateur());
+                sortie.writeUTF(jTextField1.getText());
+                jTextField1.setText("");
+            } catch (Exception e) {
+                MessageBox mb = new MessageBox(this, true, "Probleme de connection, vous êtes déco");
+                mb.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         MessageBox mb = new MessageBox(this, true, "Quitter le salon?");
         mb.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER && !jTextField1.getText().isEmpty()) {
+            try {
+
+                // Récupération du flot de sortie
+                OutputStream out = this.controleur.getSocket().getOutputStream();
+                // Création du flot de sortie pour données typées
+                DataOutputStream sortie = new DataOutputStream(out);
+                sortie.writeUTF(controleur.getNomUtilisateur());
+                sortie.writeUTF(jTextField1.getText());
+                jTextField1.setText("");
+            } catch (Exception e) {
+                MessageBox mb = new MessageBox(this, true, "Probleme de connection, vous êtes déco");
+                mb.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

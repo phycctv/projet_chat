@@ -90,41 +90,17 @@ public class Controleur {
             int port = 5015;
             System.out.println(host + " : " + port);
             socket = new Socket(host, port);
-            // Récupération du flot d'entrée
-            InputStream in = socket.getInputStream();
-            // Création du flot d'entrée pour données typées
-            DataInputStream entree = new DataInputStream(in);
-            // Récupération du flot de sortie
-            OutputStream out = socket.getOutputStream();
-            // Création du flot de sortie pour données typées
-            DataOutputStream sortie = new DataOutputStream(out);
-            //sortie.writeInt(42);
-            //sortie.writeUTF("Bonjour la Chine, hihi héhé");
-            //sortie.write(socket.getInetAddress().getAddress());
-            //socket.close();
         } catch (Exception e) {
-            System.out.println("Je peut pas m'exécuter :(");
+            System.out.println("probleme connection");
         }
 
     }
 
     public void deconnection() {
         try {
-            String host = "transit";
-            int port = 5015;
-            System.out.println(host + " : " + port);
-            socket = new Socket(host, port);
-            // Récupération du flot d'entrée
-            InputStream in = socket.getInputStream();
-            // Création du flot d'entrée pour données typées
-            DataInputStream entree = new DataInputStream(in);
-            // Récupération du flot de sortie
-            OutputStream out = socket.getOutputStream();
-            // Création du flot de sortie pour données typées
-            sortie = new DataOutputStream(out);
             socket.close();
         } catch (Exception e) {
-            System.out.println("Je peut pas m'exécuter :(");
+            System.out.println("probleme déco");
         }
 
     }

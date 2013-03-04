@@ -105,6 +105,9 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="jTextField1">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField1KeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
@@ -121,6 +124,7 @@
         <Component class="javax.swing.JTextArea" name="messageArea">
           <Properties>
             <Property name="columns" type="int" value="20"/>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="5"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
