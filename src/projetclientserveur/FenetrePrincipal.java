@@ -172,6 +172,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     
     private void mItemDeconnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemDeconnectionActionPerformed
         // TODO add your handling code here:
+        this.controleur.deconnection();
         this.controleur.setNomUtilisateur(null);
         this.mItemConnection.setEnabled(true);
         this.mItemDeconnection.setEnabled(false);
