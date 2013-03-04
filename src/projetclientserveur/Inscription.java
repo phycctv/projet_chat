@@ -203,7 +203,7 @@ public class Inscription extends javax.swing.JFrame {
         if (jTextFieldLogin.getForeground() != Color.LIGHT_GRAY) {
             if (!jTextFieldLogin.getText().isEmpty()) {
                 login = jTextFieldLogin.getText();
-                if (true) {
+                if (getControleur().testLogin(login)) {
                     jButtonQuitter.setEnabled(false);
                     jButtonVerifier.setEnabled(false);
                     jTextFieldLogin.setEnabled(false);
@@ -287,9 +287,15 @@ public class Inscription extends javax.swing.JFrame {
             } else {
                 sexe = true;
             }
-          //  getControleur().inscrire(login, mdp, email, dateNais, sexe);
-            MessageBox mb = new MessageBox(this, true, "L'utilisateur : "+login+" est inscrit");
-            mb.setVisible(true);
+            if (getControleur().inscrire(login, mdp, email, dateNais, sexe)) {
+                MessageBox mb = new MessageBox(this, true, "L'utilisateur : " + login + " est inscrit");
+                mb.setVisible(true);
+                this.dispose();
+                parent.setVisible(true);
+            } else {
+                MessageBox mb = new MessageBox(this, true, "Problème connection serveur inscription");
+                mb.setVisible(true);
+            }
         } else {
             MessageBox mb = new MessageBox(this, true, "Mot de passe différent");
             mb.setVisible(true);
