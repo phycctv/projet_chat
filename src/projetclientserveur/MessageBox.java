@@ -18,6 +18,7 @@ public class MessageBox extends javax.swing.JDialog {
     public MessageBox(java.awt.Frame parent, boolean modal, String message) {
     
         super(parent, modal);
+        setBounds(400, 300, 391, 353);
         initComponents();
         this.message=message;
         this.parent=parent;   

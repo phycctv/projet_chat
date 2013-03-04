@@ -4,6 +4,9 @@
  */
 package projetclientserveur;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+
 /**
  *
  * @author zhangxi
@@ -13,8 +16,34 @@ public class FSalon extends javax.swing.JFrame {
     /**
      * Creates new form FSalon
      */
-    public FSalon() {
+    private Controleur controleur;
+    private java.awt.Frame parent;
+    private DefaultListModel listModel1;
+
+    public FSalon(java.awt.Frame parent, Controleur controleur) {
+        this.setControleur(controleur);
+
+        this.parent = parent;
+        setBounds(400, 300, 391, 353);
         initComponents();
+
+
+        // String[] data = {this.controleur.getNomUtilisateur(), "asd"};
+        listModel1 = new DefaultListModel();
+        listModel1.addElement(this.controleur.getNomUtilisateur());
+        this.jList1 = new JList(listModel1);
+        jScrollPane2.setViewportView(jList1);
+        this.jLabel1.setText(this.controleur.getNomUtilisateur() + " : ");
+
+
+    }
+
+    public Controleur getControleur() {
+        return controleur;
+    }
+
+    public void setControleur(Controleur controleur) {
+        this.controleur = controleur;
     }
 
     /**
@@ -32,6 +61,7 @@ public class FSalon extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         messageScrollPane = new javax.swing.JScrollPane();
         messageArea = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -40,11 +70,6 @@ public class FSalon extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(jList1);
 
         jButton1.setText("Envoyer");
@@ -59,6 +84,8 @@ public class FSalon extends javax.swing.JFrame {
         messageArea.setRows(5);
         messageArea.setAutoscrolls(true);
         messageScrollPane.setViewportView(messageArea);
+
+        jLabel1.setText("jLabel1");
 
         jMenu1.setText("File");
 
@@ -87,10 +114,12 @@ public class FSalon extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1))
-                    .addComponent(messageScrollPane))
+                    .addComponent(messageScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE))
                 .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
@@ -102,8 +131,9 @@ public class FSalon extends javax.swing.JFrame {
                         .addComponent(messageScrollPane)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(19, 19, 19))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE))
                 .addGap(25, 25, 25))
@@ -120,50 +150,9 @@ public class FSalon extends javax.swing.JFrame {
         MessageBox mb = new MessageBox(this, true, "Quitter le salon?");
         mb.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /*
-         * Set the Nimbus look and feel
-         */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /*
-         * If Nimbus (introduced in Java SE 6) is not available, stay with the
-         * default look and feel. For details see
-         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FSalon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FSalon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FSalon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FSalon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /*
-         * Create and display the form
-         */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                new FSalon().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

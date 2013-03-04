@@ -4,6 +4,8 @@
  */
 package projetclientserveur;
 
+import javax.swing.JMenuItem;
+
 /**
  *
  * @author zhangxi
@@ -16,6 +18,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
      */
     public FenetrePrincipal(Controleur controleur) {
         this.setControleur(controleur);
+        setBounds(400, 300, 391, 353);
         initComponents();
     }
 
@@ -38,53 +41,68 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        mSession = new javax.swing.JMenu();
+        mItemInscription = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        mItemConnection = new javax.swing.JMenuItem();
+        mItemDeconnection = new javax.swing.JMenuItem();
+        mItemQuitter = new javax.swing.JMenuItem();
+        mSalon = new javax.swing.JMenu();
+        mItemSalon = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Session");
+        mSession.setText("Session");
 
-        jMenuItem4.setText("inscription");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        mItemInscription.setText("Inscription");
+        mItemInscription.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                mItemInscriptionActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
-        jMenu1.add(jSeparator1);
+        mSession.add(mItemInscription);
+        mSession.add(jSeparator1);
 
-        jMenuItem5.setText("Connection");
-        jMenu1.add(jMenuItem5);
-
-        jMenuItem2.setText("Quitter");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        mItemConnection.setText("Connection");
+        mItemConnection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                mItemConnectionActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        mSession.add(mItemConnection);
 
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edition");
-
-        jMenuItem3.setText("Salon");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        mItemDeconnection.setText("Deconnection");
+        mItemDeconnection.setEnabled(false);
+        mItemDeconnection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                mItemDeconnectionActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        mSession.add(mItemDeconnection);
 
-        jMenuBar1.add(jMenu2);
+        mItemQuitter.setText("Quitter");
+        mItemQuitter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItemQuitterActionPerformed(evt);
+            }
+        });
+        mSession.add(mItemQuitter);
+
+        jMenuBar1.add(mSession);
+
+        mSalon.setText("Salon");
+
+        mItemSalon.setText("Salon");
+        mItemSalon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItemSalonActionPerformed(evt);
+            }
+        });
+        mSalon.add(mItemSalon);
+
+        jMenuBar1.add(mSalon);
 
         jMenu3.setText("Aide");
 
@@ -109,33 +127,70 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void mItemQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemQuitterActionPerformed
         MessageBox mb = new MessageBox(this, true, "Quitter ?");
         mb.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_mItemQuitterActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void mItemSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemSalonActionPerformed
         // TODO add your handling code here:
-        FSalon fSlon = new FSalon();
-        fSlon.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+        getControleur().fenetreSalon();
+    }//GEN-LAST:event_mItemSalonActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void mItemInscriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemInscriptionActionPerformed
 
         getControleur().fenetreInscription();
 
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_mItemInscriptionActionPerformed
 
+    private void mItemConnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemConnectionActionPerformed
+        // TODO add your handling code here:
+        getControleur().fenetreConnection();
+    }
+
+    
+    public JMenuItem getmItemConnection() {
+        return mItemConnection;
+    }
+
+    public JMenuItem getmItemInscription() {
+        return mItemInscription;
+    }
+
+    public JMenuItem getmItemQuitter() {
+        return mItemQuitter;
+    }
+
+    public JMenuItem getmItemSalon() {
+        return mItemSalon;
+    }//GEN-LAST:event_mItemConnectionActionPerformed
+
+    public JMenuItem getmItemDeconnection() {
+        return mItemDeconnection;
+    }
+
+    
+    private void mItemDeconnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemDeconnectionActionPerformed
+        // TODO add your handling code here:
+        this.controleur.setNomUtilisateur(null);
+        this.mItemConnection.setEnabled(true);
+        this.mItemDeconnection.setEnabled(false);
+    }//GEN-LAST:event_mItemDeconnectionActionPerformed
+
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenuItem mItemConnection;
+    private javax.swing.JMenuItem mItemDeconnection;
+    private javax.swing.JMenuItem mItemInscription;
+    private javax.swing.JMenuItem mItemQuitter;
+    private javax.swing.JMenuItem mItemSalon;
+    private javax.swing.JMenu mSalon;
+    private javax.swing.JMenu mSession;
     // End of variables declaration//GEN-END:variables
 }
