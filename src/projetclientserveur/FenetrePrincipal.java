@@ -49,8 +49,8 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         mItemQuitter = new javax.swing.JMenuItem();
         mSalon = new javax.swing.JMenu();
         mItemSalon = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        mAide = new javax.swing.JMenu();
+        jMenuDoc = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,12 +104,17 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mSalon);
 
-        jMenu3.setText("Aide");
+        mAide.setText("Aide");
 
-        jMenuItem1.setText("Documentation");
-        jMenu3.add(jMenuItem1);
+        jMenuDoc.setText("Documentation");
+        jMenuDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuDocActionPerformed(evt);
+            }
+        });
+        mAide.add(jMenuDoc);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(mAide);
 
         setJMenuBar(jMenuBar1);
 
@@ -133,21 +138,16 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mItemQuitterActionPerformed
 
     private void mItemSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemSalonActionPerformed
-        // TODO add your handling code here:
         getControleur().fenetreSalon();
     }//GEN-LAST:event_mItemSalonActionPerformed
 
     private void mItemInscriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemInscriptionActionPerformed
-
         getControleur().fenetreInscription();
-
     }//GEN-LAST:event_mItemInscriptionActionPerformed
 
     private void mItemConnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemConnectionActionPerformed
-        // TODO add your handling code here:
         getControleur().fenetreConnection();
     }
-
     
     public JMenuItem getmItemConnection() {
         return mItemConnection;
@@ -171,21 +171,24 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
     
     private void mItemDeconnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemDeconnectionActionPerformed
-        // TODO add your handling code here:
         this.controleur.deconnection();
         this.controleur.setNomUtilisateur(null);
         this.mItemConnection.setEnabled(true);
         this.mItemDeconnection.setEnabled(false);
     }//GEN-LAST:event_mItemDeconnectionActionPerformed
 
+    private void jMenuDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuDocActionPerformed
+        getControleur().fenetreDoc();
+    }//GEN-LAST:event_jMenuDocActionPerformed
+
     
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuDoc;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenu mAide;
     private javax.swing.JMenuItem mItemConnection;
     private javax.swing.JMenuItem mItemDeconnection;
     private javax.swing.JMenuItem mItemInscription;

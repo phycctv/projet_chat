@@ -74,6 +74,11 @@ public class Controleur {
         fConn.setVisible(true);
     }
 
+    public void fenetreDoc() {
+        FDocumentation fDoc = new FDocumentation(fp, this);
+        fDoc.setVisible(true);
+    }
+
     public void fenetreSalon() {
         if (nomUtilisateur != null) {
             FSalon fSalon = new FSalon(fp, this);
