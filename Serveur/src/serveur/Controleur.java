@@ -3,6 +3,7 @@ package serveur;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /*
  * To change this template, choose Tools | Templates and open the template in
@@ -37,7 +38,8 @@ public class Controleur {
             }
         }
         System.out.println("J'attend les client :)");
-                int numClient = 0;
+        int numClient = 0;
+        ArrayList<Socket> listClient = new ArrayList<Socket>();
         while (true) {
             Socket socket_transfert = null;
             try {
@@ -47,8 +49,9 @@ public class Controleur {
                 System.out.println("Problème pour attendre un client :'(");
             }
             
-            ThreadClient client = new ThreadClient(numClient, socket_transfert, this);
+            ThreadClient client = new ThreadClient(numClient, socket_transfert, this, listClient);
             client.start();
+            
         }
     }
 
@@ -61,8 +64,5 @@ public class Controleur {
     }
 
     public void login() {
-
-
-
     }
 }
