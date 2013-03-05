@@ -56,6 +56,7 @@ public class ThreadClient extends Thread {
             }
 
         } catch (Exception e) {
+            listClient.remove(socket_transfert);
             if (e.toString()=="java.io.EOFException") {
                 System.out.println("Client : " + nomClient + " a quitté le salon");
             } else {
