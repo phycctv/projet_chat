@@ -46,7 +46,7 @@ public class Controleur implements Serializable {
     //public void setSocket_ecoute(ServerSocket socket_ecoute) {
     //    this.socket_ecoute = socket_ecoute;
     //}
-    public void lancer() {        
+    public void lancer() {
         int port = 0;
         ServerSocket socket_ecoute = null;
 
@@ -89,9 +89,18 @@ public class Controleur implements Serializable {
                 String parametre = entree.readUTF();
 
                 if (parametre.equals("connection")) {
-                    ThreadClient client = new ThreadClient(numClient, socket_transfert, this, listClient);
-                    client.start();
-                    listClient.remove(socket_transfert);
+                    String nomClient = entree.readUTF();
+                    String mdp = entree.readUTF();
+                    if (getUtilisateur(nomClient) == null) {
+                        sortie.writeInt(1);
+                    } else if (getUtilisateur(nomClient).getMdp() != mdp) {
+                        sortie.writeInt(2);
+                    } else {
+                        sortie.writeInt(0);
+                        ThreadClient client = new ThreadClient(numClient, socket_transfert, this, listClient);
+                        client.start();
+                        listClient.remove(socket_transfert);
+                    }
                 } else if (parametre.equals("inscription")) {
                     ThreadInscription inscription = new ThreadInscription(numClient, socket_transfert, this);
                     inscription.start();

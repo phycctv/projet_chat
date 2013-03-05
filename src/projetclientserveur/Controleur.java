@@ -89,7 +89,7 @@ public class Controleur {
         }
     }
 
-    public void connection() {
+    public int connection(String nomUtilisateur, String mdp) {
         try {
             String host = "transit";
             int port = 5015;
@@ -99,10 +99,17 @@ public class Controleur {
             OutputStream out = socket.getOutputStream();
             // Création du flot de sortie pour données typées
             sortie = new DataOutputStream(out);
+            // Récupération du flot d'entrée
+            InputStream in = socket.getInputStream();
+            // Création du flot d'entrée pour données typées
+            DataInputStream entree = new DataInputStream(in);
             sortie.writeUTF("connection");
-
+            sortie.writeUTF(nomUtilisateur);
+            sortie.writeUTF(mdp);
+            return entree.readInt();
         } catch (Exception e) {
             System.out.println("probleme connection");
+            return 3;
         }
 
     }

@@ -136,16 +136,26 @@ public class FConnection extends javax.swing.JFrame {
 
     private void jButtonConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectActionPerformed
         // TODO add your handling code here:
-        if (true) {
-            this.controleur.setNomUtilisateur(jTextField1.getText().toString());
-            this.controleur.setConncte(true);
-            controleur.connection();
+
+        this.controleur.setNomUtilisateur(jTextField1.getText().toString());
+        this.controleur.setConncte(true);
+        int rep = controleur.connection(jTextField1.getText(), jTextField2.getText());
+        if (rep == 0) {
             this.dispose();
             parent.getmItemConnection().setEnabled(false);
             parent.getmItemDeconnection().setEnabled(true);
             parent.setVisible(true);
-            
+        } else if (rep == 1) {
+            MessageBox mb = new MessageBox(this, true, "Nom utilisateur non existe !");
+            mb.setVisible(true);
+        } else if (rep == 2) {
+            MessageBox mb = new MessageBox(this, true, "Mot de passe incorrecte !");
+            mb.setVisible(true);
+        } else if (rep == 3) {
+            MessageBox mb = new MessageBox(this, true, "probleme connection");
+            mb.setVisible(true);
         }
+
     }//GEN-LAST:event_jButtonConnectActionPerformed
 
     private void jButtonAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerActionPerformed
