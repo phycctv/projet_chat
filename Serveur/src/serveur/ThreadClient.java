@@ -21,11 +21,12 @@ public class ThreadClient extends Thread {
     private ArrayList<Socket> listClient;
     private String nomClient;
 
-    public ThreadClient(int numClient, Socket socket_transfert, Controleur controleur, ArrayList<Socket> listClient) {
+    public ThreadClient(int numClient, Socket socket_transfert, Controleur controleur, ArrayList<Socket> listClient,String nomClient) {
         this.numClient = numClient;
         this.controleur = controleur;
         this.socket_transfert = socket_transfert;
         this.listClient = listClient;
+        this.nomClient =nomClient;
     }
 
     public void run() {
