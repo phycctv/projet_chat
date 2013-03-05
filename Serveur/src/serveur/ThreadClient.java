@@ -19,6 +19,7 @@ public class ThreadClient extends Thread {
     private Socket socket_transfert;
     private Controleur controleur;
     private ArrayList<Socket> listClient;
+    private String nomClient;
 
     public ThreadClient(int numClient, Socket socket_transfert, Controleur controleur, ArrayList<Socket> listClient) {
         this.numClient = numClient;
@@ -40,22 +41,26 @@ public class ThreadClient extends Thread {
             DataInputStream entree = new DataInputStream(in);
 
             while (true) {
-                String i = entree.readUTF();
+                nomClient = entree.readUTF();
                 String j = entree.readUTF();
-                System.out.print(i + " : ");
+                System.out.print(nomClient + " : ");
                 System.out.println(j);
                 for (int k = 0; k < listClient.size(); k++) {
                     // Récupération du flot de sortie
                     OutputStream out = listClient.get(k).getOutputStream();
                     // Création du flot de sortie pour données typées
                     DataOutputStream sortie = new DataOutputStream(out);
-                    sortie.writeUTF(i + " : " + j);
+                    sortie.writeUTF(nomClient + " : " + j);
                 }
               
             }
 
         } catch (Exception e) {
+            if (e.toString()=="java.io.EOFException") {
+                System.out.println("Client : " + nomClient + " a quitté le salon");
+            } else {
             System.out.println("GROS PROBLEME : " + e.toString());
+            }
         }
         try {
             socket_transfert.close();
