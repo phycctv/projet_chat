@@ -83,9 +83,12 @@ public class Inscription extends javax.swing.JFrame {
 
         jTextFieldLogin.setForeground(java.awt.Color.lightGray);
         jTextFieldLogin.setText("Choisir un login");
-        jTextFieldLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldLoginMouseClicked(evt);
+        jTextFieldLogin.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldLoginFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldLoginFocusLost(evt);
             }
         });
         getContentPane().add(jTextFieldLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 12, 133, -1));
@@ -116,9 +119,12 @@ public class Inscription extends javax.swing.JFrame {
         jTextFieldMDP1.setForeground(java.awt.Color.lightGray);
         jTextFieldMDP1.setText("Choisir un mot de passe");
         jTextFieldMDP1.setEnabled(false);
-        jTextFieldMDP1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldMDP1MouseClicked(evt);
+        jTextFieldMDP1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldMDP1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldMDP1FocusLost(evt);
             }
         });
         getContentPane().add(jTextFieldMDP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 132, 180, -1));
@@ -126,9 +132,12 @@ public class Inscription extends javax.swing.JFrame {
         jTextFieldMDP2.setForeground(java.awt.Color.lightGray);
         jTextFieldMDP2.setText("Confirmer MDP");
         jTextFieldMDP2.setEnabled(false);
-        jTextFieldMDP2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldMDP2MouseClicked(evt);
+        jTextFieldMDP2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldMDP2FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldMDP2FocusLost(evt);
             }
         });
         getContentPane().add(jTextFieldMDP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 165, 180, -1));
@@ -139,9 +148,12 @@ public class Inscription extends javax.swing.JFrame {
         jTextFieldEmail.setForeground(java.awt.Color.lightGray);
         jTextFieldEmail.setText("exemple@exemple.fr");
         jTextFieldEmail.setEnabled(false);
-        jTextFieldEmail.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldEmailMouseClicked(evt);
+        jTextFieldEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldEmailFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldEmailFocusLost(evt);
             }
         });
         getContentPane().add(jTextFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 210, 223, -1));
@@ -152,9 +164,12 @@ public class Inscription extends javax.swing.JFrame {
         jTextFieldDateNaiss.setForeground(java.awt.Color.lightGray);
         jTextFieldDateNaiss.setText("01/01/2000");
         jTextFieldDateNaiss.setEnabled(false);
-        jTextFieldDateNaiss.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldDateNaissMouseClicked(evt);
+        jTextFieldDateNaiss.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldDateNaissFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldDateNaissFocusLost(evt);
             }
         });
         getContentPane().add(jTextFieldDateNaiss, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 255, 92, -1));
@@ -192,13 +207,6 @@ public class Inscription extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldLoginMouseClicked
-        if (jTextFieldLogin.getForeground() == Color.LIGHT_GRAY) {
-            jTextFieldLogin.setText(null);
-            jTextFieldLogin.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_jTextFieldLoginMouseClicked
-
     private void jButtonVerifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerifierActionPerformed
         if (jTextFieldLogin.getForeground() != Color.LIGHT_GRAY) {
             if (!jTextFieldLogin.getText().isEmpty()) {
@@ -232,36 +240,7 @@ public class Inscription extends javax.swing.JFrame {
         parent.setVisible(true);
     }//GEN-LAST:event_jButtonQuitterActionPerformed
 
-    private void jTextFieldMDP1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldMDP1MouseClicked
-        if (jTextFieldMDP1.getForeground() == Color.LIGHT_GRAY) {
-            jTextFieldMDP1.setText(null);
-            jTextFieldMDP1.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_jTextFieldMDP1MouseClicked
-
-    private void jTextFieldMDP2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldMDP2MouseClicked
-        if (jTextFieldMDP2.getForeground() == Color.LIGHT_GRAY) {
-            jTextFieldMDP2.setText(null);
-            jTextFieldMDP2.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_jTextFieldMDP2MouseClicked
-
-    private void jTextFieldEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldEmailMouseClicked
-        if (jTextFieldEmail.getForeground() == Color.LIGHT_GRAY) {
-            jTextFieldEmail.setText(null);
-            jTextFieldEmail.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_jTextFieldEmailMouseClicked
-
-    private void jTextFieldDateNaissMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldDateNaissMouseClicked
-        if (jTextFieldDateNaiss.getForeground() == Color.LIGHT_GRAY) {
-            jTextFieldDateNaiss.setText(null);
-            jTextFieldDateNaiss.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_jTextFieldDateNaissMouseClicked
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
         parent.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
@@ -301,6 +280,76 @@ public class Inscription extends javax.swing.JFrame {
             mb.setVisible(true);
         }
     }//GEN-LAST:event_jButtonInscriptionActionPerformed
+
+    private void jTextFieldLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldLoginFocusGained
+        if (jTextFieldLogin.getForeground() == Color.LIGHT_GRAY) {
+            jTextFieldLogin.setText(null);
+            jTextFieldLogin.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jTextFieldLoginFocusGained
+
+    private void jTextFieldLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldLoginFocusLost
+        if (jTextFieldLogin.getText().isEmpty()) {
+            jTextFieldLogin.setForeground(Color.LIGHT_GRAY);
+            jTextFieldLogin.setText("Choisir un login");
+        }
+    }//GEN-LAST:event_jTextFieldLoginFocusLost
+
+    private void jTextFieldMDP1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldMDP1FocusGained
+        if (jTextFieldMDP1.getForeground() == Color.LIGHT_GRAY) {
+            jTextFieldMDP1.setText(null);
+            jTextFieldMDP1.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jTextFieldMDP1FocusGained
+
+    private void jTextFieldMDP1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldMDP1FocusLost
+        if (jTextFieldMDP1.getText().isEmpty()) {
+            jTextFieldMDP1.setForeground(Color.LIGHT_GRAY);
+            jTextFieldMDP1.setText("Choisir un mot de passe");
+        }
+    }//GEN-LAST:event_jTextFieldMDP1FocusLost
+
+    private void jTextFieldMDP2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldMDP2FocusGained
+        if (jTextFieldMDP2.getForeground() == Color.LIGHT_GRAY) {
+            jTextFieldMDP2.setText(null);
+            jTextFieldMDP2.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jTextFieldMDP2FocusGained
+
+    private void jTextFieldMDP2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldMDP2FocusLost
+        if (jTextFieldMDP2.getText().isEmpty()) {
+            jTextFieldMDP2.setForeground(Color.LIGHT_GRAY);
+            jTextFieldMDP2.setText("Confirmer MDP");
+        }
+    }//GEN-LAST:event_jTextFieldMDP2FocusLost
+
+    private void jTextFieldEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldEmailFocusGained
+        if (jTextFieldEmail.getForeground() == Color.LIGHT_GRAY) {
+            jTextFieldEmail.setText(null);
+            jTextFieldEmail.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jTextFieldEmailFocusGained
+
+    private void jTextFieldEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldEmailFocusLost
+        if (jTextFieldEmail.getText().isEmpty()) {
+            jTextFieldEmail.setForeground(Color.LIGHT_GRAY);
+            jTextFieldEmail.setText("exemple@exemple.com");
+        }
+    }//GEN-LAST:event_jTextFieldEmailFocusLost
+
+    private void jTextFieldDateNaissFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDateNaissFocusGained
+        if (jTextFieldDateNaiss.getForeground() == Color.LIGHT_GRAY) {
+            jTextFieldDateNaiss.setText(null);
+            jTextFieldDateNaiss.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jTextFieldDateNaissFocusGained
+
+    private void jTextFieldDateNaissFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDateNaissFocusLost
+        if (jTextFieldDateNaiss.getText().isEmpty()) {
+            jTextFieldDateNaiss.setForeground(Color.LIGHT_GRAY);
+            jTextFieldDateNaiss.setText("01/01/2000");
+        }
+    }//GEN-LAST:event_jTextFieldDateNaissFocusLost
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButtonAnnuler;
