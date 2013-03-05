@@ -95,7 +95,10 @@ public class Controleur {
             int port = 5015;
             System.out.println(host + " : " + port);
             socket = new Socket(host, port);
-
+            // Récupération du flot de sortie
+            OutputStream out = socket.getOutputStream();
+            // Création du flot de sortie pour données typées
+            sortie = new DataOutputStream(out);
             sortie.writeUTF("connection");
 
         } catch (Exception e) {

@@ -91,6 +91,7 @@ public class Controleur implements Serializable {
                 if (parametre.equals("connection")) {
                     ThreadClient client = new ThreadClient(numClient, socket_transfert, this, listClient);
                     client.start();
+                    listClient.remove(socket_transfert);
                 } else if (parametre.equals("inscription")) {
                     ThreadInscription inscription = new ThreadInscription(numClient, socket_transfert, this);
                     inscription.start();
