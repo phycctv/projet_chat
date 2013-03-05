@@ -93,7 +93,7 @@ public class Controleur implements Serializable {
                     String mdp = entree.readUTF();
                     if (getUtilisateur(nomClient) == null) {
                         sortie.writeInt(1);
-                    } else if (getUtilisateur(nomClient).getMdp().equals(mdp) ) {
+                    } else if (!getUtilisateur(nomClient).getMdp().equals(mdp) ) {
                         sortie.writeInt(2);
                     } else {
                         sortie.writeInt(0);
