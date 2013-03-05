@@ -3,3 +3,5 @@
 /dist/
 manifest.mf
 /Serveur/nbproject/
+/Serveur/build/
+/Serveur/dist/
