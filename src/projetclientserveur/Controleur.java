@@ -95,6 +95,9 @@ public class Controleur {
             int port = 5015;
             System.out.println(host + " : " + port);
             socket = new Socket(host, port);
+
+            sortie.writeUTF("connection");
+
         } catch (Exception e) {
             System.out.println("probleme connection");
         }
@@ -111,13 +114,9 @@ public class Controleur {
     }
 
     public boolean testLogin(String login) {
-        return true;
-    }
-
-    public boolean inscrire(String login, String mdp, String email, String dateNais, Boolean sexe) {
         try {
             String host = "transit";
-            int port = 6015;
+            int port = 5015;
             System.out.println(host + " : " + port);
             Socket socket2 = new Socket(host, port);
             // Récupération du flot d'entrée
@@ -128,17 +127,59 @@ public class Controleur {
             OutputStream out = socket2.getOutputStream();
             // Création du flot de sortie pour données typées
             DataOutputStream sortie = new DataOutputStream(out);
+
+            sortie.writeUTF("testlogin");
+
+            sortie.writeUTF(login);
+
+            int reponse = entree.readInt();
+            socket2.close();
+
+            if (reponse == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean inscrire(String login, String mdp, String email, String dateNais, Boolean sexe) {
+        try {
+            String host = "transit";
+            int port = 5015;
+            System.out.println(host + " : " + port);
+            Socket socket2 = new Socket(host, port);
+            // Récupération du flot d'entrée
+            InputStream in = socket2.getInputStream();
+            // Création du flot d'entrée pour données typées
+            DataInputStream entree = new DataInputStream(in);
+            // Récupération du flot de sortie
+            OutputStream out = socket2.getOutputStream();
+            // Création du flot de sortie pour données typées
+            DataOutputStream sortie = new DataOutputStream(out);
+
+            sortie.writeUTF("inscription");
+
+            sortie.writeUTF(login);
+            sortie.writeUTF(mdp);
+            sortie.writeUTF(email);
+            sortie.writeUTF(dateNais);
             if (sexe) {
                 sortie.writeInt(1);
             } else {
                 sortie.writeInt(0);
             }
-            sortie.writeUTF(login);
-            sortie.writeUTF(mdp);
-            sortie.writeUTF(email);
-            sortie.writeUTF(dateNais);
+
+            int reponse = entree.readInt();
             socket2.close();
-            return true;
+
+            if (reponse == 1) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             return false;
         }

@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /*
  * To change this template, choose Tools | Templates and open the template in
@@ -13,11 +14,39 @@ import java.util.ArrayList;
  *
  * @author zhangxi
  */
-public class Controleur {
+public class Controleur implements Serializable {
 
-    private ServerSocket socket_ecoute;
+    private static final long serialVersionUID = 1L;
+    //private ServerSocket socket_ecoute;
+    private HashMap<String, Utilisateur> utilisateurs;
 
     public Controleur() {
+        this.setUtilisateurs(new HashMap<String, Utilisateur>());
+    }
+
+    private void setUtilisateurs(HashMap<String, Utilisateur> utilisateurs) {
+        this.utilisateurs = utilisateurs;
+    }
+
+    private HashMap<String, Utilisateur> getUtilisateurs() {
+        return utilisateurs;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur, String login) {
+        this.getUtilisateurs().put(login, utilisateur);
+    }
+
+    public Utilisateur getUtilisateur(String login) {
+        return this.getUtilisateurs().get(login);
+    }
+
+    //public ServerSocket getSocket_ecoute() {
+    //  return socket_ecoute;
+    //}
+    //public void setSocket_ecoute(ServerSocket socket_ecoute) {
+    //    this.socket_ecoute = socket_ecoute;
+    //}
+    public void lancer() {        
         int port = 0;
         ServerSocket socket_ecoute = null;
 
@@ -48,21 +77,61 @@ public class Controleur {
             } catch (IOException e) {
                 System.out.println("Problème pour attendre un client :'(");
             }
-            
-            ThreadClient client = new ThreadClient(numClient, socket_transfert, this, listClient);
-            client.start();
-            
+            try {
+                // Récupération du flot d'entrée
+                InputStream in = socket_transfert.getInputStream();
+                // Création du flot d'entrée pour données typées
+                DataInputStream entree = new DataInputStream(in);
+                // Récupération du flot de sortie
+                OutputStream out = socket_transfert.getOutputStream();
+                // Création du flot de sortie pour données typées
+                DataOutputStream sortie = new DataOutputStream(out);
+                String parametre = entree.readUTF();
+
+                if (parametre.equals("connection")) {
+                    ThreadClient client = new ThreadClient(numClient, socket_transfert, this, listClient);
+                    client.start();
+                } else if (parametre.equals("inscription")) {
+                    ThreadInscription inscription = new ThreadInscription(numClient, socket_transfert, this);
+                    inscription.start();
+                    this.sauve();
+                } else if (parametre.equals("testlogin")) {
+                    if (getUtilisateur(entree.readUTF()) == null) {
+                        sortie.writeInt(1);
+                    } else {
+                        sortie.writeInt(0);
+                    }
+                }
+
+            } catch (Exception e) {
+                System.out.println("Problème ouverture connection/inscription : " + e.toString());
+            }
+            System.out.println("mouahaha");
+
         }
     }
 
-    public ServerSocket getSocket_ecoute() {
-        return socket_ecoute;
+    public Controleur restaure() {
+        try {
+            FileInputStream fichier = new FileInputStream("Fsauv.ser");
+            ObjectInputStream in = new ObjectInputStream(fichier);
+            return ((Controleur) in.readObject());
+        } catch (Exception e) {
+            System.out.println("Pbs de Restauration ou fichier non encore créé");
+            return this;
+        }
     }
 
-    public void setSocket_ecoute(ServerSocket socket_ecoute) {
-        this.socket_ecoute = socket_ecoute;
-    }
-
-    public void login() {
+    /**
+     * sauvegarde des objets de l'application
+     */
+    private void sauve() {
+        try {
+            FileOutputStream f = new FileOutputStream("Fsauv.ser");
+            ObjectOutputStream out = new ObjectOutputStream(f);
+            out.writeObject(this);
+        } catch (Exception e) {
+            System.out.println("Pb de Sauvegarde dans le fichier");
+        }
     }
 }

@@ -1,19 +1,22 @@
 package serveur;
 
+import java.io.Serializable;
 import java.util.Date;
 /**
  *
  * @author zhangxi
  */
-public class Utilisateur {
+public class Utilisateur implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
 
     private String login;
     private String mdp;
     private String email;
-    private Date dateNais;
+    private String dateNais;
     private boolean sexe;
 
-    public Utilisateur(String login, String mdp, String email, Date dateNais, boolean sexe) {
+    public Utilisateur(String login, String mdp, String email, String dateNais, boolean sexe) {
         this.login = login;
         this.mdp = mdp;
         this.email = email;
@@ -21,11 +24,11 @@ public class Utilisateur {
         this.sexe = sexe;
     }
 
-    public Date getDateNais() {
+    public String getDateNais() {
         return dateNais;
     }
 
-    public void setDateNais(Date dateNais) {
+    public void setDateNais(String dateNais) {
         this.dateNais = dateNais;
     }
 
