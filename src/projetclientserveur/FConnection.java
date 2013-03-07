@@ -5,6 +5,7 @@
 package projetclientserveur;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -69,6 +70,11 @@ public class FConnection extends javax.swing.JFrame {
                 jTextFieldLoginFocusLost(evt);
             }
         });
+        jTextFieldLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldLoginKeyTyped(evt);
+            }
+        });
 
         jButtonConnect.setText("Connecter");
         jButtonConnect.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +91,12 @@ public class FConnection extends javax.swing.JFrame {
         });
 
         jLabel2.setText("Mot de passe :");
+
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,6 +186,18 @@ public class FConnection extends javax.swing.JFrame {
             jTextFieldLogin.setText("Votre login");
         }
     }//GEN-LAST:event_jTextFieldLoginFocusLost
+
+    private void jTextFieldLoginKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldLoginKeyTyped
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER && !jTextFieldLogin.getText().isEmpty()) {
+            jPasswordField1.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_jTextFieldLoginKeyTyped
+
+    private void jPasswordField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyTyped
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER && !jTextFieldLogin.getText().isEmpty()) {
+            jButtonConnect.doClick();
+        }
+    }//GEN-LAST:event_jPasswordField1KeyTyped
     /**
      * @param args the command line arguments
      */

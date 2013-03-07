@@ -5,6 +5,7 @@
 package projetclientserveur;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -89,6 +90,11 @@ public class Inscription extends javax.swing.JFrame {
                 jTextFieldLoginFocusLost(evt);
             }
         });
+        jTextFieldLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldLoginKeyTyped(evt);
+            }
+        });
 
         jButtonVerifier.setText("Vérifier");
         jButtonVerifier.addActionListener(new java.awt.event.ActionListener() {
@@ -133,6 +139,11 @@ public class Inscription extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextFieldDateNaissFocusLost(evt);
+            }
+        });
+        jTextFieldDateNaiss.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldDateNaissKeyTyped(evt);
             }
         });
 
@@ -322,7 +333,7 @@ public class Inscription extends javax.swing.JFrame {
 
     private void jButtonInscriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscriptionActionPerformed
         mdp = new String(jPasswordField1.getPassword());
-        if (mdp.equals( new String(jPasswordField2.getPassword()))) {
+        if (mdp.equals(new String(jPasswordField2.getPassword()))) {
             email = jTextFieldEmail.getText();
             dateNais = jTextFieldDateNaiss.getText();
             if (jRadioButtonFille.isSelected()) {
@@ -330,13 +341,19 @@ public class Inscription extends javax.swing.JFrame {
             } else {
                 sexe = true;
             }
-            if (getControleur().inscrire(login, mdp, email, dateNais, sexe)) {
-                MessageBox mb = new MessageBox(this, true, "L'utilisateur : " + login + " est inscrit");
-                mb.setVisible(true);
-                this.dispose();
-                parent.setVisible(true);
+            if (!mdp.isEmpty() && !email.isEmpty() && !dateNais.isEmpty() &&
+                    jTextFieldEmail.getForeground() == Color.black && jTextFieldDateNaiss.getForeground() == Color.black) {
+                if (getControleur().inscrire(login, mdp, email, dateNais, sexe)) {
+                    MessageBox mb = new MessageBox(this, true, "L'utilisateur : " + login + " est inscrit");
+                    mb.setVisible(true);
+                    this.dispose();
+                    parent.setVisible(true);
+                } else {
+                    MessageBox mb = new MessageBox(this, true, "Problème connection serveur inscription");
+                    mb.setVisible(true);
+                }
             } else {
-                MessageBox mb = new MessageBox(this, true, "Problème connection serveur inscription");
+                MessageBox mb = new MessageBox(this, true, "Champ(s) vide(s)");
                 mb.setVisible(true);
             }
         } else {
@@ -386,6 +403,18 @@ public class Inscription extends javax.swing.JFrame {
             jTextFieldDateNaiss.setText("01/01/2000");
         }
     }//GEN-LAST:event_jTextFieldDateNaissFocusLost
+
+    private void jTextFieldLoginKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldLoginKeyTyped
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER && !jTextFieldLogin.getText().isEmpty()) {
+            jButtonVerifier.doClick();
+        }
+    }//GEN-LAST:event_jTextFieldLoginKeyTyped
+
+    private void jTextFieldDateNaissKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldDateNaissKeyTyped
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER && !jTextFieldDateNaiss.getText().isEmpty()) {
+            jButtonInscription.doClick();
+        }
+    }//GEN-LAST:event_jTextFieldDateNaissKeyTyped
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButtonAnnuler;
