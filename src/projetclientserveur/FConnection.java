@@ -44,11 +44,11 @@ public class FConnection extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldLogin = new javax.swing.JTextField();
         jButtonConnect = new javax.swing.JButton();
         jButtonAnnuler = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -59,11 +59,14 @@ public class FConnection extends javax.swing.JFrame {
 
         jLabel1.setText("Nom utilisateur :");
 
-        jTextField1.setForeground(java.awt.Color.lightGray);
-        jTextField1.setText("Votre login");
-        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+        jTextFieldLogin.setForeground(java.awt.Color.lightGray);
+        jTextFieldLogin.setText("Votre login");
+        jTextFieldLogin.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField1FocusGained(evt);
+                jTextFieldLoginFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldLoginFocusLost(evt);
             }
         });
 
@@ -83,14 +86,6 @@ public class FConnection extends javax.swing.JFrame {
 
         jLabel2.setText("Mot de passe :");
 
-        jTextField2.setForeground(java.awt.Color.lightGray);
-        jTextField2.setText("Votre mot de passe");
-        jTextField2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField2MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,18 +95,16 @@ public class FConnection extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                            .addComponent(jTextField1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
                         .addComponent(jButtonAnnuler)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonConnect)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                        .addComponent(jButtonConnect))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTextFieldLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                        .addComponent(jPasswordField1)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,11 +112,11 @@ public class FConnection extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAnnuler)
@@ -137,9 +130,9 @@ public class FConnection extends javax.swing.JFrame {
     private void jButtonConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectActionPerformed
         // TODO add your handling code here:
 
-        this.controleur.setNomUtilisateur(jTextField1.getText().toString());
+        this.controleur.setNomUtilisateur(jTextFieldLogin.getText().toString());
         this.controleur.setConncte(true);
-        int rep = controleur.connection(jTextField1.getText(), jTextField2.getText());
+        int rep = controleur.connection(jTextFieldLogin.getText(), new String(jPasswordField1.getPassword()));
         if (rep == 0) {
             this.dispose();
             parent.getmItemConnection().setEnabled(false);
@@ -163,24 +156,24 @@ public class FConnection extends javax.swing.JFrame {
         parent.setVisible(true);
     }//GEN-LAST:event_jButtonAnnulerActionPerformed
 
-    private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
-        if (jTextField2.getForeground() == Color.LIGHT_GRAY) {
-            jTextField2.setText(null);
-            jTextField2.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_jTextField2MouseClicked
-
-    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
+    private void jTextFieldLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldLoginFocusGained
         // TODO add your handling code here:
-        if (jTextField1.getForeground() == Color.LIGHT_GRAY) {
-            jTextField1.setText(null);
-            jTextField1.setForeground(Color.black);
+        if (jTextFieldLogin.getForeground() == Color.LIGHT_GRAY) {
+            jTextFieldLogin.setText(null);
+            jTextFieldLogin.setForeground(Color.black);
         }
-    }//GEN-LAST:event_jTextField1FocusGained
+    }//GEN-LAST:event_jTextFieldLoginFocusGained
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         parent.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
+
+    private void jTextFieldLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldLoginFocusLost
+        if (jTextFieldLogin.getText().isEmpty()) {
+            jTextFieldLogin.setForeground(Color.LIGHT_GRAY);
+            jTextFieldLogin.setText("Votre login");
+        }
+    }//GEN-LAST:event_jTextFieldLoginFocusLost
     /**
      * @param args the command line arguments
      */
@@ -189,7 +182,7 @@ public class FConnection extends javax.swing.JFrame {
     private javax.swing.JButton jButtonConnect;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JTextField jTextFieldLogin;
     // End of variables declaration//GEN-END:variables
 }

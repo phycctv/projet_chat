@@ -57,8 +57,6 @@ public class Inscription extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldMDP1 = new javax.swing.JTextField();
-        jTextFieldMDP2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -68,6 +66,8 @@ public class Inscription extends javax.swing.JFrame {
         jRadioButtonGarcon = new javax.swing.JRadioButton();
         jButtonInscription = new javax.swing.JButton();
         jButtonAnnuler = new javax.swing.JButton();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jPasswordField2 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -76,10 +76,8 @@ public class Inscription extends javax.swing.JFrame {
                 formWindowClosing(evt);
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Nom utilisateur :");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 17, -1, -1));
 
         jTextFieldLogin.setForeground(java.awt.Color.lightGray);
         jTextFieldLogin.setText("Choisir un login");
@@ -91,7 +89,6 @@ public class Inscription extends javax.swing.JFrame {
                 jTextFieldLoginFocusLost(evt);
             }
         });
-        getContentPane().add(jTextFieldLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 12, 133, -1));
 
         jButtonVerifier.setText("Vérifier");
         jButtonVerifier.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +96,6 @@ public class Inscription extends javax.swing.JFrame {
                 jButtonVerifierActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonVerifier, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 57, -1, -1));
 
         jButtonQuitter.setText("Quitter");
         jButtonQuitter.addActionListener(new java.awt.event.ActionListener() {
@@ -107,43 +103,12 @@ public class Inscription extends javax.swing.JFrame {
                 jButtonQuitterActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonQuitter, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 57, -1, -1));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 104, 463, 10));
 
         jLabel2.setText("Mot de passe :");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 137, -1, -1));
 
         jLabel3.setText("Confirmation :");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 170, -1, -1));
-
-        jTextFieldMDP1.setForeground(java.awt.Color.lightGray);
-        jTextFieldMDP1.setText("Choisir un mot de passe");
-        jTextFieldMDP1.setEnabled(false);
-        jTextFieldMDP1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextFieldMDP1FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextFieldMDP1FocusLost(evt);
-            }
-        });
-        getContentPane().add(jTextFieldMDP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 132, 180, -1));
-
-        jTextFieldMDP2.setForeground(java.awt.Color.lightGray);
-        jTextFieldMDP2.setText("Confirmer MDP");
-        jTextFieldMDP2.setEnabled(false);
-        jTextFieldMDP2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextFieldMDP2FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextFieldMDP2FocusLost(evt);
-            }
-        });
-        getContentPane().add(jTextFieldMDP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 165, 180, -1));
 
         jLabel4.setText("Adresse email :");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 215, -1, -1));
 
         jTextFieldEmail.setForeground(java.awt.Color.lightGray);
         jTextFieldEmail.setText("exemple@exemple.fr");
@@ -156,10 +121,8 @@ public class Inscription extends javax.swing.JFrame {
                 jTextFieldEmailFocusLost(evt);
             }
         });
-        getContentPane().add(jTextFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 210, 223, -1));
 
         jLabel5.setText("Date de naissance :");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 260, -1, -1));
 
         jTextFieldDateNaiss.setForeground(java.awt.Color.lightGray);
         jTextFieldDateNaiss.setText("01/01/2000");
@@ -172,37 +135,134 @@ public class Inscription extends javax.swing.JFrame {
                 jTextFieldDateNaissFocusLost(evt);
             }
         });
-        getContentPane().add(jTextFieldDateNaiss, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 255, 92, -1));
 
         jLabel6.setText("Sexe :");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 303, -1, -1));
 
         buttonGroup1.add(jRadioButtonFille);
         jRadioButtonFille.setSelected(true);
         jRadioButtonFille.setText("Fille");
         jRadioButtonFille.setEnabled(false);
-        getContentPane().add(jRadioButtonFille, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 300, -1, -1));
 
         buttonGroup1.add(jRadioButtonGarcon);
         jRadioButtonGarcon.setText("Garçon");
         jRadioButtonGarcon.setEnabled(false);
-        getContentPane().add(jRadioButtonGarcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 328, -1, -1));
 
         jButtonInscription.setText("Inscription");
+        jButtonInscription.setEnabled(false);
         jButtonInscription.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonInscriptionActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonInscription, new org.netbeans.lib.awtextra.AbsoluteConstraints(314, 368, -1, -1));
 
         jButtonAnnuler.setText("Annuler");
+        jButtonAnnuler.setEnabled(false);
         jButtonAnnuler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAnnulerActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonAnnuler, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 368, -1, -1));
+
+        jPasswordField1.setEnabled(false);
+
+        jPasswordField2.setEnabled(false);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(jLabel1)
+                        .addGap(33, 33, 33)
+                        .addComponent(jTextFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldDateNaiss, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel6)
+                        .addGap(105, 105, 105)
+                        .addComponent(jRadioButtonFille))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(213, 213, 213)
+                        .addComponent(jRadioButtonGarcon))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(235, 235, 235)
+                        .addComponent(jButtonAnnuler)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonInscription))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                                .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.LEADING)))))
+                .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonQuitter)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonVerifier)
+                .addGap(123, 123, 123))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonQuitter)
+                    .addComponent(jButtonVerifier))
+                .addGap(24, 24, 24)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel4))
+                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel5))
+                    .addComponent(jTextFieldDateNaiss, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel6))
+                    .addComponent(jRadioButtonFille))
+                .addGap(6, 6, 6)
+                .addComponent(jRadioButtonGarcon)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonAnnuler)
+                    .addComponent(jButtonInscription)))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -216,11 +276,13 @@ public class Inscription extends javax.swing.JFrame {
                     jButtonVerifier.setEnabled(false);
                     jTextFieldLogin.setEnabled(false);
                     jTextFieldEmail.setEnabled(true);
-                    jTextFieldMDP1.setEnabled(true);
-                    jTextFieldMDP2.setEnabled(true);
+                    jPasswordField1.setEnabled(true);
+                    jPasswordField2.setEnabled(true);
                     jTextFieldDateNaiss.setEnabled(true);
                     jRadioButtonFille.setEnabled(true);
                     jRadioButtonGarcon.setEnabled(true);
+                    jButtonAnnuler.setEnabled(true);
+                    jButtonInscription.setEnabled(true);
                 } else {
                     MessageBox mb = new MessageBox(this, true, "Nom d'utilisateur déjà utilisé");
                     mb.setVisible(true);
@@ -249,16 +311,18 @@ public class Inscription extends javax.swing.JFrame {
         jButtonVerifier.setEnabled(true);
         jTextFieldLogin.setEnabled(true);
         jTextFieldEmail.setEnabled(false);
-        jTextFieldMDP1.setEnabled(false);
-        jTextFieldMDP2.setEnabled(false);
+        jPasswordField1.setEnabled(false);
+        jPasswordField2.setEnabled(false);
         jTextFieldDateNaiss.setEnabled(false);
         jRadioButtonFille.setEnabled(false);
         jRadioButtonGarcon.setEnabled(false);
+        jButtonAnnuler.setEnabled(false);
+        jButtonInscription.setEnabled(false);
     }//GEN-LAST:event_jButtonAnnulerActionPerformed
 
     private void jButtonInscriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscriptionActionPerformed
-        mdp = jTextFieldMDP1.getText();
-        if (mdp.equals(jTextFieldMDP2.getText())) {
+        mdp = new String(jPasswordField1.getPassword());
+        if (mdp.equals( new String(jPasswordField2.getPassword()))) {
             email = jTextFieldEmail.getText();
             dateNais = jTextFieldDateNaiss.getText();
             if (jRadioButtonFille.isSelected()) {
@@ -294,34 +358,6 @@ public class Inscription extends javax.swing.JFrame {
             jTextFieldLogin.setText("Choisir un login");
         }
     }//GEN-LAST:event_jTextFieldLoginFocusLost
-
-    private void jTextFieldMDP1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldMDP1FocusGained
-        if (jTextFieldMDP1.getForeground() == Color.LIGHT_GRAY) {
-            jTextFieldMDP1.setText(null);
-            jTextFieldMDP1.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_jTextFieldMDP1FocusGained
-
-    private void jTextFieldMDP1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldMDP1FocusLost
-        if (jTextFieldMDP1.getText().isEmpty()) {
-            jTextFieldMDP1.setForeground(Color.LIGHT_GRAY);
-            jTextFieldMDP1.setText("Choisir un mot de passe");
-        }
-    }//GEN-LAST:event_jTextFieldMDP1FocusLost
-
-    private void jTextFieldMDP2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldMDP2FocusGained
-        if (jTextFieldMDP2.getForeground() == Color.LIGHT_GRAY) {
-            jTextFieldMDP2.setText(null);
-            jTextFieldMDP2.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_jTextFieldMDP2FocusGained
-
-    private void jTextFieldMDP2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldMDP2FocusLost
-        if (jTextFieldMDP2.getText().isEmpty()) {
-            jTextFieldMDP2.setForeground(Color.LIGHT_GRAY);
-            jTextFieldMDP2.setText("Confirmer MDP");
-        }
-    }//GEN-LAST:event_jTextFieldMDP2FocusLost
 
     private void jTextFieldEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldEmailFocusGained
         if (jTextFieldEmail.getForeground() == Color.LIGHT_GRAY) {
@@ -362,13 +398,13 @@ public class Inscription extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JRadioButton jRadioButtonFille;
     private javax.swing.JRadioButton jRadioButtonGarcon;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextFieldDateNaiss;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldLogin;
-    private javax.swing.JTextField jTextFieldMDP1;
-    private javax.swing.JTextField jTextFieldMDP2;
     // End of variables declaration//GEN-END:variables
 }
