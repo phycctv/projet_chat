@@ -35,7 +35,7 @@ public class SimpleThread extends Thread {
                 messageArea.setCaretPosition(messageArea.getDocument().getLength());
             }
         } catch (Exception e) {
-            System.out.println("Problème de récuperation des messages :'(");
+            System.out.println("Vous etes deco.");
         }
     }
 }

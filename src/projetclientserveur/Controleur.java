@@ -118,8 +118,10 @@ public class Controleur {
     }
 
     public void deconnection() {
-        fSalon.dispose();
-        fSalon=null;
+        if (fSalon != null) {
+            fSalon.dispose();
+            fSalon = null;
+        }
         try {
             socket.close();
 
