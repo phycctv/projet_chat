@@ -31,6 +31,7 @@ public class SimpleThread extends Thread {
             DataInputStream entree = new DataInputStream(in);
             while (true) {
                 messageArea.append(entree.readUTF() + "\n");
+                messageArea.setCaretPosition(messageArea.getDocument().getLength());
             }
         } catch (Exception e) {
         }
