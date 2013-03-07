@@ -53,6 +53,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         jMenuDoc = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Projet Client Serveur V0.7");
 
         mSession.setText("Session");
 

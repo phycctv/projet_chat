@@ -73,6 +73,7 @@ public class FSalon extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
+        setTitle("Salon de discution");
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -110,7 +111,6 @@ public class FSalon extends javax.swing.JFrame {
         messageArea.setEditable(false);
         messageArea.setLineWrap(true);
         messageArea.setRows(5);
-        messageArea.setAutoscrolls(true);
         messageScrollPane.setViewportView(messageArea);
 
         jLabel1.setText("jLabel1");

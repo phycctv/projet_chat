@@ -87,7 +87,7 @@ public class Controleur {
             }
             fSalon.setVisible(true);
         } else {
-            MessageBox mb = new MessageBox(fp, true, "Vous n'etes pas conncté");
+            MessageBox mb = new MessageBox(fp, true, "Vous n'etes pas connecté");
             mb.setVisible(true);
         }
     }

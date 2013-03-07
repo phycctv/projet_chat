@@ -52,7 +52,7 @@ public class SimpleThread extends Thread {
                 } else if (type.equals("participant")) {
                     String nomParticipant = entree.readUTF();
                     listModel1.addElement(nomParticipant);
-                    messageArea.append("\n" + nomParticipant + " est entée dans le salon.");
+                    messageArea.append("\n" + nomParticipant + " est entrée dans le salon.");
                     messageArea.setCaretPosition(messageArea.getDocument().getLength());
                 } else if (type.equals("clientQuitter")) {
                     String clientQuitter = entree.readUTF();
