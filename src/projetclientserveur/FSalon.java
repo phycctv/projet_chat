@@ -23,6 +23,7 @@ public class FSalon extends javax.swing.JFrame {
     private Controleur controleur;
     private java.awt.Frame parent;
     private DefaultListModel listModel1;
+    private SimpleThread messagesbox;
 
     public FSalon(java.awt.Frame parent, Controleur controleur) {
         this.setControleur(controleur);
@@ -37,8 +38,8 @@ public class FSalon extends javax.swing.JFrame {
         this.jList1 = new JList(listModel1);
         jScrollPane2.setViewportView(jList1);
         this.jLabel1.setText(this.controleur.getNomUtilisateur() + " : ");
-        SimpleThread messages = new SimpleThread("messageArea", messageArea, controleur);
-        messages.start();
+        messagesbox = new SimpleThread("messageArea", messageArea, controleur);
+        messagesbox.start();
     }
 
     public Controleur getControleur() {
@@ -73,6 +74,11 @@ public class FSalon extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jList1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPane2.setViewportView(jList1);
@@ -226,6 +232,17 @@ public class FSalon extends javax.swing.JFrame {
             jTextField1.setText("Entrer votre message ici ...");
         }
     }//GEN-LAST:event_jTextField1FocusLost
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        try {
+            messagesbox.interrupt();
+            this.dispose();
+        } catch (Exception e) {
+            MessageBox mb = new MessageBox(this, true, "Probleme ");
+            mb.setVisible(true);
+        }
+    }//GEN-LAST:event_formWindowClosed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
