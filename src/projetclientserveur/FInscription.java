@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
  *
  * @author bodinjo
  */
-public class Inscription extends javax.swing.JFrame {
+public class FInscription extends javax.swing.JFrame {
 
     private Controleur controleur;
     /**
@@ -24,7 +24,7 @@ public class Inscription extends javax.swing.JFrame {
     private String dateNais;
     private boolean sexe;
 
-    public Inscription(java.awt.Frame parent, Controleur controleur) {
+    public FInscription(java.awt.Frame parent, Controleur controleur) {
         this.setControleur(controleur);
         setBounds(400, 300, 391, 353);
         initComponents();
@@ -306,6 +306,7 @@ public class Inscription extends javax.swing.JFrame {
             MessageBox mb = new MessageBox(this, true, "Champs login vide");
             mb.setVisible(true);
         }
+        jPasswordField1.requestFocusInWindow();
     }//GEN-LAST:event_jButtonVerifierActionPerformed
 
     private void jButtonQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuitterActionPerformed

@@ -66,7 +66,7 @@ public class Controleur {
     }
 
     public void fenetreInscription() {
-        Inscription fIns = new Inscription(fp, this);
+        FInscription fIns = new FInscription(fp, this);
         fIns.setVisible(true);
     }
 
