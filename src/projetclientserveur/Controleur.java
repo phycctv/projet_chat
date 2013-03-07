@@ -21,6 +21,7 @@ public class Controleur {
     private String nomUtilisateur;
     private Socket socket;
     private DataOutputStream sortie;
+    private FSalon fSalon = null;
 
     public Controleur() {
         conncte = false;
@@ -81,7 +82,9 @@ public class Controleur {
 
     public void fenetreSalon() {
         if (nomUtilisateur != null) {
-            FSalon fSalon = new FSalon(fp, this);
+            if (fSalon == null) {
+                fSalon = new FSalon(fp, this);
+            }
             fSalon.setVisible(true);
         } else {
             MessageBox mb = new MessageBox(fp, true, "Vous n'etes pas conncté");
@@ -115,8 +118,11 @@ public class Controleur {
     }
 
     public void deconnection() {
+        fSalon.dispose();
+        fSalon=null;
         try {
             socket.close();
+
         } catch (Exception e) {
             System.out.println("probleme déco");
         }

@@ -72,7 +72,6 @@ public class FSalon extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -236,10 +235,9 @@ public class FSalon extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
         try {
-            messagesbox.interrupt();
-            this.dispose();
+            //this.dispose();
         } catch (Exception e) {
-            MessageBox mb = new MessageBox(this, true, "Probleme ");
+            MessageBox mb = new MessageBox(this, true, "Probleme de la fermeture du salon");
             mb.setVisible(true);
         }
     }//GEN-LAST:event_formWindowClosed

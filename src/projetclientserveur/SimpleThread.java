@@ -29,11 +29,13 @@ public class SimpleThread extends Thread {
             InputStream in = this.controleur.getSocket().getInputStream();
             // Création du flot d'entrée pour données typées
             DataInputStream entree = new DataInputStream(in);
+            messageArea.append("------Bienvenue chez nous------");
             while (true) {
-                messageArea.append(entree.readUTF() + "\n");
+                messageArea.append("\n" + entree.readUTF());
                 messageArea.setCaretPosition(messageArea.getDocument().getLength());
             }
         } catch (Exception e) {
+            System.out.println("Problème de récuperation des messages :'(");
         }
     }
 }
