@@ -33,13 +33,14 @@ public class FSalon extends javax.swing.JFrame {
         initComponents();
 
         // String[] data = {this.controleur.getNomUtilisateur(), "asd"};
+
+        this.jLabel1.setText(this.controleur.getNomUtilisateur() + " : ");
         listModel1 = new DefaultListModel();
-        listModel1.addElement(this.controleur.getNomUtilisateur());
+        messagesbox = new SimpleThread("messageArea", listModel1, messageArea, controleur);
+        messagesbox.start();
+        //listModel1.addElement(this.controleur.getNomUtilisateur());
         this.jList1 = new JList(listModel1);
         jScrollPane2.setViewportView(jList1);
-        this.jLabel1.setText(this.controleur.getNomUtilisateur() + " : ");
-        messagesbox = new SimpleThread("messageArea", messageArea, controleur);
-        messagesbox.start();
     }
 
     public Controleur getControleur() {

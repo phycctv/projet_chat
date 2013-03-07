@@ -6,8 +6,6 @@ package serveur;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  *
@@ -18,15 +16,29 @@ public class ThreadClient extends Thread {
     private int numClient;
     private Socket socket_transfert;
     private Controleur controleur;
-    private ArrayList<Socket> listClient;
     private String nomClient;
 
-    public ThreadClient(int numClient, Socket socket_transfert, Controleur controleur, ArrayList<Socket> listClient,String nomClient) {
+    public ThreadClient(int numClient, Socket socket_transfert, Controleur controleur, String nomClient) {
         this.numClient = numClient;
         this.controleur = controleur;
         this.socket_transfert = socket_transfert;
-        this.listClient = listClient;
-        this.nomClient =nomClient;
+        this.nomClient = nomClient;
+    }
+
+    public String getNomClient() {
+        return nomClient;
+    }
+
+    public void setNomClient(String nomClient) {
+        this.nomClient = nomClient;
+    }
+
+    public Socket getSocket_transfert() {
+        return socket_transfert;
+    }
+
+    public void setSocket_transfert(Socket socket_transfert) {
+        this.socket_transfert = socket_transfert;
     }
 
     public void run() {
@@ -35,33 +47,67 @@ public class ThreadClient extends Thread {
             int portCli = socket_transfert.getPort();
             System.out.println(ip + " : " + portCli);
 
-            listClient.add(socket_transfert);
+            controleur.getListClient().add(this);
             // Récupération du flot d'entrée
             InputStream in = socket_transfert.getInputStream();
             // Création du flot d'entrée pour données typées
             DataInputStream entree = new DataInputStream(in);
-
-            while (true) {
-                nomClient = entree.readUTF();
-                String j = entree.readUTF();
-                System.out.print(nomClient + " : ");
-                System.out.println(j);
-                for (int k = 0; k < listClient.size(); k++) {
-                    // Récupération du flot de sortie
-                    OutputStream out = listClient.get(k).getOutputStream();
-                    // Création du flot de sortie pour données typées
-                    DataOutputStream sortie = new DataOutputStream(out);
-                    sortie.writeUTF(nomClient + " : " + j);
+            // Récupération du flot de sortie
+            OutputStream out0 = socket_transfert.getOutputStream();
+            // Création du flot de sortie pour données typées
+            DataOutputStream sortie0 = new DataOutputStream(out0);
+            String ok = entree.readUTF();
+            if (ok.equals("ok_je_suis_dans_le_salon")) {
+                System.out.println("Client : " + nomClient + " est entré dans le salon");
+                sortie0.writeInt(controleur.getListClient().size());
+                for (int k = 0; k < controleur.getListClient().size(); k++) {
+                    sortie0.writeUTF(controleur.getListClient().get(k).getNomClient());
                 }
-              
-            }
+                for (int k = 0; k < controleur.getListClient().size(); k++) {
+                    if (!controleur.getListClient().get(k).getNomClient().equals(nomClient)) {
+                        // Récupération du flot de sortie
+                        OutputStream out1 = controleur.getListClient().get(k).getSocket_transfert().getOutputStream();
+                        // Création du flot de sortie pour données typées
+                        DataOutputStream sortie1 = new DataOutputStream(out1);
+                        sortie1.writeUTF("participant");
+                        sortie1.writeUTF(nomClient);
+                    }
+                }
+                while (true) {
+                    nomClient = entree.readUTF();
+                    String j = entree.readUTF();
+                    System.out.print(nomClient + " : ");
+                    System.out.println(j);
+                    for (int k = 0; k < controleur.getListClient().size(); k++) {
+                        // Récupération du flot de sortie
+                        OutputStream out = controleur.getListClient().get(k).getSocket_transfert().getOutputStream();
+                        // Création du flot de sortie pour données typées
+                        DataOutputStream sortie = new DataOutputStream(out);
+                        sortie.writeUTF("message");
+                        sortie.writeUTF(nomClient + " : " + j);
+                    }
 
+                }
+            }
         } catch (Exception e) {
-            listClient.remove(socket_transfert);
-            if (e.toString()=="java.io.EOFException") {
+            controleur.getListClient().remove(this);
+            if (e.toString() == "java.io.EOFException") {
                 System.out.println("Client : " + nomClient + " a quitté le salon");
+                try {
+                    for (int k = 0; k < controleur.getListClient().size(); k++) {
+                        if (!controleur.getListClient().get(k).getNomClient().equals(nomClient)) {
+                            // Récupération du flot de sortie
+                            OutputStream out1 = controleur.getListClient().get(k).getSocket_transfert().getOutputStream();
+                            // Création du flot de sortie pour données typées
+                            DataOutputStream sortie1 = new DataOutputStream(out1);
+                            sortie1.writeUTF("clientQuitter");
+                            sortie1.writeUTF(nomClient);
+                        }
+                    }
+                } catch (Exception e2) {
+                }
             } else {
-            System.out.println("GROS PROBLEME : " + e.toString());
+                System.out.println("GROS PROBLEME : " + e.toString());
             }
         }
         try {

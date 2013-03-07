@@ -19,6 +19,7 @@ public class Controleur implements Serializable {
     private static final long serialVersionUID = 1L;
     //private ServerSocket socket_ecoute;
     private HashMap<String, Utilisateur> utilisateurs;
+    private ArrayList<ThreadClient> listClient = null;
 
     public Controleur() {
         this.setUtilisateurs(new HashMap<String, Utilisateur>());
@@ -68,7 +69,7 @@ public class Controleur implements Serializable {
         }
         System.out.println("J'attend les client :)");
         int numClient = 0;
-        ArrayList<Socket> listClient = new ArrayList<Socket>();
+        listClient = new ArrayList<ThreadClient>();
         while (true) {
             Socket socket_transfert = null;
             try {
@@ -97,9 +98,9 @@ public class Controleur implements Serializable {
                         sortie.writeInt(2);
                     } else {
                         sortie.writeInt(0);
-                        ThreadClient client = new ThreadClient(numClient, socket_transfert, this, listClient,nomClient);
+                        ThreadClient client = new ThreadClient(numClient, socket_transfert, this,nomClient);
                         client.start();
-                        listClient.remove(socket_transfert);
+                        listClient.remove(client);
                     }
                 } else if (parametre.equals("inscription")) {
                     ThreadInscription inscription = new ThreadInscription(numClient, socket_transfert, this);
@@ -119,6 +120,14 @@ public class Controleur implements Serializable {
             System.out.println("mouahaha");
 
         }
+    }
+
+    public ArrayList<ThreadClient> getListClient() {
+        return listClient;
+    }
+
+    public void setListClient(ArrayList<ThreadClient> listClient) {
+        this.listClient = listClient;
     }
 
     public Controleur restaure() {
