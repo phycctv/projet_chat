@@ -177,8 +177,7 @@ public class FSalon extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        if (!jTextField1.getText().isEmpty()) {
+        if (!jTextField1.getText().isEmpty() && jTextField1.getForeground() == Color.black) {
             try {
 
                 // Récupération du flot de sortie
@@ -193,6 +192,7 @@ public class FSalon extends javax.swing.JFrame {
                 mb.setVisible(true);
             }
         }
+        jTextField1.requestFocusInWindow();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -201,7 +201,6 @@ public class FSalon extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
-        // TODO add your handling code here:
         if (evt.getKeyChar() == KeyEvent.VK_ENTER && !jTextField1.getText().isEmpty()) {
             try {
 
@@ -234,7 +233,6 @@ public class FSalon extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1FocusLost
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
         try {
             //this.dispose();
         } catch (Exception e) {
