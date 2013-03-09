@@ -8,14 +8,14 @@ package projetclientserveur;
  *
  * @author bodinjo
  */
-public class FDocumentation extends javax.swing.JFrame {
+public class FAide extends javax.swing.JFrame {
 
     /**
      * Creates new form FDocumentation
      */
     private FenetrePrincipal parent;
 
-    public FDocumentation(FenetrePrincipal parent, Controleur controleur) {
+    public FAide(FenetrePrincipal parent, Controleur controleur) {
         setBounds(400, 300, 391, 353);
         initComponents();
         parent.setVisible(false);

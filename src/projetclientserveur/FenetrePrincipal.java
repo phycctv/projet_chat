@@ -50,6 +50,8 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         mSalon = new javax.swing.JMenu();
         mItemSalon = new javax.swing.JMenuItem();
         mAide = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuDoc = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -105,9 +107,25 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mSalon);
 
-        mAide.setText("Aide");
+        mAide.setText("Option");
 
-        jMenuDoc.setText("Documentation");
+        jMenuItem1.setText("Changer langue");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mAide.add(jMenuItem1);
+
+        jMenuItem2.setText("Changer serveur");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        mAide.add(jMenuItem2);
+
+        jMenuDoc.setText("Aide");
         jMenuDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuDocActionPerformed(evt);
@@ -179,8 +197,16 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mItemDeconnectionActionPerformed
 
     private void jMenuDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuDocActionPerformed
-        getControleur().fenetreDoc();
+        getControleur().fenetreAide();
     }//GEN-LAST:event_jMenuDocActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        getControleur().fenetreServeur();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     
     
@@ -188,6 +214,8 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuDoc;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu mAide;
     private javax.swing.JMenuItem mItemConnection;

@@ -22,10 +22,19 @@ public class Controleur {
     private Socket socket;
     private DataOutputStream sortie;
     private FSalon fSalon = null;
+    private String serveur = "localhost";
 
     public Controleur() {
         conncte = false;
         fenetrePrincipal();
+    }
+
+    public String getServeur() {
+        return serveur;
+    }
+
+    public void setServeur(String serveur) {
+        this.serveur = serveur;
     }
 
     public boolean isConncte() {
@@ -75,9 +84,14 @@ public class Controleur {
         fConn.setVisible(true);
     }
 
-    public void fenetreDoc() {
-        FDocumentation fDoc = new FDocumentation(fp, this);
-        fDoc.setVisible(true);
+    public void fenetreServeur() {
+        FServeur fServeur = new FServeur(fp, this);
+        fServeur.setVisible(true);
+    }
+
+    public void fenetreAide() {
+        FAide fAide = new FAide(fp, this);
+        fAide.setVisible(true);
     }
 
     public void fenetreSalon() {
@@ -94,10 +108,9 @@ public class Controleur {
 
     public int connection(String nomUtilisateur, String mdp) {
         try {
-            String host = "transit";
             int port = 5015;
-            System.out.println(host + " : " + port);
-            socket = new Socket(host, port);
+            System.out.println(serveur + " : " + port);
+            socket = new Socket(serveur, port);
             // Récupération du flot de sortie
             OutputStream out = socket.getOutputStream();
             // Création du flot de sortie pour données typées
@@ -133,10 +146,9 @@ public class Controleur {
 
     public boolean testLogin(String login) {
         try {
-            String host = "transit";
             int port = 5015;
-            System.out.println(host + " : " + port);
-            Socket socket2 = new Socket(host, port);
+            System.out.println(serveur + " : " + port);
+            Socket socket2 = new Socket(serveur, port);
             // Récupération du flot d'entrée
             InputStream in = socket2.getInputStream();
             // Création du flot d'entrée pour données typées
@@ -165,10 +177,9 @@ public class Controleur {
 
     public boolean inscrire(String login, String mdp, String email, String dateNais, Boolean sexe) {
         try {
-            String host = "transit";
             int port = 5015;
-            System.out.println(host + " : " + port);
-            Socket socket2 = new Socket(host, port);
+            System.out.println(serveur + " : " + port);
+            Socket socket2 = new Socket(serveur, port);
             // Récupération du flot d'entrée
             InputStream in = socket2.getInputStream();
             // Création du flot d'entrée pour données typées
