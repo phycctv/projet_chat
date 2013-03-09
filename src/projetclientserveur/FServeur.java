@@ -112,7 +112,8 @@ public class FServeur extends javax.swing.JFrame {
     private void jButtonChangerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangerActionPerformed
         controleur.setServeur(jTextFieldServeur.getText());
         MessageBox mb = new MessageBox(this, true, "Serveur modifié");
-        this.dispose();
+        mb.setVisible(true);
+        parent.setVisible(true);
     }//GEN-LAST:event_jButtonChangerActionPerformed
 
     private void jButtonAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerActionPerformed
