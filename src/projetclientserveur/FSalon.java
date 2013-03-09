@@ -34,9 +34,9 @@ public class FSalon extends javax.swing.JFrame {
 
         // String[] data = {this.controleur.getNomUtilisateur(), "asd"};
 
-        this.jLabel1.setText(this.controleur.getNomUtilisateur() + " : ");
+        this.jLabel1.setText(this.controleur.getNomUtilisateur() + java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString(" : "));
         listModel1 = new DefaultListModel();
-        messagesbox = new SimpleThread("messageArea", listModel1, jTextPaneMessage, controleur);
+        messagesbox = new SimpleThread(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("MESSAGEAREA"), listModel1, jTextPaneMessage, controleur);
         messagesbox.start();
         //listModel1.addElement(this.controleur.getNomUtilisateur());
         this.jList1 = new JList(listModel1);
@@ -73,7 +73,8 @@ public class FSalon extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
-        setTitle("Salon de discution");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("projetclientserveur/Bundle"); // NOI18N
+        setTitle(bundle.getString("SALON DE DISCUTION")); // NOI18N
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -85,7 +86,7 @@ public class FSalon extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jList1);
 
         jTextField1.setForeground(java.awt.Color.lightGray);
-        jTextField1.setText("Entre votre message ici ...");
+        jTextField1.setText(bundle.getString("ENTRE VOTRE MESSAGE ICI ...")); // NOI18N
         jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField1FocusGained(evt);
@@ -100,23 +101,23 @@ public class FSalon extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Envoyer");
+        jButton1.setText(bundle.getString("ENVOYER")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText(bundle.getString("JLABEL1")); // NOI18N
 
-        jLabel2.setText("Participants");
+        jLabel2.setText(bundle.getString("PARTICIPANTS")); // NOI18N
 
         jTextPaneMessage.setEditable(false);
         jScrollPane1.setViewportView(jTextPaneMessage);
 
-        jMenu1.setText("Salon");
+        jMenu1.setText(bundle.getString("SALON")); // NOI18N
 
-        jMenuItem1.setText("Quitte salon");
+        jMenuItem1.setText(bundle.getString("QUITTE SALON")); // NOI18N
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -126,7 +127,7 @@ public class FSalon extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Aide");
+        jMenu2.setText(bundle.getString("AIDE")); // NOI18N
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -182,9 +183,9 @@ public class FSalon extends javax.swing.JFrame {
                 DataOutputStream sortie = new DataOutputStream(out);
                 sortie.writeUTF(controleur.getNomUtilisateur());
                 sortie.writeUTF(jTextField1.getText());
-                jTextField1.setText("");
+                jTextField1.setText(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString(""));
             } catch (Exception e) {
-                MessageBox mb = new MessageBox(this, true, "Probleme de connection, vous êtes déco");
+                MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("PROBLEME DE CONNECTION, VOUS ÊTES DÉCO"));
                 mb.setVisible(true);
             }
         }
@@ -192,7 +193,7 @@ public class FSalon extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        MessageBox mb = new MessageBox(this, true, "Quitter le salon?");
+        MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("QUITTER LE SALON?"));
         mb.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -206,9 +207,9 @@ public class FSalon extends javax.swing.JFrame {
                 DataOutputStream sortie = new DataOutputStream(out);
                 sortie.writeUTF(controleur.getNomUtilisateur());
                 sortie.writeUTF(jTextField1.getText());
-                jTextField1.setText("");
+                jTextField1.setText(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString(""));
             } catch (Exception e) {
-                MessageBox mb = new MessageBox(this, true, "Probleme de connection, vous êtes déco");
+                MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("PROBLEME DE CONNECTION, VOUS ÊTES DÉCO"));
                 mb.setVisible(true);
             }
         }
@@ -224,7 +225,7 @@ public class FSalon extends javax.swing.JFrame {
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
         if (jTextField1.getText().isEmpty()) {
             jTextField1.setForeground(Color.LIGHT_GRAY);
-            jTextField1.setText("Entrer votre message ici ...");
+            jTextField1.setText(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("ENTRER VOTRE MESSAGE ICI ..."));
         }
     }//GEN-LAST:event_jTextField1FocusLost
 
@@ -232,7 +233,7 @@ public class FSalon extends javax.swing.JFrame {
         try {
             //this.dispose();
         } catch (Exception e) {
-            MessageBox mb = new MessageBox(this, true, "Probleme de la fermeture du salon");
+            MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("PROBLEME DE LA FERMETURE DU SALON"));
             mb.setVisible(true);
         }
     }//GEN-LAST:event_formWindowClosed

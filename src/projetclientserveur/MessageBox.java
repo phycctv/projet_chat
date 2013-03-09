@@ -41,14 +41,15 @@ public class MessageBox extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButton1.setText("Ok");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("projetclientserveur/Bundle"); // NOI18N
+        jButton1.setText(bundle.getString("OK")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Annuler");
+        jButton2.setText(bundle.getString("ANNULER")); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -56,7 +57,7 @@ public class MessageBox extends javax.swing.JDialog {
         });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Bonjour !");
+        jLabel1.setText(bundle.getString("BONJOUR !")); // NOI18N
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -96,9 +97,9 @@ public class MessageBox extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         this.dispose();
-        if (message=="Quitter ?")
+        if (message==java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("QUITTER ?"))
             System.exit(0);
-        else if(message=="Quitter le salon?")
+        else if(message==java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("QUITTER LE SALON?"))
             this.parent.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -118,7 +119,7 @@ public class MessageBox extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if (java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("NIMBUS").equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

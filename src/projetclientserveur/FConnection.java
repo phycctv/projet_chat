@@ -6,12 +6,14 @@ package projetclientserveur;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.util.ResourceBundle;
 
 /**
  *
  * @author zhangxi
  */
 public class FConnection extends javax.swing.JFrame {
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("projetclientserveur/Bundle");
 
     /**
      * Creates new form FConnection
@@ -52,17 +54,17 @@ public class FConnection extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Connection");
+        setTitle(bundle.getString("CONNECTION")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
 
-        jLabel1.setText("Nom utilisateur :");
+        jLabel1.setText(bundle.getString("NOM UTILISATEUR :")); // NOI18N
 
         jTextFieldLogin.setForeground(java.awt.Color.lightGray);
-        jTextFieldLogin.setText("Votre login");
+        jTextFieldLogin.setText(bundle.getString("VOTRE LOGIN")); // NOI18N
         jTextFieldLogin.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextFieldLoginFocusGained(evt);
@@ -77,21 +79,21 @@ public class FConnection extends javax.swing.JFrame {
             }
         });
 
-        jButtonConnect.setText("Connecter");
+        jButtonConnect.setText(bundle.getString("CONNECTER")); // NOI18N
         jButtonConnect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConnectActionPerformed(evt);
             }
         });
 
-        jButtonAnnuler.setText("Annuler");
+        jButtonAnnuler.setText(bundle.getString("ANNULER")); // NOI18N
         jButtonAnnuler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAnnulerActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Mot de passe :");
+        jLabel2.setText(bundle.getString("MOT DE PASSE :")); // NOI18N
 
         jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -152,13 +154,13 @@ public class FConnection extends javax.swing.JFrame {
             parent.getmItemDeconnection().setEnabled(true);
             parent.setVisible(true);
         } else if (rep == 1) {
-            MessageBox mb = new MessageBox(this, true, "Nom utilisateur non existe !");
+            MessageBox mb = new MessageBox(this, true, bundle.getString("NOM UTILISATEUR NON EXISTE !"));
             mb.setVisible(true);
         } else if (rep == 2) {
-            MessageBox mb = new MessageBox(this, true, "Mot de passe incorrecte !");
+            MessageBox mb = new MessageBox(this, true, bundle.getString("MOT DE PASSE INCORRECTE !"));
             mb.setVisible(true);
         } else if (rep == 3) {
-            MessageBox mb = new MessageBox(this, true, "probleme connection");
+            MessageBox mb = new MessageBox(this, true, bundle.getString("PROBLEME CONNECTION"));
             mb.setVisible(true);
         }
 
@@ -184,7 +186,7 @@ public class FConnection extends javax.swing.JFrame {
     private void jTextFieldLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldLoginFocusLost
         if (jTextFieldLogin.getText().isEmpty()) {
             jTextFieldLogin.setForeground(Color.LIGHT_GRAY);
-            jTextFieldLogin.setText("Votre login");
+            jTextFieldLogin.setText(bundle.getString("VOTRE LOGIN"));
         }
     }//GEN-LAST:event_jTextFieldLoginFocusLost
 

@@ -55,11 +55,12 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         jMenuDoc = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Projet Client Serveur V0.7");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("projetclientserveur/Bundle"); // NOI18N
+        setTitle(bundle.getString("PROJET CLIENT SERVEUR V0.7")); // NOI18N
 
-        mSession.setText("Session");
+        mSession.setText(bundle.getString("SESSION")); // NOI18N
 
-        mItemInscription.setText("Inscription");
+        mItemInscription.setText(bundle.getString("INSCRIPTION")); // NOI18N
         mItemInscription.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mItemInscriptionActionPerformed(evt);
@@ -68,7 +69,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         mSession.add(mItemInscription);
         mSession.add(jSeparator1);
 
-        mItemConnection.setText("Connection");
+        mItemConnection.setText(bundle.getString("CONNECTION")); // NOI18N
         mItemConnection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mItemConnectionActionPerformed(evt);
@@ -76,7 +77,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         });
         mSession.add(mItemConnection);
 
-        mItemDeconnection.setText("Deconnection");
+        mItemDeconnection.setText(bundle.getString("DECONNECTION")); // NOI18N
         mItemDeconnection.setEnabled(false);
         mItemDeconnection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,7 +86,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         });
         mSession.add(mItemDeconnection);
 
-        mItemQuitter.setText("Quitter");
+        mItemQuitter.setText(bundle.getString("QUITTER")); // NOI18N
         mItemQuitter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mItemQuitterActionPerformed(evt);
@@ -95,9 +96,9 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mSession);
 
-        mSalon.setText("Salon");
+        mSalon.setText(bundle.getString("SALON")); // NOI18N
 
-        mItemSalon.setText("Salon");
+        mItemSalon.setText(bundle.getString("SALON")); // NOI18N
         mItemSalon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mItemSalonActionPerformed(evt);
@@ -107,9 +108,9 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mSalon);
 
-        mAide.setText("Option");
+        mAide.setText(bundle.getString("OPTION")); // NOI18N
 
-        jMenuItem1.setText("Changer langue");
+        jMenuItem1.setText(bundle.getString("CHANGER LANGUE")); // NOI18N
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -117,7 +118,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         });
         mAide.add(jMenuItem1);
 
-        jMenuItem2.setText("Changer serveur");
+        jMenuItem2.setText(bundle.getString("CHANGER SERVEUR")); // NOI18N
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -125,7 +126,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         });
         mAide.add(jMenuItem2);
 
-        jMenuDoc.setText("Aide");
+        jMenuDoc.setText(bundle.getString("AIDE")); // NOI18N
         jMenuDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuDocActionPerformed(evt);
@@ -152,7 +153,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mItemQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemQuitterActionPerformed
-        MessageBox mb = new MessageBox(this, true, "Quitter ?");
+        MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("QUITTER ?"));
         mb.setVisible(true);
     }//GEN-LAST:event_mItemQuitterActionPerformed
 

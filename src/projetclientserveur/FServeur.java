@@ -51,7 +51,8 @@ public class FServeur extends javax.swing.JFrame {
         jButtonAnnuler = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Changer serveur");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("projetclientserveur/Bundle"); // NOI18N
+        setTitle(bundle.getString("CHANGER SERVEUR")); // NOI18N
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -60,16 +61,16 @@ public class FServeur extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Serveur :");
+        jLabel1.setText(bundle.getString("SERVEUR :")); // NOI18N
 
-        jButtonChanger.setText("Changer");
+        jButtonChanger.setText(bundle.getString("CHANGER")); // NOI18N
         jButtonChanger.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonChangerActionPerformed(evt);
             }
         });
 
-        jButtonAnnuler.setText("Annuler");
+        jButtonAnnuler.setText(bundle.getString("ANNULER")); // NOI18N
         jButtonAnnuler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAnnulerActionPerformed(evt);
@@ -111,7 +112,7 @@ public class FServeur extends javax.swing.JFrame {
 
     private void jButtonChangerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangerActionPerformed
         controleur.setServeur(jTextFieldServeur.getText());
-        MessageBox mb = new MessageBox(this, true, "Serveur modifié");
+        MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("SERVEUR MODIFIÉ"));
         mb.setVisible(true);
         this.dispose();
         parent.setVisible(true);

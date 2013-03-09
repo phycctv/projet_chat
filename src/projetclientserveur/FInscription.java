@@ -71,7 +71,8 @@ public class FInscription extends javax.swing.JFrame {
         jPasswordField2 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Inscription");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("projetclientserveur/Bundle"); // NOI18N
+        setTitle(bundle.getString("INSCRIPTION")); // NOI18N
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -79,10 +80,10 @@ public class FInscription extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Nom utilisateur :");
+        jLabel1.setText(bundle.getString("NOM UTILISATEUR :")); // NOI18N
 
         jTextFieldLogin.setForeground(java.awt.Color.lightGray);
-        jTextFieldLogin.setText("Choisir un login");
+        jTextFieldLogin.setText(bundle.getString("CHOISIR UN LOGIN")); // NOI18N
         jTextFieldLogin.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextFieldLoginFocusGained(evt);
@@ -97,28 +98,28 @@ public class FInscription extends javax.swing.JFrame {
             }
         });
 
-        jButtonVerifier.setText("Vérifier");
+        jButtonVerifier.setText(bundle.getString("VÉRIFIER")); // NOI18N
         jButtonVerifier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVerifierActionPerformed(evt);
             }
         });
 
-        jButtonQuitter.setText("Quitter");
+        jButtonQuitter.setText(bundle.getString("QUITTER")); // NOI18N
         jButtonQuitter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonQuitterActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Mot de passe :");
+        jLabel2.setText(bundle.getString("MOT DE PASSE :")); // NOI18N
 
-        jLabel3.setText("Confirmation :");
+        jLabel3.setText(bundle.getString("CONFIRMATION :")); // NOI18N
 
-        jLabel4.setText("Adresse email :");
+        jLabel4.setText(bundle.getString("ADRESSE EMAIL :")); // NOI18N
 
         jTextFieldEmail.setForeground(java.awt.Color.lightGray);
-        jTextFieldEmail.setText("exemple@exemple.fr");
+        jTextFieldEmail.setText(bundle.getString("EXEMPLE@EXEMPLE.FR")); // NOI18N
         jTextFieldEmail.setEnabled(false);
         jTextFieldEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -129,10 +130,10 @@ public class FInscription extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Date de naissance :");
+        jLabel5.setText(bundle.getString("DATE DE NAISSANCE :")); // NOI18N
 
         jTextFieldDateNaiss.setForeground(java.awt.Color.lightGray);
-        jTextFieldDateNaiss.setText("01/01/2000");
+        jTextFieldDateNaiss.setText(bundle.getString("01/01/2000")); // NOI18N
         jTextFieldDateNaiss.setEnabled(false);
         jTextFieldDateNaiss.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -148,18 +149,18 @@ public class FInscription extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Sexe :");
+        jLabel6.setText(bundle.getString("SEXE :")); // NOI18N
 
         buttonGroup1.add(jRadioButtonFille);
         jRadioButtonFille.setSelected(true);
-        jRadioButtonFille.setText("Fille");
+        jRadioButtonFille.setText(bundle.getString("FILLE")); // NOI18N
         jRadioButtonFille.setEnabled(false);
 
         buttonGroup1.add(jRadioButtonGarcon);
-        jRadioButtonGarcon.setText("Garçon");
+        jRadioButtonGarcon.setText(bundle.getString("GARÇON")); // NOI18N
         jRadioButtonGarcon.setEnabled(false);
 
-        jButtonInscription.setText("Inscription");
+        jButtonInscription.setText(bundle.getString("INSCRIPTION")); // NOI18N
         jButtonInscription.setEnabled(false);
         jButtonInscription.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,7 +168,7 @@ public class FInscription extends javax.swing.JFrame {
             }
         });
 
-        jButtonAnnuler.setText("Annuler");
+        jButtonAnnuler.setText(bundle.getString("ANNULER")); // NOI18N
         jButtonAnnuler.setEnabled(false);
         jButtonAnnuler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,15 +294,15 @@ public class FInscription extends javax.swing.JFrame {
                     jButtonAnnuler.setEnabled(true);
                     jButtonInscription.setEnabled(true);
                 } else {
-                    MessageBox mb = new MessageBox(this, true, "Nom d'utilisateur déjà utilisé");
+                    MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("NOM D'UTILISATEUR DÉJÀ UTILISÉ"));
                     mb.setVisible(true);
                 }
             } else {
-                MessageBox mb = new MessageBox(this, true, "Champs login vide");
+                MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("CHAMPS LOGIN VIDE"));
                 mb.setVisible(true);
             }
         } else {
-            MessageBox mb = new MessageBox(this, true, "Champs login vide");
+            MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("CHAMPS LOGIN VIDE"));
             mb.setVisible(true);
         }
         jPasswordField1.requestFocusInWindow();
@@ -343,20 +344,20 @@ public class FInscription extends javax.swing.JFrame {
             if (!mdp.isEmpty() && !email.isEmpty() && !dateNais.isEmpty() &&
                     jTextFieldEmail.getForeground() == Color.black && jTextFieldDateNaiss.getForeground() == Color.black) {
                 if (getControleur().inscrire(login, mdp, email, dateNais, sexe)) {
-                    MessageBox mb = new MessageBox(this, true, "L'utilisateur : " + login + " est inscrit");
+                    MessageBox mb = new MessageBox(this, true, java.text.MessageFormat.format(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("L'UTILISATEUR : {0} EST INSCRIT"), new Object[] {login}));
                     mb.setVisible(true);
                     this.dispose();
                     parent.setVisible(true);
                 } else {
-                    MessageBox mb = new MessageBox(this, true, "Problème connection serveur inscription");
+                    MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("PROBLÈME CONNECTION SERVEUR INSCRIPTION"));
                     mb.setVisible(true);
                 }
             } else {
-                MessageBox mb = new MessageBox(this, true, "Champ(s) vide(s)");
+                MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("CHAMP(S) VIDE(S)"));
                 mb.setVisible(true);
             }
         } else {
-            MessageBox mb = new MessageBox(this, true, "Mot de passe différent");
+            MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("MOT DE PASSE DIFFÉRENT"));
             mb.setVisible(true);
         }
     }//GEN-LAST:event_jButtonInscriptionActionPerformed
@@ -371,7 +372,7 @@ public class FInscription extends javax.swing.JFrame {
     private void jTextFieldLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldLoginFocusLost
         if (jTextFieldLogin.getText().isEmpty()) {
             jTextFieldLogin.setForeground(Color.LIGHT_GRAY);
-            jTextFieldLogin.setText("Choisir un login");
+            jTextFieldLogin.setText(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("CHOISIR UN LOGIN"));
         }
     }//GEN-LAST:event_jTextFieldLoginFocusLost
 
@@ -385,7 +386,7 @@ public class FInscription extends javax.swing.JFrame {
     private void jTextFieldEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldEmailFocusLost
         if (jTextFieldEmail.getText().isEmpty()) {
             jTextFieldEmail.setForeground(Color.LIGHT_GRAY);
-            jTextFieldEmail.setText("exemple@exemple.com");
+            jTextFieldEmail.setText(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("EXEMPLE@EXEMPLE.COM"));
         }
     }//GEN-LAST:event_jTextFieldEmailFocusLost
 
@@ -399,7 +400,7 @@ public class FInscription extends javax.swing.JFrame {
     private void jTextFieldDateNaissFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDateNaissFocusLost
         if (jTextFieldDateNaiss.getText().isEmpty()) {
             jTextFieldDateNaiss.setForeground(Color.LIGHT_GRAY);
-            jTextFieldDateNaiss.setText("01/01/2000");
+            jTextFieldDateNaiss.setText(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("01/01/2000"));
         }
     }//GEN-LAST:event_jTextFieldDateNaissFocusLost
 
