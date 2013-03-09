@@ -106,7 +106,7 @@ public class Controleur {
         }
     }
 
-    public int connection(String nomUtilisateur, String mdp) {
+    public int connection(String nomUtilisateur0, String mdp) {
         try {
             int port = 5015;
             System.out.println(serveur + " : " + port);
@@ -120,7 +120,7 @@ public class Controleur {
             // Création du flot d'entrée pour données typées
             DataInputStream entree = new DataInputStream(in);
             sortie.writeUTF("connection");
-            sortie.writeUTF(nomUtilisateur);
+            sortie.writeUTF(nomUtilisateur0);
             sortie.writeUTF(mdp);
             return entree.readInt();
         } catch (Exception e) {

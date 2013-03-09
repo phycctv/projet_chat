@@ -143,11 +143,11 @@ public class FConnection extends javax.swing.JFrame {
     private void jButtonConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectActionPerformed
         // TODO add your handling code here:
 
-        this.controleur.setNomUtilisateur(jTextFieldLogin.getText().toString());
-        this.controleur.setConncte(true);
         int rep = controleur.connection(jTextFieldLogin.getText(), new String(jPasswordField1.getPassword()));
         if (rep == 0) {
             this.dispose();
+            this.controleur.setNomUtilisateur(jTextFieldLogin.getText().toString());
+            this.controleur.setConncte(true);
             parent.getmItemConnection().setEnabled(false);
             parent.getmItemDeconnection().setEnabled(true);
             parent.setVisible(true);
