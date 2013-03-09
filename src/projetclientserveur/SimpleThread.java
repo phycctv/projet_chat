@@ -9,6 +9,10 @@ import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import javax.swing.DefaultListModel;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
 
 /**
  *
@@ -17,15 +21,19 @@ import javax.swing.DefaultListModel;
 public class SimpleThread extends Thread {
 
     private String nom;
-    private javax.swing.JTextArea messageArea;
+    private JTextPane messagePane;
     private DefaultListModel listModel1;
     private Controleur controleur;
+    private HTMLEditorKit kit;
+    private HTMLDocument doc;
 
-    public SimpleThread(String nom, DefaultListModel listModel1, javax.swing.JTextArea messageArea, Controleur controleur) {
+    public SimpleThread(String nom, DefaultListModel listModel1, JTextPane messagePane, Controleur controleur) {
         this.nom = nom;
         this.listModel1 = listModel1;
-        this.messageArea = messageArea;
+        this.messagePane = messagePane;
         this.controleur = controleur;
+        this.kit = new HTMLEditorKit();
+        this.doc = new HTMLDocument();
     }
 
     public void run() {
@@ -43,22 +51,40 @@ public class SimpleThread extends Thread {
             for (int i = 0; i < nb; i++) {
                 listModel1.addElement(entree.readUTF());
             }
-            messageArea.append("------Bienvenue chez nous------");
+
+            messagePane.setEditorKit(kit);
+            messagePane.setDocument(doc);
+            kit.insertHTML(doc, doc.getLength(),
+                    "<p ALIGN=\"center\">------ Bienvenue chez nous ------</p>", 0, 0, null);
+            
             while (true) {
                 String type = entree.readUTF();
                 if (type.equals("message")) {
-                    messageArea.append("\n" + entree.readUTF());
-                    messageArea.setCaretPosition(messageArea.getDocument().getLength());
+                    String sexe = entree.readUTF();
+                    if (sexe.equals("garcon")) {
+                        kit.insertHTML(doc, doc.getLength(), "<font color='blue'><b>"
+                                + entree.readUTF() + " :</b></font><p>"
+                                + entree.readUTF() + "</p>", 0, 0, null);
+                    } else if (sexe.equals("fille")) {
+                        kit.insertHTML(doc, doc.getLength(), "<font color='#FD6C9E'><b>"
+                                + entree.readUTF() + " :</b></font><p>"
+                                + entree.readUTF() + "</p>", 0, 0, null);
+                    }
+                    messagePane.setCaretPosition(messagePane.getDocument().getLength());
+                    
                 } else if (type.equals("participant")) {
                     String nomParticipant = entree.readUTF();
                     listModel1.addElement(nomParticipant);
-                    messageArea.append("\n" + nomParticipant + " est entrée dans le salon.");
-                    messageArea.setCaretPosition(messageArea.getDocument().getLength());
+                    kit.insertHTML(doc, doc.getLength(), "<p>" + nomParticipant
+                            + " est entrée dans le salon.</p>", 0, 0, null);
+                    messagePane.setCaretPosition(messagePane.getDocument().getLength());
+                    
                 } else if (type.equals("clientQuitter")) {
                     String clientQuitter = entree.readUTF();
                     listModel1.removeElement(clientQuitter);
-                    messageArea.append("\n" + clientQuitter + " a quitté le salon.");
-                    messageArea.setCaretPosition(messageArea.getDocument().getLength());
+                    kit.insertHTML(doc, doc.getLength(), "<p>" + clientQuitter
+                            + " a quitté le salon.</p>", 0, 0, null);
+                    messagePane.setCaretPosition(messagePane.getDocument().getLength());
                 }
 
             }

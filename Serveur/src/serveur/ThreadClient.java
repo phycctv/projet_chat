@@ -17,12 +17,14 @@ public class ThreadClient extends Thread {
     private Socket socket_transfert;
     private Controleur controleur;
     private String nomClient;
+    private Utilisateur utilisateur;
 
     public ThreadClient(int numClient, Socket socket_transfert, Controleur controleur, String nomClient) {
         this.numClient = numClient;
         this.controleur = controleur;
         this.socket_transfert = socket_transfert;
         this.nomClient = nomClient;
+        this.utilisateur = controleur.getUtilisateur(nomClient);
     }
 
     public String getNomClient() {
@@ -84,7 +86,13 @@ public class ThreadClient extends Thread {
                         // Création du flot de sortie pour données typées
                         DataOutputStream sortie = new DataOutputStream(out);
                         sortie.writeUTF("message");
-                        sortie.writeUTF(nomClient + " : " + j);
+                        if (utilisateur.isSexe()) {
+                            sortie.writeUTF("garcon");
+                        } else {
+                            sortie.writeUTF("fille");
+                        }
+                        sortie.writeUTF(nomClient);
+                        sortie.writeUTF(j);
                     }
 
                 }

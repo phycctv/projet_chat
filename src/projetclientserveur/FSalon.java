@@ -36,7 +36,7 @@ public class FSalon extends javax.swing.JFrame {
 
         this.jLabel1.setText(this.controleur.getNomUtilisateur() + " : ");
         listModel1 = new DefaultListModel();
-        messagesbox = new SimpleThread("messageArea", listModel1, messageArea, controleur);
+        messagesbox = new SimpleThread("messageArea", listModel1, jTextPaneMessage, controleur);
         messagesbox.start();
         //listModel1.addElement(this.controleur.getNomUtilisateur());
         this.jList1 = new JList(listModel1);
@@ -64,10 +64,10 @@ public class FSalon extends javax.swing.JFrame {
         jList1 = new javax.swing.JList();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        messageScrollPane = new javax.swing.JScrollPane();
-        messageArea = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPaneMessage = new javax.swing.JTextPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -107,15 +107,12 @@ public class FSalon extends javax.swing.JFrame {
             }
         });
 
-        messageArea.setColumns(20);
-        messageArea.setEditable(false);
-        messageArea.setLineWrap(true);
-        messageArea.setRows(5);
-        messageScrollPane.setViewportView(messageArea);
-
         jLabel1.setText("jLabel1");
 
         jLabel2.setText("Participants");
+
+        jTextPaneMessage.setEditable(false);
+        jScrollPane1.setViewportView(jTextPaneMessage);
 
         jMenu1.setText("Salon");
 
@@ -148,23 +145,22 @@ public class FSalon extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1))
-                    .addComponent(messageScrollPane))
+                    .addComponent(jScrollPane1))
                 .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2))
-                    .addComponent(messageScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,9 +245,9 @@ public class FSalon extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextArea messageArea;
-    private javax.swing.JScrollPane messageScrollPane;
+    private javax.swing.JTextPane jTextPaneMessage;
     // End of variables declaration//GEN-END:variables
 }
