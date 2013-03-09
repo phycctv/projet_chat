@@ -99,8 +99,8 @@ public class ThreadClient extends Thread {
             }
         } catch (Exception e) {
             controleur.getListClient().remove(this);
-            if (e.toString() == "java.io.EOFException") {
-                System.out.println("Client : " + nomClient + " a quitté le salon");
+            if (e.toString().equals("java.io.EOFException") || e.toString().equals("java.net.SocketException")) {
+                System.out.println("Client : " + nomClient + " a quitté la session");
                 try {
                     for (int k = 0; k < controleur.getListClient().size(); k++) {
                         if (!controleur.getListClient().get(k).getNomClient().equals(nomClient)) {
@@ -113,9 +113,25 @@ public class ThreadClient extends Thread {
                         }
                     }
                 } catch (Exception e2) {
+                    System.out.println("petit PROBLEME : " + e2.toString());
                 }
             } else {
                 System.out.println("GROS PROBLEME : " + e.toString());
+                System.out.println("Donc client : " + nomClient + " est déco par serveur");
+                try {
+                    for (int k = 0; k < controleur.getListClient().size(); k++) {
+                        if (!controleur.getListClient().get(k).getNomClient().equals(nomClient)) {
+                            // Récupération du flot de sortie
+                            OutputStream out1 = controleur.getListClient().get(k).getSocket_transfert().getOutputStream();
+                            // Création du flot de sortie pour données typées
+                            DataOutputStream sortie1 = new DataOutputStream(out1);
+                            sortie1.writeUTF("clientQuitter");
+                            sortie1.writeUTF(nomClient);
+                        }
+                    }
+                } catch (Exception e2) {
+                    System.out.println("petit PROBLEME : " + e2.toString());
+                }
             }
         }
         try {

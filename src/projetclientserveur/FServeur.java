@@ -113,6 +113,7 @@ public class FServeur extends javax.swing.JFrame {
         controleur.setServeur(jTextFieldServeur.getText());
         MessageBox mb = new MessageBox(this, true, "Serveur modifié");
         mb.setVisible(true);
+        this.dispose();
         parent.setVisible(true);
     }//GEN-LAST:event_jButtonChangerActionPerformed
 
