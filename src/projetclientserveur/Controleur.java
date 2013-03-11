@@ -9,6 +9,7 @@ import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Locale;
 
 /**
  *
@@ -212,5 +213,10 @@ public class Controleur {
         } catch (Exception e) {
             return false;
         }
+    }
+    public void setLangue(Locale pays) {
+        Locale.setDefault(pays);
+        fp.dispose();
+        fenetrePrincipal();
     }
 }
