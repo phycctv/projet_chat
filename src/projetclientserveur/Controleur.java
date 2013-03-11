@@ -101,7 +101,7 @@ public class Controleur {
             }
             fSalon.setVisible(true);
         } else {
-            MessageBox mb = new MessageBox(fp, true, "Vous n'etes pas connecté");
+            MessageBox mb = new MessageBox(fp, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("VOUS N'ETES PAS CONNECTÉ"));
             mb.setVisible(true);
         }
     }
@@ -124,7 +124,7 @@ public class Controleur {
             sortie.writeUTF(mdp);
             return entree.readInt();
         } catch (Exception e) {
-            System.out.println("probleme connection");
+            System.out.println(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("PROBLEME CONNECTION"));
             return 3;
         }
 
@@ -139,7 +139,7 @@ public class Controleur {
             socket.close();
 
         } catch (Exception e) {
-            System.out.println("probleme déco");
+            System.out.println(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("PROBLEME DÉCO"));
         }
 
     }
