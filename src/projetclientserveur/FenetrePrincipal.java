@@ -56,7 +56,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("projetclientserveur/Bundle"); // NOI18N
-        setTitle(bundle.getString("PROJET CLIENT SERVEUR V0.7")); // NOI18N
+        setTitle(bundle.getString("PROJET CLIENT SERVEUR")); // NOI18N
 
         mSession.setText(bundle.getString("SESSION")); // NOI18N
 
