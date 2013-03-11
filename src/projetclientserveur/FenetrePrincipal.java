@@ -14,6 +14,7 @@ import javax.swing.JMenuItem;
 public class FenetrePrincipal extends javax.swing.JFrame {
 
     private Controleur controleur;
+
     /**
      * Creates new form FenetrePrincipal
      */
@@ -30,7 +31,6 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     public void setControleur(Controleur controleur) {
         this.controleur = controleur;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -124,9 +124,19 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         jMenu1.setText("Changer langue ");
 
         butDeutsch.setText("Deutsch");
+        butDeutsch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butDeutschActionPerformed(evt);
+            }
+        });
         jMenu1.add(butDeutsch);
 
         butEnglish.setText("English");
+        butEnglish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butEnglishActionPerformed(evt);
+            }
+        });
         jMenu1.add(butEnglish);
 
         butEspañol.setText("Español");
@@ -221,7 +231,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     private void mItemConnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemConnectionActionPerformed
         getControleur().fenetreConnection();
     }
-    
+
     public JMenuItem getmItemConnection() {
         return mItemConnection;
     }
@@ -242,7 +252,6 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         return mItemDeconnection;
     }
 
-    
     private void mItemDeconnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemDeconnectionActionPerformed
         this.controleur.deconnection();
         this.controleur.setNomUtilisateur(null);
@@ -260,31 +269,38 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
     private void butFrancaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butFrancaisActionPerformed
         // TODO add your handling code here:
+        getControleur().setLangue(new Locale("fr", "FR", ""));
     }//GEN-LAST:event_butFrancaisActionPerformed
 
     private void butChinoisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butChinoisActionPerformed
         // TODO add your handling code here:
-        getControleur().setLangue(Locale.PRC);
+        getControleur().setLangue(new Locale("zh", "CN", ""));
     }//GEN-LAST:event_butChinoisActionPerformed
 
     private void butEspañolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butEspañolActionPerformed
         // TODO add your handling code here:
-        //getControleur().setLangue(createSingleton("en__", "en", ""));
+        getControleur().setLangue(new Locale("es", "ES", ""));
     }//GEN-LAST:event_butEspañolActionPerformed
 
     private void butItalianoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butItalianoActionPerformed
         // TODO add your handling code here:
-        getControleur().setLangue(Locale.PRC);
+        getControleur().setLangue(new Locale("it", "IT", ""));
     }//GEN-LAST:event_butItalianoActionPerformed
 
     private void butNederlandsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butNederlandsActionPerformed
         // TODO add your handling code here:
-        getControleur().setLangue(Locale.PRC);
+        getControleur().setLangue(new Locale("nl", "NL", ""));
     }//GEN-LAST:event_butNederlandsActionPerformed
 
-    
-    
-    
+    private void butDeutschActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butDeutschActionPerformed
+        // TODO add your handling code here:
+        getControleur().setLangue(new Locale("de", "DE", ""));
+    }//GEN-LAST:event_butDeutschActionPerformed
+
+    private void butEnglishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butEnglishActionPerformed
+        // TODO add your handling code here:
+        getControleur().setLangue(new Locale("en", "US", ""));
+    }//GEN-LAST:event_butEnglishActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem butChinois;
     private javax.swing.JMenuItem butDeutsch;
