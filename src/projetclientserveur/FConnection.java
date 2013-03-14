@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
  * @author zhangxi
  */
 public class FConnection extends javax.swing.JFrame {
-    private static final ResourceBundle bundle = ResourceBundle.getBundle("projetclientserveur/Bundle");
+
 
     /**
      * Creates new form FConnection
@@ -54,6 +54,7 @@ public class FConnection extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("projetclientserveur/Bundle"); // NOI18N
         setTitle(bundle.getString("CONNECTION")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -154,13 +155,13 @@ public class FConnection extends javax.swing.JFrame {
             parent.getmItemDeconnection().setEnabled(true);
             parent.setVisible(true);
         } else if (rep == 1) {
-            MessageBox mb = new MessageBox(this, true, bundle.getString("NOM UTILISATEUR NON EXISTE !"));
+            MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("NOM UTILISATEUR NON EXISTE !"));
             mb.setVisible(true);
         } else if (rep == 2) {
-            MessageBox mb = new MessageBox(this, true, bundle.getString("MOT DE PASSE INCORRECTE !"));
+            MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("MOT DE PASSE INCORRECTE !"));
             mb.setVisible(true);
         } else if (rep == 3) {
-            MessageBox mb = new MessageBox(this, true, bundle.getString("PROBLEME CONNECTION"));
+            MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("PROBLEME CONNECTION"));
             mb.setVisible(true);
         }
 
@@ -186,7 +187,7 @@ public class FConnection extends javax.swing.JFrame {
     private void jTextFieldLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldLoginFocusLost
         if (jTextFieldLogin.getText().isEmpty()) {
             jTextFieldLogin.setForeground(Color.LIGHT_GRAY);
-            jTextFieldLogin.setText(bundle.getString("VOTRE LOGIN"));
+            jTextFieldLogin.setText(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("VOTRE LOGIN"));
         }
     }//GEN-LAST:event_jTextFieldLoginFocusLost
 
