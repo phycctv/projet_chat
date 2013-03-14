@@ -23,7 +23,7 @@ public class FSalon extends javax.swing.JFrame {
     private Controleur controleur;
     private java.awt.Frame parent;
     private DefaultListModel listModel1;
-    private SimpleThread messagesbox;
+    private ThreadAfficher messagesbox;
 
     public FSalon(java.awt.Frame parent, Controleur controleur) {
         this.setControleur(controleur);
@@ -36,7 +36,7 @@ public class FSalon extends javax.swing.JFrame {
 
         this.jLabel1.setText(this.controleur.getNomUtilisateur() + java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString(" : "));
         listModel1 = new DefaultListModel();
-        messagesbox = new SimpleThread(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("MESSAGEAREA"), listModel1, jTextPaneMessage, controleur);
+        messagesbox = new ThreadAfficher(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("MESSAGEAREA"), listModel1, jTextPaneMessage, controleur);
         messagesbox.start();
         //listModel1.addElement(this.controleur.getNomUtilisateur());
         this.jList1 = new JList(listModel1);
