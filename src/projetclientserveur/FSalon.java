@@ -112,6 +112,7 @@ public class FSalon extends javax.swing.JFrame {
 
         jLabel2.setText(bundle.getString("PARTICIPANTS")); // NOI18N
 
+        jTextPaneMessage.setBackground(java.awt.Color.white);
         jTextPaneMessage.setEditable(false);
         jScrollPane1.setViewportView(jTextPaneMessage);
 

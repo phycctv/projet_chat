@@ -8,6 +8,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JTextPane;
 import javax.swing.text.html.HTMLDocument;
@@ -61,60 +63,42 @@ public class SimpleThread extends Thread {
                 if (type.equals("message")) {
                     String sexe = entree.readUTF();
                     if (sexe.equals("garcon")) {
-                        kit.insertHTML(doc, doc.getLength(), "<font color='blue'><b>"
+                        SimpleDateFormat date2 = new SimpleDateFormat("HH:mm:ss");
+                        kit.insertHTML(doc, doc.getLength(), "[" + date2.format(new Date()) + "] "
+                                + "<font color='blue'><b>"
                                 + entree.readUTF() + " :</b></font>", 0, 0, null);
-
-                        String message = entree.readUTF();
-                        if (message.equals(":)")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/03.jpg\">", 0, 0, null);
-                        } else if (message.equals(":D")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/04.jpg\">", 0, 0, null);
-                        } else if (message.equals(":(")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/20.gif\">", 0, 0, null);
-                        } else if (message.equals(";)")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/05.jpg\">", 0, 0, null);
-                        } else if (message.equals(":'(")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/07.jpg\">", 0, 0, null);
-                        } else if (message.equals(">.<")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/18.gif\">", 0, 0, null);
-                        } else if (message.equals(":O")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/08.jpg\">", 0, 0, null);
-                        } else if (message.equals(":P")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/21.gif\">", 0, 0, null);
-                        } else if (message.equals("<3")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/06.jpg\">", 0, 0, null);
-                        } else {
-                            kit.insertHTML(doc, doc.getLength(), "<p>" + message + "</p>", 0, 0, null);
-                        }
 
                     } else if (sexe.equals("fille")) {
-                        kit.insertHTML(doc, doc.getLength(), "<font color='#FD6C9E'><b>"
+                        SimpleDateFormat date2 = new SimpleDateFormat("HH:mm:ss");
+                        kit.insertHTML(doc, doc.getLength(), "[" + date2.format(new Date()) + "] "
+                                + "<font color='#FD6C9E'><b>"
                                 + entree.readUTF() + " :</b></font>", 0, 0, null);
-
-                        String message = entree.readUTF();
-                        if (message.equals(":)")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/03.jpg\">", 0, 0, null);
-                        } else if (message.equals(":D")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/04.jpg\">", 0, 0, null);
-                        } else if (message.equals(":(")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/20.gif\">", 0, 0, null);
-                        } else if (message.equals(";)")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/05.jpg\">", 0, 0, null);
-                        } else if (message.equals(":'(")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/07.jpg\">", 0, 0, null);
-                        } else if (message.equals(">.<")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/18.gif\">", 0, 0, null);
-                        } else if (message.equals(":O")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/08.jpg\">", 0, 0, null);
-                        } else if (message.equals(":P")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/21.gif\">", 0, 0, null);
-                        } else if (message.equals("<3")) {
-                            kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/06.jpg\">", 0, 0, null);
-                        } else {
-                            kit.insertHTML(doc, doc.getLength(), "<p>" + message + "</p>", 0, 0, null);
-                        }
-
                     }
+                    
+                    String message = entree.readUTF();
+
+                    if (message.equals(":)")) {
+                        kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/03.jpg\">", 0, 0, null);
+                    } else if (message.equals(":D")) {
+                        kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/04.jpg\">", 0, 0, null);
+                    } else if (message.equals(":(")) {
+                        kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/20.gif\">", 0, 0, null);
+                    } else if (message.equals(";)")) {
+                        kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/05.jpg\">", 0, 0, null);
+                    } else if (message.equals(":'(")) {
+                        kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/07.jpg\">", 0, 0, null);
+                    } else if (message.equals(">.<")) {
+                        kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/18.gif\">", 0, 0, null);
+                    } else if (message.equals(":O")) {
+                        kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/08.jpg\">", 0, 0, null);
+                    } else if (message.equals(":P")) {
+                        kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/21.gif\">", 0, 0, null);
+                    } else if (message.equals("<3")) {
+                        kit.insertHTML(doc, doc.getLength(), "<img src=\"http://www.astucefb.com/face/06.jpg\">", 0, 0, null);
+                    } else {
+                        kit.insertHTML(doc, doc.getLength(), "<p>" + message + "</p>", 0, 0, null);
+                    }
+
                     messagePane.setCaretPosition(messagePane.getDocument().getLength());
 
                 } else if (type.equals("participant")) {
