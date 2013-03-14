@@ -5,3 +5,10 @@ manifest.mf
 /Serveur/nbproject/
 /Serveur/build/
 /Serveur/dist/
+/Serveur (copy)/build/
+/Serveur (copy)/nbproject/private/
+/Serveur (multiSalon)/build/
+/Serveur (multiSalon)/nbproject/private/
+/Serveur(MultiSalon)/nbproject/private/
+/Serveur(MultiSalon)/build/
+/Serveur(MultiSalon)/dist/
