@@ -150,7 +150,7 @@ public class FConnection extends javax.swing.JFrame {
         if (rep == 0) {
             this.dispose();
             this.controleur.setNomUtilisateur(jTextFieldLogin.getText().toString());
-            this.controleur.setConncte(true);
+            this.controleur.setConnecte(true);
             parent.getmItemConnection().setEnabled(false);
             parent.getmItemDeconnection().setEnabled(true);
             parent.setVisible(true);
