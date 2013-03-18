@@ -153,6 +153,8 @@ public class FConnection extends javax.swing.JFrame {
             this.controleur.setConnecte(true);
             parent.getmItemConnection().setEnabled(false);
             parent.getmItemDeconnection().setEnabled(true);
+            parent.getMenuLangue().setEnabled(false);
+            parent.getMItemServeur().setEnabled(false);
             parent.setVisible(true);
         } else if (rep == 1) {
             MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("NOM UTILISATEUR NON EXISTE !"));

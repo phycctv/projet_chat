@@ -5,6 +5,7 @@
 package projetclientserveur;
 
 import java.util.Locale;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 /**
@@ -52,7 +53,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         mSalon = new javax.swing.JMenu();
         mItemSalon = new javax.swing.JMenuItem();
         mAide = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
+        menuLangue = new javax.swing.JMenu();
         butDeutsch = new javax.swing.JMenuItem();
         butEnglish = new javax.swing.JMenuItem();
         butEspañol = new javax.swing.JMenuItem();
@@ -60,7 +61,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         butNederlands = new javax.swing.JMenuItem();
         butItaliano = new javax.swing.JMenuItem();
         butChinois = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        mItemServeur = new javax.swing.JMenuItem();
         jMenuDoc = new javax.swing.JMenuItem();
 
         jMenuItem3.setText("jMenuItem3");
@@ -121,7 +122,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
         mAide.setText(bundle.getString("OPTION")); // NOI18N
 
-        jMenu1.setText("Changer langue ");
+        menuLangue.setText("Changer langue ");
 
         butDeutsch.setText("Deutsch");
         butDeutsch.addActionListener(new java.awt.event.ActionListener() {
@@ -129,7 +130,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 butDeutschActionPerformed(evt);
             }
         });
-        jMenu1.add(butDeutsch);
+        menuLangue.add(butDeutsch);
 
         butEnglish.setText("English");
         butEnglish.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +138,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 butEnglishActionPerformed(evt);
             }
         });
-        jMenu1.add(butEnglish);
+        menuLangue.add(butEnglish);
 
         butEspañol.setText("Español");
         butEspañol.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +146,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 butEspañolActionPerformed(evt);
             }
         });
-        jMenu1.add(butEspañol);
+        menuLangue.add(butEspañol);
 
         butFrancais.setText("Français");
         butFrancais.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +154,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 butFrancaisActionPerformed(evt);
             }
         });
-        jMenu1.add(butFrancais);
+        menuLangue.add(butFrancais);
 
         butNederlands.setText("Nederlands");
         butNederlands.addActionListener(new java.awt.event.ActionListener() {
@@ -161,7 +162,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 butNederlandsActionPerformed(evt);
             }
         });
-        jMenu1.add(butNederlands);
+        menuLangue.add(butNederlands);
 
         butItaliano.setText("Italiano");
         butItaliano.addActionListener(new java.awt.event.ActionListener() {
@@ -169,7 +170,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 butItalianoActionPerformed(evt);
             }
         });
-        jMenu1.add(butItaliano);
+        menuLangue.add(butItaliano);
 
         butChinois.setText("中文 ");
         butChinois.addActionListener(new java.awt.event.ActionListener() {
@@ -177,17 +178,17 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 butChinoisActionPerformed(evt);
             }
         });
-        jMenu1.add(butChinois);
+        menuLangue.add(butChinois);
 
-        mAide.add(jMenu1);
+        mAide.add(menuLangue);
 
-        jMenuItem2.setText(bundle.getString("CHANGER SERVEUR")); // NOI18N
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        mItemServeur.setText(bundle.getString("CHANGER SERVEUR")); // NOI18N
+        mItemServeur.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                mItemServeurActionPerformed(evt);
             }
         });
-        mAide.add(jMenuItem2);
+        mAide.add(mItemServeur);
 
         jMenuDoc.setText(bundle.getString("AIDE")); // NOI18N
         jMenuDoc.addActionListener(new java.awt.event.ActionListener() {
@@ -252,20 +253,30 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         return mItemDeconnection;
     }
 
+    public JMenuItem getMItemServeur() {
+        return mItemServeur;
+    }
+
+    public JMenu getMenuLangue() {
+        return menuLangue;
+    }
+
     private void mItemDeconnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemDeconnectionActionPerformed
         this.controleur.deconnection();
         this.controleur.setNomUtilisateur(null);
         this.mItemConnection.setEnabled(true);
         this.mItemDeconnection.setEnabled(false);
+        this.getMenuLangue().setEnabled(true);
+        this.getMItemServeur().setEnabled(true);
     }//GEN-LAST:event_mItemDeconnectionActionPerformed
 
     private void jMenuDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuDocActionPerformed
         getControleur().fenetreAide();
     }//GEN-LAST:event_jMenuDocActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void mItemServeurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemServeurActionPerformed
         getControleur().fenetreServeur();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_mItemServeurActionPerformed
 
     private void butFrancaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butFrancaisActionPerformed
         // TODO add your handling code here:
@@ -309,10 +320,8 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem butFrancais;
     private javax.swing.JMenuItem butItaliano;
     private javax.swing.JMenuItem butNederlands;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuDoc;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu mAide;
@@ -321,7 +330,9 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mItemInscription;
     private javax.swing.JMenuItem mItemQuitter;
     private javax.swing.JMenuItem mItemSalon;
+    private javax.swing.JMenuItem mItemServeur;
     private javax.swing.JMenu mSalon;
     private javax.swing.JMenu mSession;
+    private javax.swing.JMenu menuLangue;
     // End of variables declaration//GEN-END:variables
 }

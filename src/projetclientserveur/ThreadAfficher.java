@@ -19,7 +19,7 @@ import javax.swing.text.html.HTMLEditorKit;
  *
  * @author zhangxi
  */
-public class SimpleThread extends Thread {
+public class ThreadAfficher extends Thread {
 
     private String nom;
     private JTextPane messagePane;
@@ -28,7 +28,7 @@ public class SimpleThread extends Thread {
     private HTMLEditorKit kit;
     private HTMLDocument doc;
 
-    public SimpleThread(String nom, DefaultListModel listModel1, JTextPane messagePane, Controleur controleur) {
+    public ThreadAfficher(String nom, DefaultListModel listModel1, JTextPane messagePane, Controleur controleur) {
         this.nom = nom;
         this.listModel1 = listModel1;
         this.messagePane = messagePane;
@@ -104,15 +104,15 @@ public class SimpleThread extends Thread {
                 } else if (type.equals("participant")) {
                     String nomParticipant = entree.readUTF();
                     listModel1.addElement(nomParticipant);
-                    kit.insertHTML(doc, doc.getLength(), "<p>" + nomParticipant
-                            + " est entrée dans le salon.</p>", 0, 0, null);
+                    kit.insertHTML(doc, doc.getLength(), "<i>" + nomParticipant
+                            + " est entrée dans le salon.</i>", 0, 0, null);
                     messagePane.setCaretPosition(messagePane.getDocument().getLength());
 
                 } else if (type.equals("clientQuitter")) {
                     String clientQuitter = entree.readUTF();
                     listModel1.removeElement(clientQuitter);
-                    kit.insertHTML(doc, doc.getLength(), "<p>" + clientQuitter
-                            + " a quitté le salon.</p>", 0, 0, null);
+                    kit.insertHTML(doc, doc.getLength(), "<i>" + clientQuitter
+                            + " a quitté le salon.</i>", 0, 0, null);
                     messagePane.setCaretPosition(messagePane.getDocument().getLength());
                 }
 
