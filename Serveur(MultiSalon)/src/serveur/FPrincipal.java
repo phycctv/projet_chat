@@ -28,8 +28,7 @@ public class FPrincipal extends javax.swing.JFrame {
     public void setControleur(Controleur controleur) {
         this.controleur = controleur;
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,49 +40,55 @@ public class FPrincipal extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItemDemmarer = new javax.swing.JMenuItem();
+        jMenuItemStopper = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItemQuitter = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItemGestionSalons = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Serveur Chat");
 
         jMenu1.setText("Serveur");
 
-        jMenuItem1.setText("Démarrer le serveur");
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("Stopper le serveur");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemDemmarer.setText("Démarrer le serveur");
+        jMenuItemDemmarer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuItemDemmarerActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(jMenuItemDemmarer);
+
+        jMenuItemStopper.setText("Stopper le serveur");
+        jMenuItemStopper.setEnabled(false);
+        jMenuItemStopper.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemStopperActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemStopper);
         jMenu1.add(jSeparator4);
 
-        jMenuItem3.setText("Quitter");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemQuitter.setText("Quitter");
+        jMenuItemQuitter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jMenuItemQuitterActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        jMenu1.add(jMenuItemQuitter);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Salons");
 
-        jMenuItem4.setText("Gestion des salons");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemGestionSalons.setText("Gestion des salons");
+        jMenuItemGestionSalons.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jMenuItemGestionSalonsActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        jMenu2.add(jMenuItemGestionSalons);
 
         jMenuBar1.add(jMenu2);
 
@@ -103,28 +108,36 @@ public class FPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMenuItemStopperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemStopperActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jMenuItemStopperActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenuItemQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemQuitterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jMenuItemQuitterActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void jMenuItemGestionSalonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGestionSalonsActionPerformed
         // TODO add your handling code here:
-        this.controleur.FenetreGestionSalons();
-        
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+        FGestionSalons fIns = new FGestionSalons(this, controleur);
+        fIns.setVisible(true);
 
+    }//GEN-LAST:event_jMenuItemGestionSalonsActionPerformed
+
+    private void jMenuItemDemmarerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDemmarerActionPerformed
+        // TODO add your handling code here:
+        TheadSalon ts = new TheadSalon(controleur, controleur.getNomPremierSalon());
+        ts.start();
+        this.jMenuItemDemmarer.setEnabled(false);
+        this.jMenuItemStopper.setEnabled(true);
+    }//GEN-LAST:event_jMenuItemDemmarerActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItemDemmarer;
+    private javax.swing.JMenuItem jMenuItemGestionSalons;
+    private javax.swing.JMenuItem jMenuItemQuitter;
+    private javax.swing.JMenuItem jMenuItemStopper;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     // End of variables declaration//GEN-END:variables
 }

@@ -50,8 +50,6 @@ public class ThreadClient extends Thread {
             String ip = socket_transfert.getInetAddress().getHostAddress();
             int portCli = socket_transfert.getPort();
             System.out.println(ip + " : " + portCli);
-
-            salon.getListeClients().add(this);
             // Récupération du flot d'entrée
             InputStream in = socket_transfert.getInputStream();
             // Création du flot d'entrée pour données typées
@@ -60,9 +58,26 @@ public class ThreadClient extends Thread {
             OutputStream out0 = socket_transfert.getOutputStream();
             // Création du flot de sortie pour données typées
             DataOutputStream sortie0 = new DataOutputStream(out0);
-            String ok = entree.readUTF();
-            if (ok.equals("ok_je_suis_dans_le_salon")) {
-                System.out.println("Client : " + nomClient + " est entré dans le salon");
+            String ok = "non";
+            while (!ok.equals("ok_je_suis_dans_un_salon")) {
+                String demande = entree.readUTF();
+                if (demande.equals("je_veux_la_liste_des_salon")) {
+                    sortie0.writeInt(this.controleur.getSalons().size());
+                    for (String key : this.controleur.getSalons().keySet()) {
+                        sortie0.writeUTF(key);
+                    }
+                    ok = entree.readUTF();
+                    if (ok.equals("ok_je_suis_dans_un_salon")){
+                        break;
+                    }
+                }
+            }
+
+            if (ok.equals("ok_je_suis_dans_un_salon")) {
+                String nomSalon = entree.readUTF();
+                salon = controleur.getSalon(nomSalon);
+                salon.getListeClients().add(this);
+                System.out.println("Client : " + nomClient + " est entré dans le salon" + salon.getIdentSalon());
                 sortie0.writeInt(salon.getListeClients().size());
                 for (int k = 0; k < salon.getListeClients().size(); k++) {
                     sortie0.writeUTF(salon.getListeClients().get(k).getNomClient());

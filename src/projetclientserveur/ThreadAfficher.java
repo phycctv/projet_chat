@@ -27,14 +27,16 @@ public class ThreadAfficher extends Thread {
     private Controleur controleur;
     private HTMLEditorKit kit;
     private HTMLDocument doc;
+    private String idnetSalon;
 
-    public ThreadAfficher(String nom, DefaultListModel listModel1, JTextPane messagePane, Controleur controleur) {
+    public ThreadAfficher(String idnetSalon, String nom, DefaultListModel listModel1, JTextPane messagePane, Controleur controleur) {
         this.nom = nom;
         this.listModel1 = listModel1;
         this.messagePane = messagePane;
         this.controleur = controleur;
         this.kit = new HTMLEditorKit();
         this.doc = new HTMLDocument();
+        this.idnetSalon = idnetSalon;
     }
 
     public void run() {
@@ -47,7 +49,8 @@ public class ThreadAfficher extends Thread {
             OutputStream out0 = this.controleur.getSocket().getOutputStream();
             // Création du flot de sortie pour données typées
             DataOutputStream sortie0 = new DataOutputStream(out0);
-            sortie0.writeUTF("ok_je_suis_dans_le_salon");
+            sortie0.writeUTF("ok_je_suis_dans_un_salon");
+            sortie0.writeUTF(idnetSalon);
             int nb = entree.readInt();
             for (int i = 0; i < nb; i++) {
                 listModel1.addElement(entree.readUTF());

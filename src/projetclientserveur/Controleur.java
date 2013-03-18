@@ -217,10 +217,10 @@ public class Controleur {
      *
      * @see FSalon
      */
-    public void fenetreSalon() {
+    public void fenetreSalon(String identSalon) {
         if (nomUtilisateur != null) {
             if (fSalon == null) {
-                fSalon = new FSalon(fp, this);
+                fSalon = new FSalon(identSalon, fp, this);
             }
             fSalon.setVisible(true);
         } else {

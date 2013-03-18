@@ -222,7 +222,10 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mItemQuitterActionPerformed
 
     private void mItemSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemSalonActionPerformed
-        getControleur().fenetreSalon();
+        FListeSalons fs = new FListeSalons(controleur);
+        fs.init();
+        fs.setVisible(true);
+        //getControleur().fenetreSalon();
     }//GEN-LAST:event_mItemSalonActionPerformed
 
     private void mItemInscriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemInscriptionActionPerformed

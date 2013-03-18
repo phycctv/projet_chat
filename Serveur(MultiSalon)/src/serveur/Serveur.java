@@ -15,6 +15,6 @@ public class Serveur {
      */
     public static void main(String[] args) {
         Controleur controleur = new Controleur().restaure();
-        controleur.lancer();
+        controleur.fenetrePrincipal();
     }
 }

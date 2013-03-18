@@ -25,7 +25,7 @@ public class FSalon extends javax.swing.JFrame {
     private DefaultListModel listModel1;
     private ThreadAfficher messagesbox;
 
-    public FSalon(java.awt.Frame parent, Controleur controleur) {
+    public FSalon(String identSalon, java.awt.Frame parent, Controleur controleur) {
         this.setControleur(controleur);
         this.parent = parent;
 
@@ -36,7 +36,7 @@ public class FSalon extends javax.swing.JFrame {
 
         this.jLabel1.setText(this.controleur.getNomUtilisateur() + java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString(" : "));
         listModel1 = new DefaultListModel();
-        messagesbox = new ThreadAfficher(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("MESSAGEAREA"), listModel1, jTextPaneMessage, controleur);
+        messagesbox = new ThreadAfficher(identSalon, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("MESSAGEAREA"), listModel1, jTextPaneMessage, controleur);
         messagesbox.start();
         //listModel1.addElement(this.controleur.getNomUtilisateur());
         this.jList1 = new JList(listModel1);

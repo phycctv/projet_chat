@@ -21,24 +21,28 @@ public class Controleur implements Serializable {
     private HashMap<String, Utilisateur> utilisateurs;
     private HashMap<String, Salon> salons;
     private String nomPremierSalon = "Premier Salon";
-    private FPrincipal fp;
+    //private FPrincipal fp;
 
     public Controleur() {
         this.setUtilisateurs(new HashMap<String, Utilisateur>());
         this.setSalons(new HashMap<String, Salon>());
         this.setSalon(new Salon(nomPremierSalon), nomPremierSalon);
-        fenetrePrincipal();
     }
 
+    public String getNomPremierSalon() {
+        return nomPremierSalon;
+    }
+
+    public void setNomPremierSalon(String nomPremierSalon) {
+        this.nomPremierSalon = nomPremierSalon;
+    }
+
+    
     public void fenetrePrincipal() {
-        this.fp = new FPrincipal(this);
+        FPrincipal fp = new FPrincipal(this);
         fp.setVisible(true);
     }
 
-    public void FenetreGestionSalons() {
-        FGestionSalons fIns = new FGestionSalons(fp, this);
-        fIns.setVisible(true);
-    }
 
     private void setUtilisateurs(HashMap<String, Utilisateur> utilisateurs) {
         this.utilisateurs = utilisateurs;
@@ -78,6 +82,10 @@ public class Controleur implements Serializable {
     //public void setSocket_ecoute(ServerSocket socket_ecoute) {
     //    this.socket_ecoute = socket_ecoute;
     //}
+    public boolean init(){
+        return true;
+    }
+    
     public void lancer() {
         int port = 0;
         ServerSocket socket_ecoute = null;
@@ -98,7 +106,7 @@ public class Controleur implements Serializable {
                 System.out.println("Port déjà utilisé, norage ;)");
             }
         }
-        System.out.println("J'attend les client :)");
+        System.out.println("J'attend les clients :)");
         int numClient = 0;
         //this.getSalon(nomPremierSalon).setListeClients(new ArrayList<ThreadClient>());
         while (true) {
@@ -173,7 +181,7 @@ public class Controleur implements Serializable {
             ObjectOutputStream out = new ObjectOutputStream(f);
             out.writeObject(this);
         } catch (Exception e) {
-            System.out.println("Pb de Sauvegarde dans le fichier");
+            System.out.println("Pb de Sauvegarde dans le fichier" + e.getMessage());
         }
     }
 }
