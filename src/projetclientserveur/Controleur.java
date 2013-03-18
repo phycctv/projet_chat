@@ -230,6 +230,22 @@ public class Controleur {
     }
 
     /**
+     * Cree une fenetre de la Liste des salons de discution et la rend visible
+     *
+     * @see FListeSalon
+     */
+    public void fenetreListeSalon() {
+        if (nomUtilisateur != null) {
+            FListeSalons fs = new FListeSalons(this);
+            fs.init();
+            fs.setVisible(true);
+        } else {
+            MessageBox mb = new MessageBox(fp, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("VOUS N'ETES PAS CONNECTÉ"));
+            mb.setVisible(true);
+        }
+    }
+
+    /**
      * Pour se connecter au serveur avec des identifiants valide
      *
      * @param nomUtilisateur0 Le nom de l'utilisateur souhaitant se connecter
@@ -263,7 +279,7 @@ public class Controleur {
     /**
      * Pour se deconnecter du serveur
      *
-     */    
+     */
     public void deconnection() {
         if (fSalon != null) {
             fSalon.dispose();
@@ -322,10 +338,10 @@ public class Controleur {
      * @param mdp Le mot de passe du nouvel utilisateur
      * @param email Le email du nouvel utilisateur
      * @param dateNais La date de naissance du nouvel utilisateur
-     * @param sexe Le sexe du nouvel utilisateur sous forme booléen,
-     * vrais si un garçon, faux si une fille.
+     * @param sexe Le sexe du nouvel utilisateur sous forme booléen, vrais si un
+     * garçon, faux si une fille.
      *
-     */    
+     */
     public boolean inscrire(String login, String mdp, String email, String dateNais, Boolean sexe) {
         try {
             int port = 5015;

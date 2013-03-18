@@ -5,6 +5,8 @@
 package projetclientserveur;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
@@ -23,6 +25,7 @@ public class FListeSalons extends javax.swing.JFrame {
     public FListeSalons(Controleur controleur) {
         this.listeSalon = new DefaultListModel();
         this.controleur = controleur;
+        setBounds(400, 300, 391, 353);
         initComponents();
     }
 
@@ -38,13 +41,15 @@ public class FListeSalons extends javax.swing.JFrame {
             DataOutputStream sortie0 = new DataOutputStream(out0);
             sortie0.writeUTF("je_veux_la_liste_des_salon");
             int nb = entree.readInt();
-            System.out.println(nb);
-            for (int i = 0; i < nb; i++) {
+            System.out.println("Il y a " + nb + " Salon(s)");
+            for (int i = 0; i < 1; i++) {
                 listeSalon.addElement(entree.readUTF());
+                 System.out.println("Il y a " + nb + " Salon(s)");
             }
             this.jList1 = new JList(listeSalon);
             jScrollPane1.setViewportView(jList1);
-
+            jList1.setSelectedIndex(0);
+            
         } catch (Exception e) {
             System.out.println("Vous etes deco.");
         }
@@ -117,12 +122,34 @@ public class FListeSalons extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerActionPerformed
+        try {
+            // Récupération du flot de sortie
+            OutputStream out0 = this.controleur.getSocket().getOutputStream();
+            // Création du flot de sortie pour données typées
+            DataOutputStream sortie0 = new DataOutputStream(out0);
+            sortie0.writeUTF("non");
+        } catch (Exception e) {
+            System.out.println("Probleme de la connection.");
+        }
         this.dispose();
+        try {
+            this.finalize();
+        } catch (Throwable ex) {
+            Logger.getLogger(FListeSalons.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_jButtonAnnulerActionPerformed
 
     private void jButtonEntrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrerActionPerformed
+
         System.out.println("vous allez entrer dans : " + jList1.getSelectedValue().toString());
         controleur.fenetreSalon(jList1.getSelectedValue().toString());
+        this.dispose();
+        try {
+            this.finalize();
+        } catch (Throwable ex) {
+            Logger.getLogger(FListeSalons.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonEntrerActionPerformed
     /**
      * @param args the command line arguments

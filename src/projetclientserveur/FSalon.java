@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.io.DataOutputStream;
 import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
@@ -24,11 +26,12 @@ public class FSalon extends javax.swing.JFrame {
     private java.awt.Frame parent;
     private DefaultListModel listModel1;
     private ThreadAfficher messagesbox;
+    private String identSalon;
 
     public FSalon(String identSalon, java.awt.Frame parent, Controleur controleur) {
         this.setControleur(controleur);
         this.parent = parent;
-
+        this.identSalon = identSalon;
         setBounds(400, 300, 391, 353);
         initComponents();
 
@@ -73,6 +76,7 @@ public class FSalon extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("projetclientserveur/Bundle"); // NOI18N
         setTitle(bundle.getString("SALON DE DISCUTION")); // NOI18N
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
@@ -112,7 +116,6 @@ public class FSalon extends javax.swing.JFrame {
 
         jLabel2.setText(bundle.getString("PARTICIPANTS")); // NOI18N
 
-        jTextPaneMessage.setBackground(java.awt.Color.white);
         jTextPaneMessage.setEditable(false);
         jScrollPane1.setViewportView(jTextPaneMessage);
 
@@ -232,10 +235,21 @@ public class FSalon extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         try {
-            //this.dispose();
+            // Récupération du flot de sortie
+            OutputStream out = this.controleur.getSocket().getOutputStream();
+            // Création du flot de sortie pour données typées
+            DataOutputStream sortie = new DataOutputStream(out);
+            sortie.writeUTF(this.controleur.getNomUtilisateur());
+            sortie.writeUTF("je_veux_fermer_le_salon");
+            sortie.writeUTF(identSalon);
         } catch (Exception e) {
             MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("PROBLEME DE LA FERMETURE DU SALON"));
             mb.setVisible(true);
+        }
+        try {
+            messagesbox.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(FSalon.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formWindowClosed
     // Variables declaration - do not modify//GEN-BEGIN:variables

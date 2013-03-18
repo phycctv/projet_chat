@@ -58,60 +58,78 @@ public class ThreadClient extends Thread {
             OutputStream out0 = socket_transfert.getOutputStream();
             // Création du flot de sortie pour données typées
             DataOutputStream sortie0 = new DataOutputStream(out0);
-            String ok = "non";
-            while (!ok.equals("ok_je_suis_dans_un_salon")) {
-                String demande = entree.readUTF();
-                if (demande.equals("je_veux_la_liste_des_salon")) {
-                    sortie0.writeInt(this.controleur.getSalons().size());
-                    for (String key : this.controleur.getSalons().keySet()) {
-                        sortie0.writeUTF(key);
-                    }
-                    ok = entree.readUTF();
-                    if (ok.equals("ok_je_suis_dans_un_salon")){
-                        break;
-                    }
-                }
-            }
 
-            if (ok.equals("ok_je_suis_dans_un_salon")) {
-                String nomSalon = entree.readUTF();
-                salon = controleur.getSalon(nomSalon);
-                salon.getListeClients().add(this);
-                System.out.println("Client : " + nomClient + " est entré dans le salon" + salon.getIdentSalon());
-                sortie0.writeInt(salon.getListeClients().size());
-                for (int k = 0; k < salon.getListeClients().size(); k++) {
-                    sortie0.writeUTF(salon.getListeClients().get(k).getNomClient());
-                }
-                for (int k = 0; k < salon.getListeClients().size(); k++) {
-                    if (!salon.getListeClients().get(k).getNomClient().equals(nomClient)) {
-                        // Récupération du flot de sortie
-                        OutputStream out1 = salon.getListeClients().get(k).getSocket_transfert().getOutputStream();
-                        // Création du flot de sortie pour données typées
-                        DataOutputStream sortie1 = new DataOutputStream(out1);
-                        sortie1.writeUTF("participant");
-                        sortie1.writeUTF(nomClient);
-                    }
-                }
-                while (true) {
-                    nomClient = entree.readUTF();
-                    String j = entree.readUTF();
-                    System.out.print(nomClient + " : ");
-                    System.out.println(j);
-                    for (int k = 0; k < salon.getListeClients().size(); k++) {
-                        // Récupération du flot de sortie
-                        OutputStream out = salon.getListeClients().get(k).getSocket_transfert().getOutputStream();
-                        // Création du flot de sortie pour données typées
-                        DataOutputStream sortie = new DataOutputStream(out);
-                        sortie.writeUTF("message");
-                        if (utilisateur.isSexe()) {
-                            sortie.writeUTF("garcon");
-                        } else {
-                            sortie.writeUTF("fille");
+            String j = "j_attends";
+            while (j.equals("j_attends")) {
+                String ok = "non";
+                while (!ok.equals("ok_je_suis_dans_un_salon")) {
+
+                    String demande = entree.readUTF();
+                    System.out.println(nomClient + " demande la liste des salons");
+                    System.out.println(demande);
+                    if (demande.equals("je_veux_la_liste_des_salon")) {
+                        sortie0.writeInt(this.controleur.getSalons().size());
+
+                        System.out.println(this.controleur.getSalons().size());
+                        for (String key : this.controleur.getSalons().keySet()) {
+                            sortie0.writeUTF(key);
                         }
-                        sortie.writeUTF(nomClient);
-                        sortie.writeUTF(j);
+                        ok = entree.readUTF();
+                        if (ok.equals("ok_je_suis_dans_un_salon")) {
+                            break;
+                        }
+                    }
+                }
+
+                if (ok.equals("ok_je_suis_dans_un_salon")) {
+                    String nomSalon = entree.readUTF();
+                    salon = controleur.getSalon(nomSalon);
+                    salon.getListeClients().add(this);
+                    System.out.println("Client : " + nomClient + " est entré dans le salon" + salon.getIdentSalon());
+                    sortie0.writeInt(salon.getListeClients().size());
+                    for (int k = 0; k < salon.getListeClients().size(); k++) {
+                        sortie0.writeUTF(salon.getListeClients().get(k).getNomClient());
+                    }
+                    for (int k = 0; k < salon.getListeClients().size(); k++) {
+                        if (!salon.getListeClients().get(k).getNomClient().equals(nomClient)) {
+                            // Récupération du flot de sortie
+                            OutputStream out1 = salon.getListeClients().get(k).getSocket_transfert().getOutputStream();
+                            // Création du flot de sortie pour données typées
+                            DataOutputStream sortie1 = new DataOutputStream(out1);
+                            sortie1.writeUTF("participant");
+                            sortie1.writeUTF(nomClient);
+                        }
                     }
 
+                    while (!j.equals("je_veux_fermer_le_salon")) {
+                        nomClient = entree.readUTF();
+                        j = entree.readUTF();
+                        if (!j.equals("je_veux_fermer_le_salon")) {
+                            System.out.print(nomClient + " : ");
+                            System.out.println(j);
+                            for (int k = 0; k < salon.getListeClients().size(); k++) {
+                                // Récupération du flot de sortie
+                                OutputStream out = salon.getListeClients().get(k).getSocket_transfert().getOutputStream();
+                                // Création du flot de sortie pour données typées
+                                DataOutputStream sortie = new DataOutputStream(out);
+                                sortie.writeUTF("message");
+                                if (utilisateur.isSexe()) {
+                                    sortie.writeUTF("garcon");
+                                } else {
+                                    sortie.writeUTF("fille");
+                                }
+                                sortie.writeUTF(nomClient);
+                                sortie.writeUTF(j);
+                            }
+                        } else {
+                            
+                            nomSalon = entree.readUTF();
+                            sortie0.writeUTF("fermer_salon");
+                            controleur.getSalon(nomSalon).getListeClients().remove(this);
+                        }
+                    }
+                    System.out.println(nomClient + " a ferme " + nomSalon);
+                    j = "j_attends";
                 }
             }
         } catch (Exception e) {

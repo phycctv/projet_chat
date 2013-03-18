@@ -60,9 +60,9 @@ public class ThreadAfficher extends Thread {
             messagePane.setDocument(doc);
             kit.insertHTML(doc, doc.getLength(),
                     "<p ALIGN=\"center\">------ Bienvenue chez nous ------</p>", 0, 0, null);
-
-            while (true) {
-                String type = entree.readUTF();
+            String type = "init";
+            while (!type.equals("fermer_salon")) {
+                type = entree.readUTF();
                 if (type.equals("message")) {
                     String sexe = entree.readUTF();
                     if (sexe.equals("garcon")) {
@@ -77,7 +77,7 @@ public class ThreadAfficher extends Thread {
                                 + "<font color='#FD6C9E'><b>"
                                 + entree.readUTF() + " :</b></font>", 0, 0, null);
                     }
-                    
+
                     String message = entree.readUTF();
 
                     if (message.equals(":)")) {

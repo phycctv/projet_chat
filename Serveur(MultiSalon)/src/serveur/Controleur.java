@@ -139,7 +139,7 @@ public class Controleur implements Serializable {
                         sortie.writeInt(0);
                         ThreadClient client = new ThreadClient(this.getSalon(nomPremierSalon), numClient, socket_transfert, this, nomClient);
                         client.start();
-                        this.getSalon(nomPremierSalon).getListeClients().remove(client);
+                        //this.getSalon(nomPremierSalon).getListeClients().remove(client);
                     }
                 } else if (parametre.equals("inscription")) {
                     ThreadInscription inscription = new ThreadInscription(numClient, socket_transfert, this);
