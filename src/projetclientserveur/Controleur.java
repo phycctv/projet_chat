@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Locale;
+import javax.swing.JList;
 
 /**
  * <p> Controleur est la classe qui regroupe toutes les méthodes principals du
@@ -273,12 +274,52 @@ public class Controleur {
             System.out.println(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("PROBLEME CONNECTION"));
             return 3;
         }
+    }
+    
+    public void recupererListeSalon() {
+        
+        try {
+            // Récupération du flot d'entrée
+            InputStream in = this.getSocket().getInputStream();
+            // Création du flot d'entrée pour données typées
+            DataInputStream entree = new DataInputStream(in);
+            // Récupération du flot de sortie
+            OutputStream out = this.getSocket().getOutputStream();
+            // Création du flot de sortie pour données typées
+            DataOutputStream sortie = new DataOutputStream(out);
+            sortie.writeUTF("je_veux_la_liste_des_salon");
+            int nb = entree.readInt();
+            System.out.println("Il y a " + nb + " Salon(s)");
+            for (int i = 0; i < nb; i++) {
+                fp.getListeSalon().addElement(entree.readUTF());
+            }
+            if (nb == 0) {
+                fp.getjButtonEntrer().setEnabled(false);
+            }
+            fp.getjScrollPane1().setViewportView(fp.getjList1());
+            fp.getjList1().setSelectedIndex(0);
 
+
+        } catch (Exception e) {
+            System.out.println("Vous etes deco.");
+        }
+    }
+
+    public void actualiser() {
+        try {
+            // Récupération du flot de sortie
+            OutputStream out0 = this.getSocket().getOutputStream();
+            // Création du flot de sortie pour données typées
+            DataOutputStream sortie0 = new DataOutputStream(out0);
+            sortie0.writeUTF("non");
+        } catch (Exception e) {
+            System.out.println("Probleme de la connection.");
+        }
+        this.recupererListeSalon();
     }
 
     /**
      * Pour se deconnecter du serveur
-     *
      */
     public void deconnection() {
         if (fSalon != null) {

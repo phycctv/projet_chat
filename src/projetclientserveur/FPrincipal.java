@@ -5,8 +5,7 @@
 package projetclientserveur;
 
 import java.util.Locale;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import javax.swing.*;
 
 /**
  * <p> FPrincipal est la classe qui créé la fenetre principal où l'ont peut
@@ -17,15 +16,19 @@ import javax.swing.JMenuItem;
  */
 public class FPrincipal extends javax.swing.JFrame {
 
+    private DefaultListModel listeSalon;
     private Controleur controleur;
 
     /**
      * Creates new form FPrincipal
      */
     public FPrincipal(Controleur controleur) {
+
+        this.listeSalon = new DefaultListModel();
         this.setControleur(controleur);
         setBounds(400, 300, 391, 353);
         initComponents();
+        jList1 = new JList(listeSalon);
     }
 
     /**
@@ -58,6 +61,10 @@ public class FPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem3 = new javax.swing.JMenuItem();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jButtonEntrer = new javax.swing.JButton();
+        jButtonActualiser = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         mSession = new javax.swing.JMenu();
         mItemInscription = new javax.swing.JMenuItem();
@@ -84,6 +91,23 @@ public class FPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("projetclientserveur/Bundle"); // NOI18N
         setTitle(bundle.getString("PROJET CLIENT SERVEUR")); // NOI18N
+
+        jList1.setBackground(java.awt.Color.white);
+        jScrollPane1.setViewportView(jList1);
+
+        jButtonEntrer.setText("Entrer");
+        jButtonEntrer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEntrerActionPerformed(evt);
+            }
+        });
+
+        jButtonActualiser.setText("Actualiser");
+        jButtonActualiser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActualiserActionPerformed(evt);
+            }
+        });
 
         mSession.setText(bundle.getString("SESSION")); // NOI18N
 
@@ -221,11 +245,26 @@ public class FPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonActualiser)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonEntrer))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 275, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonActualiser)
+                    .addComponent(jButtonEntrer))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -248,23 +287,39 @@ public class FPrincipal extends javax.swing.JFrame {
         getControleur().fenetreConnection();
     }
 
-    public JMenuItem getmItemConnection() {
+    public JButton getjButtonEntrer() {
+        return jButtonEntrer;
+    }
+
+    public JList getjList1() {
+        return jList1;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public DefaultListModel getListeSalon() {
+        return listeSalon;
+    }
+
+    public JMenuItem getMItemConnection() {
         return mItemConnection;
     }
 
-    public JMenuItem getmItemInscription() {
+    public JMenuItem getMItemInscription() {
         return mItemInscription;
     }
 
-    public JMenuItem getmItemQuitter() {
+    public JMenuItem getMItemQuitter() {
         return mItemQuitter;
     }
 
-    public JMenuItem getmItemSalon() {
+    public JMenuItem getMItemSalon() {
         return mItemSalon;
     }//GEN-LAST:event_mItemConnectionActionPerformed
 
-    public JMenuItem getmItemDeconnection() {
+    public JMenuItem getMItemDeconnection() {
         return mItemDeconnection;
     }
 
@@ -327,6 +382,16 @@ public class FPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         getControleur().setLangue(new Locale("en", "US", ""));
     }//GEN-LAST:event_butEnglishActionPerformed
+
+    private void jButtonEntrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrerActionPerformed
+        System.out.println("vous allez entrer dans : " + jList1.getSelectedValue().toString());
+        controleur.fenetreSalon(jList1.getSelectedValue().toString());
+        jButtonEntrer.setEnabled(false);
+    }//GEN-LAST:event_jButtonEntrerActionPerformed
+
+    private void jButtonActualiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualiserActionPerformed
+        controleur.actualiser();
+    }//GEN-LAST:event_jButtonActualiserActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem butChinois;
     private javax.swing.JMenuItem butDeutsch;
@@ -335,9 +400,13 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem butFrancais;
     private javax.swing.JMenuItem butItaliano;
     private javax.swing.JMenuItem butNederlands;
+    private javax.swing.JButton jButtonActualiser;
+    private javax.swing.JButton jButtonEntrer;
+    private javax.swing.JList jList1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuDoc;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu mAide;
     private javax.swing.JMenuItem mItemConnection;

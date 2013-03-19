@@ -173,11 +173,12 @@ public class FConnection extends javax.swing.JFrame {
             this.dispose();
             this.controleur.setNomUtilisateur(jTextFieldLogin.getText().toString());
             this.controleur.setConnecte(true);
-            parent.getmItemConnection().setEnabled(false);
-            parent.getmItemDeconnection().setEnabled(true);
+            parent.getMItemConnection().setEnabled(false);
+            parent.getMItemDeconnection().setEnabled(true);
             parent.getMenuLangue().setEnabled(false);
             parent.getMItemServeur().setEnabled(false);
             parent.setVisible(true);
+            controleur.recupererListeSalon();
         } else if (rep == 1) {
             MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("NOM UTILISATEUR NON EXISTE !"));
             mb.setVisible(true);
