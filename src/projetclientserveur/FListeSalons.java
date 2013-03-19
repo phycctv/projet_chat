@@ -42,14 +42,17 @@ public class FListeSalons extends javax.swing.JFrame {
             sortie0.writeUTF("je_veux_la_liste_des_salon");
             int nb = entree.readInt();
             System.out.println("Il y a " + nb + " Salon(s)");
-            for (int i = 0; i < 1; i++) {
+            for (int i = 0; i < nb; i++) {
                 listeSalon.addElement(entree.readUTF());
-                 System.out.println("Il y a " + nb + " Salon(s)");
+            }
+            if (nb==0){
+                jButtonEntrer.setEnabled(false);
             }
             this.jList1 = new JList(listeSalon);
             jScrollPane1.setViewportView(jList1);
             jList1.setSelectedIndex(0);
             
+
         } catch (Exception e) {
             System.out.println("Vous etes deco.");
         }
@@ -69,9 +72,14 @@ public class FListeSalons extends javax.swing.JFrame {
         jButtonEntrer = new javax.swing.JButton();
         jButtonAnnuler = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Listes des salons");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jScrollPane1.setViewportView(jList1);
 
@@ -115,7 +123,7 @@ public class FListeSalons extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAnnuler)
                     .addComponent(jButtonEntrer))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
@@ -151,6 +159,11 @@ public class FListeSalons extends javax.swing.JFrame {
             Logger.getLogger(FListeSalons.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonEntrerActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_formWindowClosed
     /**
      * @param args the command line arguments
      */

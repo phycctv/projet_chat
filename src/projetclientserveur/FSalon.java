@@ -251,6 +251,11 @@ public class FSalon extends javax.swing.JFrame {
         } catch (InterruptedException ex) {
             Logger.getLogger(FSalon.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try {
+            this.finalize();
+        } catch (Throwable ex) {
+            Logger.getLogger(FSalon.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_formWindowClosed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
