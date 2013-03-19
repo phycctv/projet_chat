@@ -6,14 +6,15 @@ package projetclientserveur;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.util.ResourceBundle;
 
 /**
+ * <p> FConnection est la classe qui créé la fenettre de connection pour
+ * demander les infos de connection </p>
  *
- * @author zhangxi
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
 public class FConnection extends javax.swing.JFrame {
-
 
     /**
      * Creates new form FConnection
@@ -29,10 +30,21 @@ public class FConnection extends javax.swing.JFrame {
         this.parent = parent;
     }
 
+    /**
+     * Retourne le controleur de l'application
+     *
+     * @return Le controleur
+     */
     public Controleur getControleur() {
         return controleur;
     }
 
+    /**
+     * Met à jour le controleur
+     *
+     * @param controleur Le controleur
+     *
+     */
     public void setControleur(Controleur controleur) {
         this.controleur = controleur;
     }
@@ -142,9 +154,16 @@ public class FConnection extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+  
+    /**
+     * Appel la methode connection du controleur en vérrifiant que les champs
+     * sont bien remplis
+     *
+     * @param jTextFieldLogin.getText() Le nom de l'utilisateur souhaitant se connecter
+     * @param String(jPasswordField1.getPassword()) Le mot de passe de l'utilisateur souhaitant se connecter
+     *
+     */
     private void jButtonConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectActionPerformed
-        // TODO add your handling code here:
 
         int rep = controleur.connection(jTextFieldLogin.getText(), new String(jPasswordField1.getPassword()));
         if (rep == 0) {
@@ -175,7 +194,7 @@ public class FConnection extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAnnulerActionPerformed
 
     private void jTextFieldLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldLoginFocusGained
-        // TODO add your handling code here:
+
         if (jTextFieldLogin.getForeground() == Color.LIGHT_GRAY) {
             jTextFieldLogin.setText(null);
             jTextFieldLogin.setForeground(Color.black);

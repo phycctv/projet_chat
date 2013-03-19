@@ -16,7 +16,7 @@ import java.util.Locale;
  * client </p>
  *
  * @author J. Bodin et X. Zhang
- * @version 1.
+ * @version 1.0
  */
 public class Controleur {
 
