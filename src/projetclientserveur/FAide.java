@@ -5,17 +5,19 @@
 package projetclientserveur;
 
 /**
+ * <p> FAide est la classe qui créé la fenettre d'aide</p>
  *
- * @author bodinjo
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
 public class FAide extends javax.swing.JFrame {
 
     /**
      * Creates new form FDocumentation
      */
-    private FenetrePrincipal parent;
+    private FPrincipal parent;
 
-    public FAide(FenetrePrincipal parent, Controleur controleur) {
+    public FAide(FPrincipal parent, Controleur controleur) {
         setBounds(400, 300, 391, 353);
         initComponents();
         parent.setVisible(false);

@@ -5,8 +5,10 @@
 package projetclientserveur;
 
 /**
+ * <p> Salon est la classe permettant d'itentifier un salon </p>
  *
- * @author zhangxi
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
 public class Salon {
 
@@ -23,7 +25,4 @@ public class Salon {
     public void setIdentSalon(String identSalon) {
         this.identSalon = identSalon;
     }
-    
-    
-    
 }

@@ -24,9 +24,9 @@ public class Controleur {
      * Variable de la fenetre principal
      *
      * @see Controleur#fenetrePrincipal()
-     * @see FenetrePrincipal
+     * @see FPrincipal
      */
-    private FenetrePrincipal fp;
+    private FPrincipal fp;
     private boolean connecter;
     private String nomUtilisateur;
     private Socket socket;
@@ -42,7 +42,7 @@ public class Controleur {
 
     /**
      * Constructeur Controleur. <p> A la construction de l'objet Controleur, on
-     * initialise connecter à false et on créé l'objet FenetrePrincipal. </p>
+     * initialise connecter à false et on créé l'objet FPrincipal. </p>
      *
      * @see Controleur#connecter
      * @see Controleur#fenetrePrincipal()
@@ -165,10 +165,10 @@ public class Controleur {
     /**
      * Cree la fenetre principal et la rend visible
      *
-     * @see FenetrePrincipal
+     * @see FPrincipal
      */
     public void fenetrePrincipal() {
-        this.fp = new FenetrePrincipal(this);
+        this.fp = new FPrincipal(this);
         fp.setVisible(true);
     }
 

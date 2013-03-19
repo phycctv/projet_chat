@@ -4,12 +4,12 @@
  */
 package projetclientserveur;
 
-import java.awt.Color;
-import java.awt.event.KeyEvent;
-
 /**
+ * <p> FServeur est la classe qui créé la fenetre d'inscription pour modifier le
+ * serveur </p>
  *
- * @author zhangxi
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
 public class FServeur extends javax.swing.JFrame {
 
@@ -17,9 +17,9 @@ public class FServeur extends javax.swing.JFrame {
      * Creates new form FConnection
      */
     private Controleur controleur;
-    private FenetrePrincipal parent;
+    private FPrincipal parent;
 
-    public FServeur(FenetrePrincipal parent, Controleur controleur) {
+    public FServeur(FPrincipal parent, Controleur controleur) {
         this.setControleur(controleur);
         setBounds(400, 300, 391, 353);
         initComponents();
@@ -28,10 +28,22 @@ public class FServeur extends javax.swing.JFrame {
         jTextFieldServeur.setText(controleur.getServeur());
     }
 
+    /**
+     * Retourne le controleur de l'application
+     *
+     * @return Le controleur
+     * @see Controleur
+     */
     public Controleur getControleur() {
         return controleur;
     }
 
+    /**
+     * Met à jour le controleur
+     *
+     * @param controleur Le controleur
+     * @see Controleur *
+     */
     public void setControleur(Controleur controleur) {
         this.controleur = controleur;
     }

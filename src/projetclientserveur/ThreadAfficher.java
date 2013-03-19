@@ -16,8 +16,12 @@ import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 
 /**
+ * <p> ThreadAfficher est la classe qui permet l'affichage des messages envoyer
+ * depuis le serveur. Il prend en charge l'affichage des smiley et des images
+ * grace à l'utilisation du html.</p>
  *
- * @author zhangxi
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
 public class ThreadAfficher extends Thread {
 

@@ -8,8 +8,8 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 /**
- * <p> FConnection est la classe qui créé la fenettre de connection pour
- * demander les infos de connection </p>
+ * <p> FConnection est la classe qui créé la fenetre de connection pour demander
+ * les infos de connection </p>
  *
  * @author J. Bodin et X. Zhang
  * @version 1.0
@@ -20,9 +20,9 @@ public class FConnection extends javax.swing.JFrame {
      * Creates new form FConnection
      */
     private Controleur controleur;
-    private FenetrePrincipal parent;
+    private FPrincipal parent;
 
-    public FConnection(FenetrePrincipal parent, Controleur controleur) {
+    public FConnection(FPrincipal parent, Controleur controleur) {
         this.setControleur(controleur);
         setBounds(400, 300, 391, 353);
         initComponents();
@@ -34,6 +34,7 @@ public class FConnection extends javax.swing.JFrame {
      * Retourne le controleur de l'application
      *
      * @return Le controleur
+     * @see Controleur
      */
     public Controleur getControleur() {
         return controleur;
@@ -43,7 +44,7 @@ public class FConnection extends javax.swing.JFrame {
      * Met à jour le controleur
      *
      * @param controleur Le controleur
-     *
+     * @see Controleur
      */
     public void setControleur(Controleur controleur) {
         this.controleur = controleur;
@@ -154,14 +155,16 @@ public class FConnection extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-  
+
     /**
-     * Appel la methode connection du controleur en vérrifiant que les champs
+     * Appel la methode connection() du controleur en vérifiant que les champs
      * sont bien remplis
      *
-     * @param jTextFieldLogin.getText() Le nom de l'utilisateur souhaitant se connecter
-     * @param String(jPasswordField1.getPassword()) Le mot de passe de l'utilisateur souhaitant se connecter
-     *
+     * @param jTextFieldLogin.getText() Le nom de l'utilisateur souhaitant se
+     * connecter
+     * @param String(jPasswordField1.getPassword()) Le mot de passe de
+     * l'utilisateur souhaitant se connecter
+     * @see Controleur
      */
     private void jButtonConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectActionPerformed
 

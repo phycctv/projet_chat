@@ -8,8 +8,11 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 /**
+ * <p> FInscription est la classe qui créé la fenetre d'inscription pour
+ * inscrire un nouvelle utilisateur </p>
  *
- * @author bodinjo
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
 public class FInscription extends javax.swing.JFrame {
 
@@ -33,10 +36,22 @@ public class FInscription extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Retourne le controleur de l'application
+     *
+     * @return Le controleur
+     * @see Controleur
+     */
     public Controleur getControleur() {
         return controleur;
     }
 
+    /**
+     * Met à jour le controleur
+     *
+     * @param controleur Le controleur
+     * @see Controleur *
+     */
     public void setControleur(Controleur controleur) {
         this.controleur = controleur;
     }
@@ -277,6 +292,14 @@ public class FInscription extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Appel la methode testLogin() du controleur en vérifiant que le login est
+     * bien libre
+     *
+     * @param jTextFieldLogin.getText() Le nom de l'utilisateur souhaitant se
+     * connecter
+     *
+     */
     private void jButtonVerifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerifierActionPerformed
         if (jTextFieldLogin.getForeground() != Color.LIGHT_GRAY) {
             if (!jTextFieldLogin.getText().isEmpty()) {
@@ -331,6 +354,16 @@ public class FInscription extends javax.swing.JFrame {
         jButtonInscription.setEnabled(false);
     }//GEN-LAST:event_jButtonAnnulerActionPerformed
 
+    /**
+     * Appel la methode inscription() du controleur en vérifiant que les champs
+     * sont bien remplis
+     *
+     * @param jTextFieldLogin.getText() Le nom de l'utilisateur souhaitant se
+     * connecter
+     * @param String(jPasswordField1.getPassword()) Le mot de passe de
+     * l'utilisateur souhaitant se connecter
+     * @see Controleur
+     */
     private void jButtonInscriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscriptionActionPerformed
         mdp = new String(jPasswordField1.getPassword());
         if (mdp.equals(new String(jPasswordField2.getPassword()))) {
@@ -341,10 +374,10 @@ public class FInscription extends javax.swing.JFrame {
             } else {
                 sexe = true;
             }
-            if (!mdp.isEmpty() && !email.isEmpty() && !dateNais.isEmpty() &&
-                    jTextFieldEmail.getForeground() == Color.black && jTextFieldDateNaiss.getForeground() == Color.black) {
+            if (!mdp.isEmpty() && !email.isEmpty() && !dateNais.isEmpty()
+                    && jTextFieldEmail.getForeground() == Color.black && jTextFieldDateNaiss.getForeground() == Color.black) {
                 if (getControleur().inscrire(login, mdp, email, dateNais, sexe)) {
-                    MessageBox mb = new MessageBox(this, true, java.text.MessageFormat.format(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("L'UTILISATEUR : {0} EST INSCRIT"), new Object[] {login}));
+                    MessageBox mb = new MessageBox(this, true, java.text.MessageFormat.format(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("L'UTILISATEUR : {0} EST INSCRIT"), new Object[]{login}));
                     mb.setVisible(true);
                     this.dispose();
                     parent.setVisible(true);

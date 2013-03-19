@@ -4,15 +4,21 @@
  */
 package projetclientserveur;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 /**
+ * <p> FListeSalons est la classe qui créé la fenetre pour selectionner un salon
+ * de discution</p>
  *
- * @author zhangxi
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
 public class FListeSalons extends javax.swing.JFrame {
 
@@ -29,6 +35,9 @@ public class FListeSalons extends javax.swing.JFrame {
         initComponents();
     }
 
+    /**
+     * Remplit la liste des salons créé par le serveur
+     */
     public void init() {
         try {
             // Récupération du flot d'entrée
@@ -45,13 +54,13 @@ public class FListeSalons extends javax.swing.JFrame {
             for (int i = 0; i < nb; i++) {
                 listeSalon.addElement(entree.readUTF());
             }
-            if (nb==0){
+            if (nb == 0) {
                 jButtonEntrer.setEnabled(false);
             }
             this.jList1 = new JList(listeSalon);
             jScrollPane1.setViewportView(jList1);
             jList1.setSelectedIndex(0);
-            
+
 
         } catch (Exception e) {
             System.out.println("Vous etes deco.");
@@ -129,6 +138,9 @@ public class FListeSalons extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Contacte le serveur pour lui signaler qu'il veut pas entrer dans un salon
+     */
     private void jButtonAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerActionPerformed
         try {
             // Récupération du flot de sortie
@@ -148,6 +160,9 @@ public class FListeSalons extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonAnnulerActionPerformed
 
+    /**
+     * Contacte le serveur pour lui signaler dans quel salon il veut rentrer
+     */
     private void jButtonEntrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrerActionPerformed
 
         System.out.println("vous allez entrer dans : " + jList1.getSelectedValue().toString());
@@ -162,7 +177,6 @@ public class FListeSalons extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-
     }//GEN-LAST:event_formWindowClosed
     /**
      * @param args the command line arguments

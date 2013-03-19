@@ -9,26 +9,41 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 /**
+ * <p> FPrincipal est la classe qui créé la fenetre principal où l'ont peut
+ * atteindre les différentes fonction du programme</p>
  *
- * @author zhangxi
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
-public class FenetrePrincipal extends javax.swing.JFrame {
+public class FPrincipal extends javax.swing.JFrame {
 
     private Controleur controleur;
 
     /**
-     * Creates new form FenetrePrincipal
+     * Creates new form FPrincipal
      */
-    public FenetrePrincipal(Controleur controleur) {
+    public FPrincipal(Controleur controleur) {
         this.setControleur(controleur);
         setBounds(400, 300, 391, 353);
         initComponents();
     }
 
+    /**
+     * Retourne le controleur de l'application
+     *
+     * @return Le controleur
+     * @see Controleur
+     */
     public Controleur getControleur() {
         return controleur;
     }
 
+    /**
+     * Met à jour le controleur
+     *
+     * @param controleur Le controleur
+     * @see Controleur *
+     */
     public void setControleur(Controleur controleur) {
         this.controleur = controleur;
     }
