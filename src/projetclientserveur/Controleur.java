@@ -219,9 +219,9 @@ public class Controleur {
      */
     public void fenetreSalon(String identSalon) {
         if (nomUtilisateur != null) {
-            if (fSalon == null) {
-                fSalon = new FSalon(identSalon, fp, this);
-            }
+            //if (fSalon == null) {
+            fSalon = new FSalon(identSalon, fp, this);
+            // }
             fSalon.setVisible(true);
         } else {
             MessageBox mb = new MessageBox(fp, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("VOUS N'ETES PAS CONNECTÉ"));
