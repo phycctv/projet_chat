@@ -14,8 +14,11 @@ public class FPrincipal extends javax.swing.JFrame {
      * Creates new form FPrincipal
      */
     private Controleur controleur;
+    private FGestionSalons fGest;
 
     public FPrincipal(Controleur controleur) {
+        this.fGest = new FGestionSalons (this,controleur);
+        fGest.init();
         this.setControleur(controleur);
         setBounds(400, 300, 391, 353);
         initComponents();
@@ -118,8 +121,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemGestionSalonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGestionSalonsActionPerformed
         // TODO add your handling code here:
-        FGestionSalons fIns = new FGestionSalons(this, controleur);
-        fIns.setVisible(true);
+        fGest.setVisible(true);
 
     }//GEN-LAST:event_jMenuItemGestionSalonsActionPerformed
 
@@ -127,6 +129,7 @@ public class FPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         TheadSalon ts = new TheadSalon(controleur, controleur.getNomPremierSalon());
         ts.start();
+        fGest.setTheadSalon(ts,controleur.getNomPremierSalon());
         this.jMenuItemDemmarer.setEnabled(false);
         this.jMenuItemStopper.setEnabled(true);
     }//GEN-LAST:event_jMenuItemDemmarerActionPerformed
