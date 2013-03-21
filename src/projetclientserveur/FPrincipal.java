@@ -4,6 +4,7 @@
  */
 package projetclientserveur;
 
+import java.awt.event.KeyEvent;
 import java.util.Locale;
 import javax.swing.*;
 
@@ -29,6 +30,10 @@ public class FPrincipal extends javax.swing.JFrame {
         setBounds(400, 300, 391, 353);
         initComponents();
         jList1 = new JList(listeSalon);
+        jScrollPane1.setVisible(false);
+        jButtonActualiser.setVisible(false);
+        jButtonEntrer.setVisible(false);
+        jButtonEntrer.setEnabled(false);
     }
 
     /**
@@ -91,8 +96,17 @@ public class FPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("projetclientserveur/Bundle"); // NOI18N
         setTitle(bundle.getString("PROJET CLIENT SERVEUR")); // NOI18N
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
+            }
+        });
 
-        jList1.setBackground(java.awt.Color.white);
+        jList1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jList1KeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         jButtonEntrer.setText("Entrer");
@@ -252,19 +266,19 @@ public class FPrincipal extends javax.swing.JFrame {
                         .addComponent(jButtonActualiser)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonEntrer))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE))
+                .addGap(46, 46, 46))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonActualiser)
                     .addComponent(jButtonEntrer))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(34, 34, 34))
         );
 
         pack();
@@ -289,6 +303,10 @@ public class FPrincipal extends javax.swing.JFrame {
 
     public JButton getjButtonEntrer() {
         return jButtonEntrer;
+    }
+
+    public JButton getjButtonActualiser() {
+        return jButtonActualiser;
     }
 
     public JList getjList1() {
@@ -338,6 +356,10 @@ public class FPrincipal extends javax.swing.JFrame {
         this.mItemDeconnection.setEnabled(false);
         this.getMenuLangue().setEnabled(true);
         this.getMItemServeur().setEnabled(true);
+        this.listeSalon = new DefaultListModel();
+        jScrollPane1.setVisible(false);
+        jButtonActualiser.setVisible(false);
+        jButtonEntrer.setVisible(false);
     }//GEN-LAST:event_mItemDeconnectionActionPerformed
 
     private void jMenuDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuDocActionPerformed
@@ -390,8 +412,27 @@ public class FPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEntrerActionPerformed
 
     private void jButtonActualiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualiserActionPerformed
+        this.listeSalon = new DefaultListModel();
         controleur.actualiser();
     }//GEN-LAST:event_jButtonActualiserActionPerformed
+
+    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+        // TODO add your handling code here:
+                if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            
+            
+            jButtonEntrer.doClick();
+        }
+    }//GEN-LAST:event_formKeyTyped
+
+    private void jList1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyTyped
+        // TODO add your handling code here:
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            
+            
+            jButtonEntrer.doClick();
+        }
+    }//GEN-LAST:event_jList1KeyTyped
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem butChinois;
     private javax.swing.JMenuItem butDeutsch;

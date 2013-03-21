@@ -64,6 +64,7 @@ public class FGestionSalons extends javax.swing.JFrame {
         for (String key : this.getTheadSalons().keySet()) {
             listeSalonLance.addElement(key);
             listeSalonNonLance.removeElement(key);
+            //System.out.println(key);
         }
 
         this.jListLance = new JList(listeSalonLance);
@@ -73,12 +74,14 @@ public class FGestionSalons extends javax.swing.JFrame {
         if (listeSalonLance.isEmpty()) {
             jButtonFermer.setEnabled(false);
         } else {
+            jButtonFermer.setEnabled(true);
             jListLance.setSelectedIndex(0);
         }
         if (listeSalonNonLance.isEmpty()) {
             jButtonOuvrir.setEnabled(false);
         } else {
             jListNonLance.setSelectedIndex(0);
+            jButtonOuvrir.setEnabled(true);
         }
 
 
@@ -194,7 +197,13 @@ public class FGestionSalons extends javax.swing.JFrame {
     private void jButtonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterActionPerformed
         // TODO add your handling code here:
         if (!jTextFieldNouveauSalon.getText().isEmpty()) {
-            listeSalonNonLance.addElement(jTextFieldNouveauSalon.getText());
+            if (!listeSalonNonLance.contains(jTextFieldNouveauSalon.getText()) && !listeSalonLance.contains(jTextFieldNouveauSalon.getText())) {
+                controleur.setSalon(new Salon(jTextFieldNouveauSalon.getText()), jTextFieldNouveauSalon.getText());
+                listeSalonNonLance.addElement(jTextFieldNouveauSalon.getText());
+            } else {
+                MessageBox mb = new MessageBox(this, true, "Le nom du salon déjà existe !");
+                mb.setVisible(true);
+            }
         } else {
             MessageBox mb = new MessageBox(this, true, "Vous devez donner un nom pour creer un salon ?");
             mb.setVisible(true);

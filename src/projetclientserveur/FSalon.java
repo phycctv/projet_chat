@@ -23,12 +23,12 @@ public class FSalon extends javax.swing.JFrame {
      * Creates new form FSalon
      */
     private Controleur controleur;
-    private java.awt.Frame parent;
+    private FPrincipal parent;
     private DefaultListModel listModel1;
     private ThreadAfficher messagesbox;
     private String identSalon;
 
-    public FSalon(String identSalon, java.awt.Frame parent, Controleur controleur) {
+    public FSalon(String identSalon, FPrincipal parent, Controleur controleur) {
         this.setControleur(controleur);
         this.parent = parent;
         this.identSalon = identSalon;
@@ -249,6 +249,9 @@ public class FSalon extends javax.swing.JFrame {
         }
         try {
             messagesbox.join();
+            parent.getjButtonEntrer().setEnabled(true);
+            parent.getjButtonActualiser().doClick();
+            parent.setVisible(true);
         } catch (InterruptedException ex) {
             Logger.getLogger(FSalon.class.getName()).log(Level.SEVERE, null, ex);
         }

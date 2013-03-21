@@ -4,6 +4,8 @@
  */
 package serveur;
 
+import java.net.ServerSocket;
+
 /**
  *
  * @author zhangxi
@@ -15,6 +17,7 @@ public class FPrincipal extends javax.swing.JFrame {
      */
     private Controleur controleur;
     private FGestionSalons fGest;
+    //ServerSocket socket_ecoute = null;
 
     public FPrincipal(Controleur controleur) {
         this.fGest = new FGestionSalons (this,controleur);
@@ -43,7 +46,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItemDemmarer = new javax.swing.JMenuItem();
+        jMenuItemDemarrer = new javax.swing.JMenuItem();
         jMenuItemStopper = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
         jMenuItemQuitter = new javax.swing.JMenuItem();
@@ -55,13 +58,13 @@ public class FPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Serveur");
 
-        jMenuItemDemmarer.setText("Démarrer le serveur");
-        jMenuItemDemmarer.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemDemarrer.setText("Démarrer le serveur");
+        jMenuItemDemarrer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemDemmarerActionPerformed(evt);
+                jMenuItemDemarrerActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemDemmarer);
+        jMenu1.add(jMenuItemDemarrer);
 
         jMenuItemStopper.setText("Stopper le serveur");
         jMenuItemStopper.setEnabled(false);
@@ -113,6 +116,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemStopperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemStopperActionPerformed
         // TODO add your handling code here:
+        controleur.sauve();
     }//GEN-LAST:event_jMenuItemStopperActionPerformed
 
     private void jMenuItemQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemQuitterActionPerformed
@@ -121,23 +125,26 @@ public class FPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemGestionSalonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGestionSalonsActionPerformed
         // TODO add your handling code here:
+        fGest.init();
         fGest.setVisible(true);
 
     }//GEN-LAST:event_jMenuItemGestionSalonsActionPerformed
 
-    private void jMenuItemDemmarerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDemmarerActionPerformed
+    private void jMenuItemDemarrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDemarrerActionPerformed
         // TODO add your handling code here:
-        TheadSalon ts = new TheadSalon(controleur, controleur.getNomPremierSalon());
+        ServerSocket socket_ecoute = controleur.init();
+        TheadSalon ts = new TheadSalon(controleur, controleur.getNomPremierSalon(), socket_ecoute);
         ts.start();
-        fGest.setTheadSalon(ts,controleur.getNomPremierSalon());
-        this.jMenuItemDemmarer.setEnabled(false);
+        fGest.setTheadSalon(ts,ts.getNomSalon());
+        System.out.println("Le salon " + ts.getNomSalon() + " est démarré.");
+        this.jMenuItemDemarrer.setEnabled(false);
         this.jMenuItemStopper.setEnabled(true);
-    }//GEN-LAST:event_jMenuItemDemmarerActionPerformed
+    }//GEN-LAST:event_jMenuItemDemarrerActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItemDemmarer;
+    private javax.swing.JMenuItem jMenuItemDemarrer;
     private javax.swing.JMenuItem jMenuItemGestionSalons;
     private javax.swing.JMenuItem jMenuItemQuitter;
     private javax.swing.JMenuItem jMenuItemStopper;

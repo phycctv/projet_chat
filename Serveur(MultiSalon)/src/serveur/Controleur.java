@@ -21,6 +21,7 @@ public class Controleur implements Serializable {
     private HashMap<String, Utilisateur> utilisateurs;
     private HashMap<String, Salon> salons;
     private String nomPremierSalon = "Premier Salon";
+    //ServerSocket socket_ecoute = null;
     //private FPrincipal fp;
 
     public Controleur() {
@@ -37,13 +38,11 @@ public class Controleur implements Serializable {
         this.nomPremierSalon = nomPremierSalon;
     }
 
-    
     public void fenetrePrincipal() {
         FPrincipal fp = new FPrincipal(this);
         fp.setVisible(true);
-        
-    }
 
+    }
 
     private void setUtilisateurs(HashMap<String, Utilisateur> utilisateurs) {
         this.utilisateurs = utilisateurs;
@@ -83,14 +82,9 @@ public class Controleur implements Serializable {
     //public void setSocket_ecoute(ServerSocket socket_ecoute) {
     //    this.socket_ecoute = socket_ecoute;
     //}
-    public boolean init(){
-        return true;
-    }
-    
-    public void lancer() {
-        int port = 0;
+    public ServerSocket init() {
         ServerSocket socket_ecoute = null;
-
+        int port = 0;
         try {
             port = 5015;
         } catch (NumberFormatException e) {
@@ -107,6 +101,11 @@ public class Controleur implements Serializable {
                 System.out.println("Port déjà utilisé, norage ;)");
             }
         }
+        return socket_ecoute;
+    }
+
+    public void lancer(ServerSocket socket_ecoute ,String identSalon) {
+
         System.out.println("J'attend les clients :)");
         int numClient = 0;
         //this.getSalon(nomPremierSalon).setListeClients(new ArrayList<ThreadClient>());
@@ -138,7 +137,7 @@ public class Controleur implements Serializable {
                         sortie.writeInt(2);
                     } else {
                         sortie.writeInt(0);
-                        ThreadClient client = new ThreadClient(this.getSalon(nomPremierSalon), numClient, socket_transfert, this, nomClient);
+                        ThreadClient client = new ThreadClient(this.getSalon(identSalon), numClient, socket_transfert, this, nomClient);
                         client.start();
                         //this.getSalon(nomPremierSalon).getListeClients().remove(client);
                     }
@@ -176,7 +175,7 @@ public class Controleur implements Serializable {
     /**
      * sauvegarde des objets de l'application
      */
-    private void sauve() {
+    public void sauve() {
         try {
             FileOutputStream f = new FileOutputStream("Fsauv.ser");
             ObjectOutputStream out = new ObjectOutputStream(f);

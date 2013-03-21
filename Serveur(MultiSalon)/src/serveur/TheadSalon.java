@@ -16,17 +16,19 @@ public class TheadSalon extends Thread {
 
     private Controleur controleur;
     private String nomSalon;
+    private ServerSocket socket_ecoute;
 
-    public TheadSalon(Controleur controleur, String nomSalon) {
-        this.controleur=controleur;
+    public TheadSalon(Controleur controleur, String nomSalon, ServerSocket socket_ecoute) {
+        this.controleur = controleur;
+        this.nomSalon = nomSalon;
+        this.socket_ecoute = socket_ecoute;
     }
 
     public void run() {
 
-        controleur.lancer();
+        controleur.lancer(socket_ecoute, nomSalon);
     }
-    
-    
+
     /*
      * int port = 0; ServerSocket socket_ecoute = null;
      *
@@ -72,7 +74,6 @@ public class TheadSalon extends Thread {
      * }
      * }
      */
-
     public String getNomSalon() {
         return nomSalon;
     }

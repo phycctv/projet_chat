@@ -122,7 +122,20 @@ public class ThreadClient extends Thread {
                                 sortie.writeUTF(j);
                             }
                         } else {
-                            
+                            try {
+                                for (int k = 0; k < salon.getListeClients().size(); k++) {
+                                    if (!salon.getListeClients().get(k).getNomClient().equals(nomClient)) {
+                                        // Récupération du flot de sortie
+                                        OutputStream out1 = salon.getListeClients().get(k).getSocket_transfert().getOutputStream();
+                                        // Création du flot de sortie pour données typées
+                                        DataOutputStream sortie1 = new DataOutputStream(out1);
+                                        sortie1.writeUTF("clientQuitter");
+                                        sortie1.writeUTF(nomClient);
+                                    }
+                                }
+                            } catch (Exception e2) {
+                                System.out.println("petit PROBLEME : " + e2.toString());
+                            }
                             nomSalon = entree.readUTF();
                             sortie0.writeUTF("fermer_salon");
                             controleur.getSalon(nomSalon).getListeClients().remove(this);

@@ -223,6 +223,7 @@ public class Controleur {
             //if (fSalon == null) {
             fSalon = new FSalon(identSalon, fp, this);
             // }
+            fp.setVisible(false);
             fSalon.setVisible(true);
         } else {
             MessageBox mb = new MessageBox(fp, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("VOUS N'ETES PAS CONNECTÉ"));
@@ -275,9 +276,9 @@ public class Controleur {
             return 3;
         }
     }
-    
+
     public void recupererListeSalon() {
-        
+
         try {
             // Récupération du flot d'entrée
             InputStream in = this.getSocket().getInputStream();
@@ -293,8 +294,8 @@ public class Controleur {
             for (int i = 0; i < nb; i++) {
                 fp.getListeSalon().addElement(entree.readUTF());
             }
-            if (nb == 0) {
-                fp.getjButtonEntrer().setEnabled(false);
+            if (nb != 0) {
+                fp.getjButtonEntrer().setEnabled(true);
             }
             fp.getjScrollPane1().setViewportView(fp.getjList1());
             fp.getjList1().setSelectedIndex(0);
@@ -322,10 +323,10 @@ public class Controleur {
      * Pour se deconnecter du serveur
      */
     public void deconnection() {
-        if (fSalon != null) {
-            fSalon.dispose();
-            fSalon = null;
-        }
+        //if (fSalon != null) {
+        // fSalon.dispose();
+        fSalon = null;
+        // }
         try {
             socket.close();
 
