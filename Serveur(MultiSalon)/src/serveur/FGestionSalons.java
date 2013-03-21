@@ -4,6 +4,10 @@
  */
 package serveur;
 
+import java.util.HashMap;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+
 /**
  *
  * @author zhangxi
@@ -15,11 +19,14 @@ public class FGestionSalons extends javax.swing.JFrame {
      */
     private Controleur controleur;
     private java.awt.Frame parent;
+    private DefaultListModel listeSalonLance;
+    private DefaultListModel listeSalonNonLance;
+    private HashMap<String, TheadSalon> theadSalons;
 
     public FGestionSalons(java.awt.Frame parent, Controleur controleur) {
+        this.theadSalons = new HashMap<String, TheadSalon>();
         this.setControleur(controleur);
         this.parent = parent;
-
         setBounds(400, 300, 391, 353);
         initComponents();
     }
@@ -32,6 +39,53 @@ public class FGestionSalons extends javax.swing.JFrame {
         this.controleur = controleur;
     }
 
+    public HashMap<String, TheadSalon> getTheadSalons() {
+        return theadSalons;
+    }
+
+    public void setTheadSalons(HashMap<String, TheadSalon> theadSalons) {
+        this.theadSalons = theadSalons;
+    }
+
+    public void setTheadSalon(TheadSalon theadSalon, String identSalon) {
+        this.getTheadSalons().put(identSalon, theadSalon);
+    }
+
+    public TheadSalon getTheadSalon(String identSalon) {
+        return this.getTheadSalons().get(identSalon);
+    }
+
+    public void init() {
+        listeSalonLance = new DefaultListModel();
+        listeSalonNonLance = new DefaultListModel();
+        for (String key : this.controleur.getSalons().keySet()) {
+            listeSalonNonLance.addElement(key);
+        }
+        for (String key : this.getTheadSalons().keySet()) {
+            listeSalonLance.addElement(key);
+            listeSalonNonLance.removeElement(key);
+        }
+
+        this.jListLance = new JList(listeSalonLance);
+        jScrollPane2.setViewportView(jListLance);
+        this.jListNonLance = new JList(listeSalonNonLance);
+        jScrollPane1.setViewportView(jListNonLance);
+        if (listeSalonLance.isEmpty()) {
+            jButtonFermer.setEnabled(false);
+        } else {
+            jListLance.setSelectedIndex(0);
+        }
+        if (listeSalonNonLance.isEmpty()) {
+            jButtonOuvrir.setEnabled(false);
+        } else {
+            jListNonLance.setSelectedIndex(0);
+        }
+
+
+
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,35 +96,44 @@ public class FGestionSalons extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
+        jListNonLance = new javax.swing.JList();
+        jButtonOuvrir = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
-        jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jListLance = new javax.swing.JList();
+        jTextFieldNouveauSalon = new javax.swing.JTextField();
+        jButtonFermer = new javax.swing.JButton();
+        jButtonAjouter = new javax.swing.JButton();
 
         setTitle("Gestion Des Salons");
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(jListNonLance);
 
-        jButton1.setText("Ouvrir>>>");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonOuvrir.setText("Ouvrir>>>");
+        jButtonOuvrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonOuvrirActionPerformed(evt);
             }
         });
 
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane2.setViewportView(jListLance);
 
-        jTextField1.setText("jTextField1");
-
-        jButton2.setText("<<<Fermer");
-
-        jButton3.setText("Ajouter");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldNouveauSalon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jTextFieldNouveauSalonActionPerformed(evt);
+            }
+        });
+
+        jButtonFermer.setText("<<<Fermer");
+        jButtonFermer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFermerActionPerformed(evt);
+            }
+        });
+
+        jButtonAjouter.setText("Ajouter");
+        jButtonAjouter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAjouterActionPerformed(evt);
             }
         });
 
@@ -82,37 +145,37 @@ public class FGestionSalons extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jTextField1))
+                        .addComponent(jTextFieldNouveauSalon))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButtonOuvrir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonFermer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)))
                 .addGap(39, 39, 39))
             .addGroup(layout.createSequentialGroup()
                 .addGap(110, 110, 110)
-                .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButtonAjouter)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(58, 58, 58)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldNouveauSalon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(jButtonAjouter)
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
-                        .addComponent(jButton1)
+                        .addComponent(jButtonOuvrir)
                         .addGap(60, 60, 60)
-                        .addComponent(jButton2))
+                        .addComponent(jButtonFermer))
                     .addComponent(jScrollPane2))
                 .addGap(38, 38, 38))
         );
@@ -120,24 +183,35 @@ public class FGestionSalons extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonOuvrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOuvrirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonOuvrirActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jTextFieldNouveauSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNouveauSalonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jTextFieldNouveauSalonActionPerformed
 
+    private void jButtonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterActionPerformed
+        // TODO add your handling code here:
+        if (!jTextFieldNouveauSalon.getText().isEmpty()) {
+            listeSalonNonLance.addElement(jTextFieldNouveauSalon.getText());
+        } else {
+            MessageBox mb = new MessageBox(this, true, "Vous devez donner un nom pour creer un salon ?");
+            mb.setVisible(true);
+        }
+    }//GEN-LAST:event_jButtonAjouterActionPerformed
 
-
+    private void jButtonFermerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFermerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonFermerActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JList jList1;
-    private javax.swing.JList jList2;
+    private javax.swing.JButton jButtonAjouter;
+    private javax.swing.JButton jButtonFermer;
+    private javax.swing.JButton jButtonOuvrir;
+    private javax.swing.JList jListLance;
+    private javax.swing.JList jListNonLance;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldNouveauSalon;
     // End of variables declaration//GEN-END:variables
 }

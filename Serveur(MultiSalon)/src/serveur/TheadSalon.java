@@ -15,6 +15,7 @@ import java.net.Socket;
 public class TheadSalon extends Thread {
 
     private Controleur controleur;
+    private String nomSalon;
 
     public TheadSalon(Controleur controleur, String nomSalon) {
         this.controleur=controleur;
@@ -24,6 +25,8 @@ public class TheadSalon extends Thread {
 
         controleur.lancer();
     }
+    
+    
     /*
      * int port = 0; ServerSocket socket_ecoute = null;
      *
@@ -69,4 +72,12 @@ public class TheadSalon extends Thread {
      * }
      * }
      */
+
+    public String getNomSalon() {
+        return nomSalon;
+    }
+
+    public void setNomSalon(String nomSalon) {
+        this.nomSalon = nomSalon;
+    }
 }

@@ -41,6 +41,7 @@ public class Controleur implements Serializable {
     public void fenetrePrincipal() {
         FPrincipal fp = new FPrincipal(this);
         fp.setVisible(true);
+        
     }
 
 
