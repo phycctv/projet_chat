@@ -33,9 +33,10 @@ public class FSalon extends javax.swing.JFrame {
         this.setControleur(controleur);
         this.parent = parent;
         this.identSalon = identSalon;
+
         setBounds(400, 300, 391, 353);
         initComponents();
-
+        this.setTitle(this.getTitle() +" : " + identSalon);
         // String[] data = {this.controleur.getNomUtilisateur(), "asd"};
 
         this.jLabel1.setText(this.controleur.getNomUtilisateur() + java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString(" : "));
