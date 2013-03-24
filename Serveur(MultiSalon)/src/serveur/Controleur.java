@@ -20,13 +20,16 @@ public class Controleur implements Serializable {
     //private ServerSocket socket_ecoute;
     private HashMap<String, Utilisateur> utilisateurs;
     private HashMap<String, Salon> salons;
+    private HashMap<String, Salon> salonsNonLancer;
     private String nomPremierSalon = "Premier Salon";
+    private boolean serveurEnLigne;
     //ServerSocket socket_ecoute = null;
     //private FPrincipal fp;
 
     public Controleur() {
         this.setUtilisateurs(new HashMap<String, Utilisateur>());
         this.setSalons(new HashMap<String, Salon>());
+        this.setSalonsNonLancer(new HashMap<String, Salon>());
         this.setSalon(new Salon(nomPremierSalon), nomPremierSalon);
     }
 
@@ -76,6 +79,30 @@ public class Controleur implements Serializable {
         return this.getSalons().get(identSalon);
     }
 
+    public HashMap<String, Salon> getSalonsNonLancer() {
+        return salonsNonLancer;
+    }
+
+    public void setSalonsNonLancer(HashMap<String, Salon> salonsNonLancer) {
+        this.salonsNonLancer = salonsNonLancer;
+    }
+
+    public void setSalonNonLancer(Salon salon, String identSalon) {
+        this.getSalonsNonLancer().put(identSalon, salon);
+    }
+
+    public Salon getSalonNonLancer(String identSalon) {
+        return this.getSalonsNonLancer().get(identSalon);
+    }
+
+    public boolean isServeurEnLigne() {
+        return serveurEnLigne;
+    }
+
+    public void setServeurEnLigne(boolean serveurEnLigne) {
+        this.serveurEnLigne = serveurEnLigne;
+    }
+
     //public ServerSocket getSocket_ecoute() {
     //  return socket_ecoute;
     //}
@@ -104,7 +131,43 @@ public class Controleur implements Serializable {
         return socket_ecoute;
     }
 
-    public void lancer(ServerSocket socket_ecoute ,String identSalon) {
+    public void ouvrirUnSalon(String identSalon) {
+        this.setSalon(getSalonsNonLancer().remove(identSalon), identSalon);
+        notification();
+    }
+
+    public void fermerUnSalon(String identSalon) {
+        notification(identSalon);
+        this.setSalonNonLancer(getSalons().remove(identSalon), identSalon);
+
+    }
+
+    public boolean notification() {
+        return true;
+    }
+
+    public boolean notification(String identSalon) {
+        try {
+            Salon s = getSalon(identSalon);
+            for (int i = 0; i < s.getListeClients().size(); i++) {
+                Socket socket_transfert = s.getListeClients().get(i).getSocket_transfert();
+                // Récupération du flot de sortie
+                OutputStream out = socket_transfert.getOutputStream();
+                // Création du flot de sortie pour données typées
+                DataOutputStream sortie = new DataOutputStream(out);
+                sortie.writeUTF("notification");
+                sortie.writeUTF("le_serveur_ferme_le_salon");
+                socket_transfert.close();
+                //s.getListeClients().get(i).join();
+            }
+        } catch (Exception e) {
+            System.out.println("Problème de notification : " + e.toString());
+            return false;
+        }
+        return true;
+    }
+
+    public void lancer(ServerSocket socket_ecoute) {
 
         System.out.println("J'attend les clients :)");
         int numClient = 0;
@@ -137,14 +200,14 @@ public class Controleur implements Serializable {
                         sortie.writeInt(2);
                     } else {
                         sortie.writeInt(0);
-                        ThreadClient client = new ThreadClient(this.getSalon(identSalon), numClient, socket_transfert, this, nomClient);
+                        ThreadClient client = new ThreadClient(numClient, socket_transfert, this, nomClient);
                         client.start();
                         //this.getSalon(nomPremierSalon).getListeClients().remove(client);
                     }
                 } else if (parametre.equals("inscription")) {
                     ThreadInscription inscription = new ThreadInscription(numClient, socket_transfert, this);
                     inscription.start();
-                    this.sauve();
+                    //this.sauve();
                 } else if (parametre.equals("testlogin")) {
                     if (getUtilisateur(entree.readUTF()) == null) {
                         sortie.writeInt(1);
@@ -182,6 +245,7 @@ public class Controleur implements Serializable {
             out.writeObject(this);
         } catch (Exception e) {
             System.out.println("Pb de Sauvegarde dans le fichier" + e.getMessage());
+            System.out.println("Pour bien sauvegarder tous les données, il est conseillé de fermer tous les salons");
         }
     }
 }

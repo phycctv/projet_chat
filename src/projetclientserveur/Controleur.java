@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Locale;
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 /**
@@ -287,22 +288,30 @@ public class Controleur {
             // Récupération du flot de sortie
             OutputStream out = this.getSocket().getOutputStream();
             // Création du flot de sortie pour données typées
-            DataOutputStream sortie = new DataOutputStream(out);
-            sortie.writeUTF("je_veux_la_liste_des_salon");
+            DataOutputStream sortie0 = new DataOutputStream(out);
+            sortie0.writeUTF("je_veux_la_liste_des_salon");
             int nb = entree.readInt();
             System.out.println("Il y a " + nb + " Salon(s)");
+            fp.setListeSalon(new DefaultListModel());
+            fp.setjList1(new JList(fp.getListeSalon()));
             for (int i = 0; i < nb; i++) {
-                fp.getListeSalon().addElement(entree.readUTF());
-            }
-            if (nb != 0) {
-                fp.getjButtonEntrer().setEnabled(true);
+                String nom = entree.readUTF();
+                fp.getListeSalon().addElement(nom);
+                System.out.println(nom);
             }
             fp.getjScrollPane1().setViewportView(fp.getjList1());
-            fp.getjList1().setSelectedIndex(0);
-
+            
+            if (nb != 0) {
+                fp.getjButtonEntrer().setEnabled(true);
+                fp.getjList1().setSelectedIndex(0);
+            } else {
+                MessageBox mb = new MessageBox(fp, true, "Aucun salon lancé sur ce serveur, Merci de vérifier le statut de serveur");
+                mb.setVisible(true);
+            }
 
         } catch (Exception e) {
             System.out.println("Vous etes deco.");
+            deconnection();
         }
     }
 
@@ -319,6 +328,12 @@ public class Controleur {
         this.recupererListeSalon();
     }
 
+    public void salonFermerParServeur() {
+        MessageBox mb = new MessageBox(fSalon, true, "Désolé, Le salon est fermer par le serveur");
+        mb.setVisible(true);
+        fSalon.fermerParServeur();
+    }
+
     /**
      * Pour se deconnecter du serveur
      */
@@ -333,6 +348,15 @@ public class Controleur {
         } catch (Exception e) {
             System.out.println(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("PROBLEME DÉCO"));
         }
+        setNomUtilisateur(null);
+        fp.getmItemConnection().setEnabled(true);
+        fp.getmItemDeconnection().setEnabled(false);
+        fp.getMenuLangue().setEnabled(true);
+        fp.getMItemServeur().setEnabled(true);
+        fp.setListeSalon(new DefaultListModel());
+        fp.getjScrollPane1().setVisible(false);
+        fp.getjButtonActualiser().setVisible(false);
+        fp.getjButtonEntrer().setVisible(false);
 
     }
 
@@ -342,7 +366,7 @@ public class Controleur {
      * @param login Le nom de l'utilisateur à tester
      *
      */
-    public boolean testLogin(String login) {
+    public int testLogin(String login) {
         try {
             int port = 5015;
             System.out.println(serveur + " : " + port);
@@ -364,12 +388,12 @@ public class Controleur {
             socket2.close();
 
             if (reponse == 1) {
-                return true;
+                return 1;
             } else {
-                return false;
+                return 2;
             }
         } catch (Exception e) {
-            return false;
+            return 3;
         }
     }
 

@@ -21,10 +21,10 @@ public class FGestionSalons extends javax.swing.JFrame {
     private java.awt.Frame parent;
     private DefaultListModel listeSalonLance;
     private DefaultListModel listeSalonNonLance;
-    private HashMap<String, TheadSalon> theadSalons;
+    //private HashMap<String, TheadSalon> theadSalons;
 
     public FGestionSalons(java.awt.Frame parent, Controleur controleur) {
-        this.theadSalons = new HashMap<String, TheadSalon>();
+        //this.theadSalons = new HashMap<String, TheadSalon>();
         this.setControleur(controleur);
         this.parent = parent;
         setBounds(400, 300, 391, 353);
@@ -39,32 +39,14 @@ public class FGestionSalons extends javax.swing.JFrame {
         this.controleur = controleur;
     }
 
-    public HashMap<String, TheadSalon> getTheadSalons() {
-        return theadSalons;
-    }
-
-    public void setTheadSalons(HashMap<String, TheadSalon> theadSalons) {
-        this.theadSalons = theadSalons;
-    }
-
-    public void setTheadSalon(TheadSalon theadSalon, String identSalon) {
-        this.getTheadSalons().put(identSalon, theadSalon);
-    }
-
-    public TheadSalon getTheadSalon(String identSalon) {
-        return this.getTheadSalons().get(identSalon);
-    }
-
     public void init() {
         listeSalonLance = new DefaultListModel();
         listeSalonNonLance = new DefaultListModel();
-        for (String key : this.controleur.getSalons().keySet()) {
+        for (String key : this.controleur.getSalonsNonLancer().keySet()) {
             listeSalonNonLance.addElement(key);
         }
-        for (String key : this.getTheadSalons().keySet()) {
+        for (String key : this.controleur.getSalons().keySet()) {
             listeSalonLance.addElement(key);
-            listeSalonNonLance.removeElement(key);
-            //System.out.println(key);
         }
 
         this.jListLance = new JList(listeSalonLance);
@@ -83,10 +65,6 @@ public class FGestionSalons extends javax.swing.JFrame {
             jListNonLance.setSelectedIndex(0);
             jButtonOuvrir.setEnabled(true);
         }
-
-
-
-
     }
 
     /**
@@ -106,9 +84,15 @@ public class FGestionSalons extends javax.swing.JFrame {
         jTextFieldNouveauSalon = new javax.swing.JTextField();
         jButtonFermer = new javax.swing.JButton();
         jButtonAjouter = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setTitle("Gestion Des Salons");
 
+        jListNonLance.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListNonLance.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(jListNonLance);
 
         jButtonOuvrir.setText("Ouvrir>>>");
@@ -118,13 +102,8 @@ public class FGestionSalons extends javax.swing.JFrame {
             }
         });
 
+        jListLance.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(jListLance);
-
-        jTextFieldNouveauSalon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNouveauSalonActionPerformed(evt);
-            }
-        });
 
         jButtonFermer.setText("<<<Fermer");
         jButtonFermer.addActionListener(new java.awt.event.ActionListener() {
@@ -133,10 +112,23 @@ public class FGestionSalons extends javax.swing.JFrame {
             }
         });
 
-        jButtonAjouter.setText("Ajouter");
+        jButtonAjouter.setText("Créer");
         jButtonAjouter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAjouterActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Nom du salon :");
+
+        jLabel2.setText("Salon(s) fermé(s) :");
+
+        jLabel3.setText("Salon(s) ouvert(s) :");
+
+        jButton1.setText("OK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -144,43 +136,64 @@ public class FGestionSalons extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jTextFieldNouveauSalon))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonOuvrir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonFermer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jTextFieldNouveauSalon)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonAjouter))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jButtonOuvrir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jButtonFermer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(18, 18, 18))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addGap(235, 235, 235)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))))))
                 .addGap(39, 39, 39))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addComponent(jButtonAjouter)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(jTextFieldNouveauSalon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonAjouter)
-                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldNouveauSalon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAjouter))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addComponent(jButtonOuvrir)
                         .addGap(60, 60, 60)
                         .addComponent(jButtonFermer))
                     .addComponent(jScrollPane2))
-                .addGap(38, 38, 38))
+                .addGap(5, 5, 5)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
@@ -188,18 +201,18 @@ public class FGestionSalons extends javax.swing.JFrame {
 
     private void jButtonOuvrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOuvrirActionPerformed
         // TODO add your handling code here:
+        controleur.ouvrirUnSalon(jListNonLance.getSelectedValue().toString());
+        init();
     }//GEN-LAST:event_jButtonOuvrirActionPerformed
-
-    private void jTextFieldNouveauSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNouveauSalonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNouveauSalonActionPerformed
 
     private void jButtonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterActionPerformed
         // TODO add your handling code here:
         if (!jTextFieldNouveauSalon.getText().isEmpty()) {
             if (!listeSalonNonLance.contains(jTextFieldNouveauSalon.getText()) && !listeSalonLance.contains(jTextFieldNouveauSalon.getText())) {
-                controleur.setSalon(new Salon(jTextFieldNouveauSalon.getText()), jTextFieldNouveauSalon.getText());
+                controleur.setSalonNonLancer(new Salon(jTextFieldNouveauSalon.getText()), jTextFieldNouveauSalon.getText());
                 listeSalonNonLance.addElement(jTextFieldNouveauSalon.getText());
+                jButtonOuvrir.setEnabled(true);
+                jListNonLance.setSelectedIndex(0);
             } else {
                 MessageBox mb = new MessageBox(this, true, "Le nom du salon déjà existe !");
                 mb.setVisible(true);
@@ -212,11 +225,22 @@ public class FGestionSalons extends javax.swing.JFrame {
 
     private void jButtonFermerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFermerActionPerformed
         // TODO add your handling code here:
+        controleur.fermerUnSalon(jListLance.getSelectedValue().toString());
+        init();
     }//GEN-LAST:event_jButtonFermerActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAjouter;
     private javax.swing.JButton jButtonFermer;
     private javax.swing.JButton jButtonOuvrir;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JList jListLance;
     private javax.swing.JList jListNonLance;
     private javax.swing.JScrollPane jScrollPane1;

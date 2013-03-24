@@ -20,9 +20,10 @@ public class FPrincipal extends javax.swing.JFrame {
     //ServerSocket socket_ecoute = null;
 
     public FPrincipal(Controleur controleur) {
-        this.fGest = new FGestionSalons (this,controleur);
-        fGest.init();
+        this.fGest = new FGestionSalons(this, controleur);
+        //fGest.init();
         this.setControleur(controleur);
+        controleur.setServeurEnLigne(false);
         setBounds(400, 300, 391, 353);
         initComponents();
     }
@@ -47,6 +48,7 @@ public class FPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemDemarrer = new javax.swing.JMenuItem();
+        jMenuItemSnapShot = new javax.swing.JMenuItem();
         jMenuItemStopper = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
         jMenuItemQuitter = new javax.swing.JMenuItem();
@@ -58,6 +60,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Serveur");
 
+        jMenuItemDemarrer.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemDemarrer.setText("Démarrer le serveur");
         jMenuItemDemarrer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +69,17 @@ public class FPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItemDemarrer);
 
+        jMenuItemSnapShot.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemSnapShot.setText("Faire un Snapshot");
+        jMenuItemSnapShot.setEnabled(false);
+        jMenuItemSnapShot.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSnapShotActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemSnapShot);
+
+        jMenuItemStopper.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemStopper.setText("Stopper le serveur");
         jMenuItemStopper.setEnabled(false);
         jMenuItemStopper.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +90,7 @@ public class FPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuItemStopper);
         jMenu1.add(jSeparator4);
 
+        jMenuItemQuitter.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemQuitter.setText("Quitter");
         jMenuItemQuitter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +103,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Salons");
 
+        jMenuItemGestionSalons.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemGestionSalons.setText("Gestion des salons");
         jMenuItemGestionSalons.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,30 +132,57 @@ public class FPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemStopperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemStopperActionPerformed
         // TODO add your handling code here:
+        for(String identSalon : controleur.getSalons().keySet()){
+            controleur.notification(identSalon);
+        }
         controleur.sauve();
     }//GEN-LAST:event_jMenuItemStopperActionPerformed
 
     private void jMenuItemQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemQuitterActionPerformed
         // TODO add your handling code here:
+        MessageBox mb = new MessageBox(this, true,("QUITTER ?"));
+        mb.setVisible(true);
     }//GEN-LAST:event_jMenuItemQuitterActionPerformed
 
     private void jMenuItemGestionSalonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGestionSalonsActionPerformed
         // TODO add your handling code here:
         fGest.init();
+        if (!controleur.isServeurEnLigne()) {
+            MessageBox mb = new MessageBox(fGest, true, "Serveur n'a pas encore démarré, tous les changements vont effectué quand le serveur démarre.");
+            mb.setSize(700, 200);
+            mb.setVisible(true);
+        }
         fGest.setVisible(true);
 
     }//GEN-LAST:event_jMenuItemGestionSalonsActionPerformed
 
     private void jMenuItemDemarrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDemarrerActionPerformed
         // TODO add your handling code here:
-        ServerSocket socket_ecoute = controleur.init();
-        TheadSalon ts = new TheadSalon(controleur, controleur.getNomPremierSalon(), socket_ecoute);
-        ts.start();
-        fGest.setTheadSalon(ts,ts.getNomSalon());
-        System.out.println("Le salon " + ts.getNomSalon() + " est démarré.");
-        this.jMenuItemDemarrer.setEnabled(false);
-        this.jMenuItemStopper.setEnabled(true);
+        try {
+            ServerSocket socket_ecoute = controleur.init();
+            TheadSalon ts = new TheadSalon(controleur, socket_ecoute);
+            ts.start();
+            for (String identSalon : controleur.getSalons().keySet()) {
+                System.out.println("Le salon " + identSalon + " est lancé.");
+            }
+            //fGest.setTheadSalon(ts,ts.getNomSalon());
+            System.out.println("Le serveur est démarré.");
+
+            this.jMenuItemDemarrer.setEnabled(false);
+            this.jMenuItemStopper.setEnabled(true);
+            this.jMenuItemSnapShot.setEnabled(true);
+            controleur.setServeurEnLigne(true);
+        } catch (Exception e) {
+            MessageBox mb = new MessageBox(this, true, "Problème du démarrage, vérifiez le ficher de sauvegarde SVP");
+            mb.setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItemDemarrerActionPerformed
+
+    private void jMenuItemSnapShotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSnapShotActionPerformed
+        // TODO add your handling code here:
+        controleur.sauve();
+    }//GEN-LAST:event_jMenuItemSnapShotActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -147,6 +190,7 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemDemarrer;
     private javax.swing.JMenuItem jMenuItemGestionSalons;
     private javax.swing.JMenuItem jMenuItemQuitter;
+    private javax.swing.JMenuItem jMenuItemSnapShot;
     private javax.swing.JMenuItem jMenuItemStopper;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     // End of variables declaration//GEN-END:variables

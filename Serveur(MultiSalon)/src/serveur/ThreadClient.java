@@ -20,8 +20,8 @@ public class ThreadClient extends Thread {
     private String nomClient;
     private Utilisateur utilisateur;
 
-    public ThreadClient(Salon salon, int numClient, Socket socket_transfert, Controleur controleur, String nomClient) {
-        this.salon = salon;
+    public ThreadClient(int numClient, Socket socket_transfert, Controleur controleur, String nomClient) {
+        //this.salon = salon;
         this.numClient = numClient;
         this.controleur = controleur;
         this.socket_transfert = socket_transfert;
@@ -85,7 +85,7 @@ public class ThreadClient extends Thread {
                     String nomSalon = entree.readUTF();
                     salon = controleur.getSalon(nomSalon);
                     salon.getListeClients().add(this);
-                    System.out.println("Client : " + nomClient + " est entré dans le salon" + salon.getIdentSalon());
+                    System.out.println("Client : " + nomClient + " est entré dans le salon : " + salon.getIdentSalon());
                     sortie0.writeInt(salon.getListeClients().size());
                     for (int k = 0; k < salon.getListeClients().size(); k++) {
                         sortie0.writeUTF(salon.getListeClients().get(k).getNomClient());
@@ -138,7 +138,9 @@ public class ThreadClient extends Thread {
                             }
                             nomSalon = entree.readUTF();
                             sortie0.writeUTF("fermer_salon");
-                            controleur.getSalon(nomSalon).getListeClients().remove(this);
+                            System.out.println("OK");
+                            salon.getListeClients().remove(this);
+                            System.out.println("OK");
                         }
                     }
                     System.out.println(nomClient + " a ferme " + nomSalon);
@@ -156,13 +158,15 @@ public class ThreadClient extends Thread {
                             OutputStream out1 = salon.getListeClients().get(k).getSocket_transfert().getOutputStream();
                             // Création du flot de sortie pour données typées
                             DataOutputStream sortie1 = new DataOutputStream(out1);
-                            sortie1.writeUTF("clientQuitter");
+                            sortie1.writeUTF("clientQuitterS");
                             sortie1.writeUTF(nomClient);
                         }
                     }
                 } catch (Exception e2) {
                     System.out.println("petit PROBLEME : " + e2.toString());
                 }
+            } else if (e.toString().equals("java.net.SocketException: socket closed")) {
+                System.out.println("Salon " + salon.getIdentSalon() + " fermer, donc client : " + nomClient + " est déco par serveur.");
             } else {
                 System.out.println("GROS PROBLEME : " + e.toString());
                 System.out.println("Donc client : " + nomClient + " est déco par serveur");
@@ -173,7 +177,7 @@ public class ThreadClient extends Thread {
                             OutputStream out1 = salon.getListeClients().get(k).getSocket_transfert().getOutputStream();
                             // Création du flot de sortie pour données typées
                             DataOutputStream sortie1 = new DataOutputStream(out1);
-                            sortie1.writeUTF("clientQuitter");
+                            sortie1.writeUTF("clientQuitterS");
                             sortie1.writeUTF(nomClient);
                         }
                     }

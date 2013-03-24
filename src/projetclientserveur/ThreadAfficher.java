@@ -31,16 +31,16 @@ public class ThreadAfficher extends Thread {
     private Controleur controleur;
     private HTMLEditorKit kit;
     private HTMLDocument doc;
-    private String idnetSalon;
+    private String identSalon;
 
-    public ThreadAfficher(String idnetSalon, String nom, DefaultListModel listModel1, JTextPane messagePane, Controleur controleur) {
+    public ThreadAfficher(String identSalon, String nom, DefaultListModel listModel1, JTextPane messagePane, Controleur controleur) {
         this.nom = nom;
         this.listModel1 = listModel1;
         this.messagePane = messagePane;
         this.controleur = controleur;
         this.kit = new HTMLEditorKit();
         this.doc = new HTMLDocument();
-        this.idnetSalon = idnetSalon;
+        this.identSalon = identSalon;
     }
 
     public void run() {
@@ -54,7 +54,7 @@ public class ThreadAfficher extends Thread {
             // Création du flot de sortie pour données typées
             DataOutputStream sortie0 = new DataOutputStream(out0);
             sortie0.writeUTF("ok_je_suis_dans_un_salon");
-            sortie0.writeUTF(idnetSalon);
+            sortie0.writeUTF(identSalon);
             int nb = entree.readInt();
             for (int i = 0; i < nb; i++) {
                 listModel1.addElement(entree.readUTF());
@@ -121,11 +121,28 @@ public class ThreadAfficher extends Thread {
                     kit.insertHTML(doc, doc.getLength(), "<i>" + clientQuitter
                             + " a quitté le salon.</i>", 0, 0, null);
                     messagePane.setCaretPosition(messagePane.getDocument().getLength());
+                } else if (type.equals("clientQuitterS")) {
+                    String clientQuitter = entree.readUTF();
+                    listModel1.removeElement(clientQuitter);
+                    kit.insertHTML(doc, doc.getLength(), "<i>" + clientQuitter
+                            + " a quitté la session.</i>", 0, 0, null);
+                    messagePane.setCaretPosition(messagePane.getDocument().getLength());
+                } else if (type.equals("notification")) {
+                    System.out.println(type);
+                    String notification = entree.readUTF();
+                    System.out.println(notification);
+                    if (notification.equals("le_serveur_ferme_le_salon")) {
+                        type = "fermer_salon";
+                        kit.insertHTML(doc, doc.getLength(), "<i>Le salon est fermé par le serveur, reconnectez-vous. SVP</i>", 0, 0, null);
+                        messagePane.setCaretPosition(messagePane.getDocument().getLength());
+                        controleur.deconnection();
+                        break;
+                    }
                 }
 
             }
         } catch (Exception e) {
-            System.out.println("Vous etes deco.");
+            System.out.println("Vous etes deco." + e.getMessage());
         }
     }
 }

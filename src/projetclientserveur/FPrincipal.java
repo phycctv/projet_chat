@@ -29,7 +29,6 @@ public class FPrincipal extends javax.swing.JFrame {
         this.setControleur(controleur);
         setBounds(400, 300, 391, 353);
         initComponents();
-        jList1 = new JList(listeSalon);
         jScrollPane1.setVisible(false);
         jButtonActualiser.setVisible(false);
         jButtonEntrer.setVisible(false);
@@ -77,8 +76,6 @@ public class FPrincipal extends javax.swing.JFrame {
         mItemConnection = new javax.swing.JMenuItem();
         mItemDeconnection = new javax.swing.JMenuItem();
         mItemQuitter = new javax.swing.JMenuItem();
-        mSalon = new javax.swing.JMenu();
-        mItemSalon = new javax.swing.JMenuItem();
         mAide = new javax.swing.JMenu();
         menuLangue = new javax.swing.JMenu();
         butDeutsch = new javax.swing.JMenuItem();
@@ -102,6 +99,7 @@ public class FPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jList1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jList1KeyTyped(evt);
@@ -125,6 +123,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
         mSession.setText(bundle.getString("SESSION")); // NOI18N
 
+        mItemInscription.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.ALT_MASK));
         mItemInscription.setText(bundle.getString("INSCRIPTION")); // NOI18N
         mItemInscription.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,6 +133,7 @@ public class FPrincipal extends javax.swing.JFrame {
         mSession.add(mItemInscription);
         mSession.add(jSeparator1);
 
+        mItemConnection.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
         mItemConnection.setText(bundle.getString("CONNECTION")); // NOI18N
         mItemConnection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,6 +142,7 @@ public class FPrincipal extends javax.swing.JFrame {
         });
         mSession.add(mItemConnection);
 
+        mItemDeconnection.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.ALT_MASK));
         mItemDeconnection.setText(bundle.getString("DECONNECTION")); // NOI18N
         mItemDeconnection.setEnabled(false);
         mItemDeconnection.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +152,7 @@ public class FPrincipal extends javax.swing.JFrame {
         });
         mSession.add(mItemDeconnection);
 
+        mItemQuitter.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         mItemQuitter.setText(bundle.getString("QUITTER")); // NOI18N
         mItemQuitter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,18 +162,6 @@ public class FPrincipal extends javax.swing.JFrame {
         mSession.add(mItemQuitter);
 
         jMenuBar1.add(mSession);
-
-        mSalon.setText(bundle.getString("SALON")); // NOI18N
-
-        mItemSalon.setText(bundle.getString("SALON")); // NOI18N
-        mItemSalon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mItemSalonActionPerformed(evt);
-            }
-        });
-        mSalon.add(mItemSalon);
-
-        jMenuBar1.add(mSalon);
 
         mAide.setText(bundle.getString("OPTION")); // NOI18N
 
@@ -289,10 +279,6 @@ public class FPrincipal extends javax.swing.JFrame {
         mb.setVisible(true);
     }//GEN-LAST:event_mItemQuitterActionPerformed
 
-    private void mItemSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemSalonActionPerformed
-        getControleur().fenetreListeSalon();
-    }//GEN-LAST:event_mItemSalonActionPerformed
-
     private void mItemInscriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemInscriptionActionPerformed
         getControleur().fenetreInscription();
     }//GEN-LAST:event_mItemInscriptionActionPerformed
@@ -313,6 +299,14 @@ public class FPrincipal extends javax.swing.JFrame {
         return jList1;
     }
 
+    public void setjList1(JList jList1) {
+        this.jList1 = jList1;
+    }
+
+    public void setListeSalon(DefaultListModel listeSalon) {
+        this.listeSalon = listeSalon;
+    }
+
     public JScrollPane getjScrollPane1() {
         return jScrollPane1;
     }
@@ -331,10 +325,6 @@ public class FPrincipal extends javax.swing.JFrame {
 
     public JMenuItem getMItemQuitter() {
         return mItemQuitter;
-    }
-
-    public JMenuItem getMItemSalon() {
-        return mItemSalon;
     }//GEN-LAST:event_mItemConnectionActionPerformed
 
     public JMenuItem getMItemDeconnection() {
@@ -349,17 +339,21 @@ public class FPrincipal extends javax.swing.JFrame {
         return menuLangue;
     }
 
+    public JMenuItem getmItemConnection() {
+        return mItemConnection;
+    }
+
+    public JMenuItem getmItemDeconnection() {
+        return mItemDeconnection;
+    }
+
+    public JMenuItem getmItemInscription() {
+        return mItemInscription;
+    }
+
     private void mItemDeconnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemDeconnectionActionPerformed
         this.controleur.deconnection();
-        this.controleur.setNomUtilisateur(null);
-        this.mItemConnection.setEnabled(true);
-        this.mItemDeconnection.setEnabled(false);
-        this.getMenuLangue().setEnabled(true);
-        this.getMItemServeur().setEnabled(true);
-        this.listeSalon = new DefaultListModel();
-        jScrollPane1.setVisible(false);
-        jButtonActualiser.setVisible(false);
-        jButtonEntrer.setVisible(false);
+
     }//GEN-LAST:event_mItemDeconnectionActionPerformed
 
     private void jMenuDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuDocActionPerformed
@@ -412,15 +406,15 @@ public class FPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEntrerActionPerformed
 
     private void jButtonActualiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualiserActionPerformed
-        this.listeSalon = new DefaultListModel();
+
         controleur.actualiser();
     }//GEN-LAST:event_jButtonActualiserActionPerformed
 
     private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
         // TODO add your handling code here:
-                if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
-            
-            
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+
+
             jButtonEntrer.doClick();
         }
     }//GEN-LAST:event_formKeyTyped
@@ -428,11 +422,12 @@ public class FPrincipal extends javax.swing.JFrame {
     private void jList1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyTyped
         // TODO add your handling code here:
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
-            
-            
+
+
             jButtonEntrer.doClick();
         }
     }//GEN-LAST:event_jList1KeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem butChinois;
     private javax.swing.JMenuItem butDeutsch;
@@ -454,9 +449,7 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mItemDeconnection;
     private javax.swing.JMenuItem mItemInscription;
     private javax.swing.JMenuItem mItemQuitter;
-    private javax.swing.JMenuItem mItemSalon;
     private javax.swing.JMenuItem mItemServeur;
-    private javax.swing.JMenu mSalon;
     private javax.swing.JMenu mSession;
     private javax.swing.JMenu menuLangue;
     // End of variables declaration//GEN-END:variables

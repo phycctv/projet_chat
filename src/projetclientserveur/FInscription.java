@@ -304,7 +304,7 @@ public class FInscription extends javax.swing.JFrame {
         if (jTextFieldLogin.getForeground() != Color.LIGHT_GRAY) {
             if (!jTextFieldLogin.getText().isEmpty()) {
                 login = jTextFieldLogin.getText();
-                if (getControleur().testLogin(login)) {
+                if (getControleur().testLogin(login) == 1) {
                     jButtonQuitter.setEnabled(false);
                     jButtonVerifier.setEnabled(false);
                     jTextFieldLogin.setEnabled(false);
@@ -316,8 +316,11 @@ public class FInscription extends javax.swing.JFrame {
                     jRadioButtonGarcon.setEnabled(true);
                     jButtonAnnuler.setEnabled(true);
                     jButtonInscription.setEnabled(true);
-                } else {
+                } else if (getControleur().testLogin(login) == 2) {
                     MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("NOM D'UTILISATEUR DÉJÀ UTILISÉ"));
+                    mb.setVisible(true);
+                } else if (getControleur().testLogin(login) == 3) {
+                    MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("PROBLEME CONNECTION"));
                     mb.setVisible(true);
                 }
             } else {

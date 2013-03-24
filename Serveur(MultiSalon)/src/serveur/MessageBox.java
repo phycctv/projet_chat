@@ -83,9 +83,7 @@ public class MessageBox extends javax.swing.JDialog {
         this.dispose();
         if (message.equals("QUITTER ?")) {
             System.exit(0);
-        } else if (message.equals("QUITTER LE SALON?")) {
-            this.parent.dispose();
-        }
+        } 
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -15,18 +15,18 @@ import java.net.Socket;
 public class TheadSalon extends Thread {
 
     private Controleur controleur;
-    private String nomSalon;
+    //private String nomSalon;
     private ServerSocket socket_ecoute;
 
-    public TheadSalon(Controleur controleur, String nomSalon, ServerSocket socket_ecoute) {
+    public TheadSalon(Controleur controleur, ServerSocket socket_ecoute) {
         this.controleur = controleur;
-        this.nomSalon = nomSalon;
+        //this.nomSalon = nomSalon;
         this.socket_ecoute = socket_ecoute;
     }
 
     public void run() {
 
-        controleur.lancer(socket_ecoute, nomSalon);
+        controleur.lancer(socket_ecoute);
     }
 
     /*
@@ -74,11 +74,5 @@ public class TheadSalon extends Thread {
      * }
      * }
      */
-    public String getNomSalon() {
-        return nomSalon;
-    }
 
-    public void setNomSalon(String nomSalon) {
-        this.nomSalon = nomSalon;
-    }
 }

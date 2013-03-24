@@ -7,6 +7,7 @@ package projetclientserveur;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +45,7 @@ public class FSalon extends javax.swing.JFrame {
         //listModel1.addElement(this.controleur.getNomUtilisateur());
         this.jList1 = new JList(listModel1);
         jScrollPane2.setViewportView(jList1);
+
     }
 
     public Controleur getControleur() {
@@ -179,6 +181,10 @@ public class FSalon extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (!messagesbox.isAlive()) {
+            fermerParServeur();
+        }
+
         if (!jTextField1.getText().isEmpty() && jTextField1.getForeground() == Color.black) {
             try {
 
@@ -203,6 +209,9 @@ public class FSalon extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        if (!messagesbox.isAlive()) {
+            fermerParServeur();
+        }
         if (evt.getKeyChar() == KeyEvent.VK_ENTER && !jTextField1.getText().isEmpty()) {
             try {
 
@@ -244,13 +253,12 @@ public class FSalon extends javax.swing.JFrame {
             sortie.writeUTF("je_veux_fermer_le_salon");
             sortie.writeUTF(identSalon);
         } catch (Exception e) {
-            MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("PROBLEME DE LA FERMETURE DU SALON"));
-            mb.setVisible(true);
+             System.out.println(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("PROBLEME DE LA FERMETURE DU SALON"));
         }
         try {
             messagesbox.join();
             parent.getjButtonEntrer().setEnabled(true);
-            parent.getjButtonActualiser().doClick();
+            controleur.recupererListeSalon();
             parent.setVisible(true);
         } catch (InterruptedException ex) {
             Logger.getLogger(FSalon.class.getName()).log(Level.SEVERE, null, ex);
@@ -260,6 +268,16 @@ public class FSalon extends javax.swing.JFrame {
         } catch (Throwable ex) {
             Logger.getLogger(FSalon.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void fermerParServeur() {
+ 
+            MessageBox mb = new MessageBox(this, true, "Désolé, Le salon est fermer par le serveur");
+            mb.setVisible(true);
+            controleur.deconnection();
+            this.dispose();
+
+
     }//GEN-LAST:event_formWindowClosed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
