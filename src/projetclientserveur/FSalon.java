@@ -40,11 +40,12 @@ public class FSalon extends javax.swing.JFrame {
 
         this.jLabel1.setText(this.controleur.getNomUtilisateur() + java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString(" : "));
         listModel1 = new DefaultListModel();
+        this.jList1 = new JList(listModel1);
+        jScrollPane2.setViewportView(jList1);
         messagesbox = new ThreadAfficher(identSalon, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("MESSAGEAREA"), listModel1, jTextPaneMessage, controleur);
         messagesbox.start();
         //listModel1.addElement(this.controleur.getNomUtilisateur());
-        this.jList1 = new JList(listModel1);
-        jScrollPane2.setViewportView(jList1);
+
 
     }
 
@@ -253,7 +254,7 @@ public class FSalon extends javax.swing.JFrame {
             sortie.writeUTF("je_veux_fermer_le_salon");
             sortie.writeUTF(identSalon);
         } catch (Exception e) {
-             System.out.println(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("PROBLEME DE LA FERMETURE DU SALON"));
+            System.out.println(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("PROBLEME DE LA FERMETURE DU SALON"));
         }
         try {
             messagesbox.join();
@@ -271,11 +272,11 @@ public class FSalon extends javax.swing.JFrame {
     }
 
     public void fermerParServeur() {
- 
-            MessageBox mb = new MessageBox(this, true, "Désolé, Le salon est fermer par le serveur");
-            mb.setVisible(true);
-            controleur.deconnection();
-            this.dispose();
+
+        MessageBox mb = new MessageBox(this, true, "Désolé, Le salon est fermer par le serveur");
+        mb.setVisible(true);
+        controleur.deconnection();
+        this.dispose();
 
 
     }//GEN-LAST:event_formWindowClosed
