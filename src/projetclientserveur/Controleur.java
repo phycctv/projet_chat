@@ -305,7 +305,7 @@ public class Controleur {
                 fp.getjButtonEntrer().setEnabled(true);
                 fp.getjList1().setSelectedIndex(0);
             } else {
-                MessageBox mb = new MessageBox(fp, true, "Aucun salon lancé sur ce serveur, Merci de vérifier le statut de serveur");
+                MessageBox mb = new MessageBox(fp, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("Aucun salon lance sur ce serveur"));
                 mb.setVisible(true);
             }
 

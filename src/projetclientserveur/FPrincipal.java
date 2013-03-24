@@ -107,14 +107,14 @@ public class FPrincipal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        jButtonEntrer.setText("Entrer");
+        jButtonEntrer.setText(bundle.getString("Entrer")); // NOI18N
         jButtonEntrer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEntrerActionPerformed(evt);
             }
         });
 
-        jButtonActualiser.setText("Actualiser");
+        jButtonActualiser.setText(bundle.getString("Actualiser")); // NOI18N
         jButtonActualiser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonActualiserActionPerformed(evt);

@@ -249,7 +249,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="jButtonEntrer">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Entrer"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="projetclientserveur/Bundle.properties" key="Entrer" replaceFormat="java.util.ResourceBundle.getBundle(&quot;projetclientserveur/Bundle&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEntrerActionPerformed"/>
@@ -257,7 +259,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonActualiser">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Actualiser"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="projetclientserveur/Bundle.properties" key="Actualiser" replaceFormat="java.util.ResourceBundle.getBundle(&quot;projetclientserveur/Bundle&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonActualiserActionPerformed"/>
