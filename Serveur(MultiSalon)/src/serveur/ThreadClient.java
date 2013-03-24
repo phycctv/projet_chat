@@ -148,7 +148,9 @@ public class ThreadClient extends Thread {
                 }
             }
         } catch (Exception e) {
-            salon.getListeClients().remove(this);
+            if (salon.getListeClients().contains(this)) {
+                salon.getListeClients().remove(this);
+            }
             if (e.toString().equals("java.io.EOFException") || e.toString().equals("java.net.SocketException: Connection reset")) {
                 System.out.println("Client : " + nomClient + " a quitté la session");
                 try {

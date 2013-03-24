@@ -172,54 +172,58 @@ public class Controleur implements Serializable {
         System.out.println("J'attend les clients :)");
         int numClient = 0;
         //this.getSalon(nomPremierSalon).setListeClients(new ArrayList<ThreadClient>());
-        while (true) {
+        while (!socket_ecoute.isClosed()) {
             Socket socket_transfert = null;
             try {
                 socket_transfert = socket_ecoute.accept();  // appel bloquant
                 numClient++;
             } catch (IOException e) {
-                System.out.println("Problème pour attendre un client :'(");
+                MessageBox mb = new MessageBox(null, true, "Serveur stoppé!!!  tous les clients sont déconnectés");
+                mb.setVisible(true);
+                System.out.println("Serveur stoppé!!!");
             }
-            try {
-                // Récupération du flot d'entrée
-                InputStream in = socket_transfert.getInputStream();
-                // Création du flot d'entrée pour données typées
-                DataInputStream entree = new DataInputStream(in);
-                // Récupération du flot de sortie
-                OutputStream out = socket_transfert.getOutputStream();
-                // Création du flot de sortie pour données typées
-                DataOutputStream sortie = new DataOutputStream(out);
-                String parametre = entree.readUTF();
+            if (!socket_ecoute.isClosed()) {
+                try {
+                    // Récupération du flot d'entrée
+                    InputStream in = socket_transfert.getInputStream();
+                    // Création du flot d'entrée pour données typées
+                    DataInputStream entree = new DataInputStream(in);
+                    // Récupération du flot de sortie
+                    OutputStream out = socket_transfert.getOutputStream();
+                    // Création du flot de sortie pour données typées
+                    DataOutputStream sortie = new DataOutputStream(out);
+                    String parametre = entree.readUTF();
 
-                if (parametre.equals("connection")) {
-                    String nomClient = entree.readUTF();
-                    String mdp = entree.readUTF();
-                    if (getUtilisateur(nomClient) == null) {
-                        sortie.writeInt(1);
-                    } else if (!getUtilisateur(nomClient).getMdp().equals(mdp)) {
-                        sortie.writeInt(2);
-                    } else {
-                        sortie.writeInt(0);
-                        ThreadClient client = new ThreadClient(numClient, socket_transfert, this, nomClient);
-                        client.start();
-                        //this.getSalon(nomPremierSalon).getListeClients().remove(client);
+                    if (parametre.equals("connection")) {
+                        String nomClient = entree.readUTF();
+                        String mdp = entree.readUTF();
+                        if (getUtilisateur(nomClient) == null) {
+                            sortie.writeInt(1);
+                        } else if (!getUtilisateur(nomClient).getMdp().equals(mdp)) {
+                            sortie.writeInt(2);
+                        } else {
+                            sortie.writeInt(0);
+                            ThreadClient client = new ThreadClient(numClient, socket_transfert, this, nomClient);
+                            client.start();
+                            //this.getSalon(nomPremierSalon).getListeClients().remove(client);
+                        }
+                    } else if (parametre.equals("inscription")) {
+                        ThreadInscription inscription = new ThreadInscription(numClient, socket_transfert, this);
+                        inscription.start();
+                        //this.sauve();
+                    } else if (parametre.equals("testlogin")) {
+                        if (getUtilisateur(entree.readUTF()) == null) {
+                            sortie.writeInt(1);
+                        } else {
+                            sortie.writeInt(0);
+                        }
                     }
-                } else if (parametre.equals("inscription")) {
-                    ThreadInscription inscription = new ThreadInscription(numClient, socket_transfert, this);
-                    inscription.start();
-                    //this.sauve();
-                } else if (parametre.equals("testlogin")) {
-                    if (getUtilisateur(entree.readUTF()) == null) {
-                        sortie.writeInt(1);
-                    } else {
-                        sortie.writeInt(0);
-                    }
+
+                } catch (Exception e) {
+                    System.out.println("Problème ouverture connection/inscription : " + e.toString());
                 }
-
-            } catch (Exception e) {
-                System.out.println("Problème ouverture connection/inscription : " + e.toString());
             }
-            System.out.println("mouahaha");
+            //System.out.println("mouahaha");
 
         }
     }

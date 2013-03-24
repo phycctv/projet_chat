@@ -4,7 +4,10 @@
  */
 package serveur;
 
+import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +20,8 @@ public class FPrincipal extends javax.swing.JFrame {
      */
     private Controleur controleur;
     private FGestionSalons fGest;
+    private TheadSalon ts;
+    private ServerSocket socket_ecoute;
     //ServerSocket socket_ecoute = null;
 
     public FPrincipal(Controleur controleur) {
@@ -132,16 +137,42 @@ public class FPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemStopperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemStopperActionPerformed
         // TODO add your handling code here:
-        for(String identSalon : controleur.getSalons().keySet()){
+        for (String identSalon : controleur.getSalons().keySet()) {
             controleur.notification(identSalon);
         }
+        ts.interrupt();
+
+        try {
+            socket_ecoute.close();
+        } catch (IOException ex) {
+            MessageBox mb = new MessageBox(this, true, "Problème de la fermeture : " + ex.toString());
+            mb.setVisible(true);
+        }
+        try {
+            ts.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(FPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         controleur.sauve();
+        controleur.setServeurEnLigne(false);
+        this.jMenuItemDemarrer.setEnabled(true);
+        this.jMenuItemStopper.setEnabled(false);
+        this.jMenuItemSnapShot.setEnabled(false);
+
+
     }//GEN-LAST:event_jMenuItemStopperActionPerformed
 
     private void jMenuItemQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemQuitterActionPerformed
         // TODO add your handling code here:
-        MessageBox mb = new MessageBox(this, true,("QUITTER ?"));
-        mb.setVisible(true);
+        if (controleur.isServeurEnLigne()) {
+            MessageBox mb = new MessageBox(this, true, ("Merci de d'abord stopper le serveur pour bien enregistrer tous les données"));
+            mb.setSize(500, 200);
+            mb.setVisible(true);
+        } else {
+            MessageBox mb = new MessageBox(this, true, ("QUITTER ?"));
+            mb.setVisible(true);
+        }
+
     }//GEN-LAST:event_jMenuItemQuitterActionPerformed
 
     private void jMenuItemGestionSalonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGestionSalonsActionPerformed
@@ -159,8 +190,8 @@ public class FPrincipal extends javax.swing.JFrame {
     private void jMenuItemDemarrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDemarrerActionPerformed
         // TODO add your handling code here:
         try {
-            ServerSocket socket_ecoute = controleur.init();
-            TheadSalon ts = new TheadSalon(controleur, socket_ecoute);
+            socket_ecoute = controleur.init();
+            ts = new TheadSalon(controleur, socket_ecoute);
             ts.start();
             for (String identSalon : controleur.getSalons().keySet()) {
                 System.out.println("Le salon " + identSalon + " est lancé.");
@@ -182,7 +213,6 @@ public class FPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         controleur.sauve();
     }//GEN-LAST:event_jMenuItemSnapShotActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
