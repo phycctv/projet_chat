@@ -100,9 +100,9 @@ public class MessageBox extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         this.dispose();
-        if (message==java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("QUITTER ?"))
+        if (message.equals(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("QUITTER ?")))
             System.exit(0);
-        else if(message==java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("QUITTER LE SALON?"))
+        else if(message.equals(java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("QUITTER LE SALON?")))
             this.parent.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed

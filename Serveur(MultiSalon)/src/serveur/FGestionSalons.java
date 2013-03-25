@@ -4,7 +4,6 @@
  */
 package serveur;
 
-import java.util.HashMap;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 

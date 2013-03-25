@@ -7,7 +7,6 @@ package projetclientserveur;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -77,7 +76,7 @@ public class FSalon extends javax.swing.JFrame {
         jTextPaneMessage = new javax.swing.JTextPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuQuitter = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -120,19 +119,18 @@ public class FSalon extends javax.swing.JFrame {
 
         jLabel2.setText(bundle.getString("PARTICIPANTS")); // NOI18N
 
-        jTextPaneMessage.setBackground(java.awt.Color.white);
         jTextPaneMessage.setEditable(false);
         jScrollPane1.setViewportView(jTextPaneMessage);
 
         jMenu1.setText(bundle.getString("SALON")); // NOI18N
 
-        jMenuItem1.setText(bundle.getString("QUITTE SALON")); // NOI18N
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuQuitter.setText(bundle.getString("QUITTE SALON")); // NOI18N
+        jMenuQuitter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuQuitterActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(jMenuQuitter);
 
         jMenuBar1.add(jMenu1);
 
@@ -205,10 +203,10 @@ public class FSalon extends javax.swing.JFrame {
         jTextField1.requestFocusInWindow();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuQuitterActionPerformed
         MessageBox mb = new MessageBox(this, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("QUITTER LE SALON?"));
         mb.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuQuitterActionPerformed
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
         if (!messagesbox.isAlive()) {
@@ -289,7 +287,7 @@ public class FSalon extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuQuitter;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
