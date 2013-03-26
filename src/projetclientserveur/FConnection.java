@@ -230,9 +230,7 @@ public class FConnection extends javax.swing.JFrame {
             jButtonConnect.doClick();
         }
     }//GEN-LAST:event_jPasswordField1KeyTyped
-    /**
-     * @param args the command line arguments
-     */
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAnnuler;
     private javax.swing.JButton jButtonConnect;

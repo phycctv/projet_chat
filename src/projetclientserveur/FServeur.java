@@ -138,9 +138,7 @@ public class FServeur extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         parent.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
-    /**
-     * @param args the command line arguments
-     */
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAnnuler;
     private javax.swing.JButton jButtonChanger;
