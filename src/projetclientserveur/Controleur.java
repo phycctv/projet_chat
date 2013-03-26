@@ -4,6 +4,8 @@
  */
 package projetclientserveur;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStream;
@@ -35,6 +37,7 @@ public class Controleur {
     private Socket socket;
     private DataOutputStream sortie;
     private FSalon fSalon = null;
+    private Image icone;
     /**
      * L'adresse du serveur. Ce serveur est changeable.
      *
@@ -52,6 +55,7 @@ public class Controleur {
      */
     public Controleur() {
         connecter = false;
+        icone = Toolkit.getDefaultToolkit().getImage("WindowsLiveMessenger.png");
         fenetrePrincipal();
     }
 
@@ -173,6 +177,7 @@ public class Controleur {
     public void fenetrePrincipal() {
         this.fp = new FPrincipal(this);
         fp.setVisible(true);
+        fp.setIconImage(icone);
     }
 
     /**
@@ -183,6 +188,7 @@ public class Controleur {
     public void fenetreInscription() {
         FInscription fIns = new FInscription(fp, this);
         fIns.setVisible(true);
+        fIns.setIconImage(icone);
     }
 
     /**
@@ -193,6 +199,7 @@ public class Controleur {
     public void fenetreConnection() {
         FConnection fConn = new FConnection(fp, this);
         fConn.setVisible(true);
+        fConn.setIconImage(icone);
     }
 
     /**
@@ -203,6 +210,7 @@ public class Controleur {
     public void fenetreServeur() {
         FServeur fServeur = new FServeur(fp, this);
         fServeur.setVisible(true);
+        fServeur.setIconImage(icone);
     }
 
     /**
@@ -213,6 +221,7 @@ public class Controleur {
     public void fenetreAide() {
         FAide fAide = new FAide(fp, this);
         fAide.setVisible(true);
+        fAide.setIconImage(icone);
     }
 
     /**
@@ -227,6 +236,7 @@ public class Controleur {
             // }
             fp.setVisible(false);
             fSalon.setVisible(true);
+            fSalon.setIconImage(icone);
         } else {
             MessageBox mb = new MessageBox(fp, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("VOUS N'ETES PAS CONNECTÉ"));
             mb.setVisible(true);
