@@ -37,6 +37,9 @@ public class ThreadAfficher extends Thread {
     private HTMLDocument doc;
     private String identSalon;
 
+    /**
+     * Constructeur ThreadAfficher.
+     */
     public ThreadAfficher(String identSalon, String nom, DefaultListModel listModel1, JTextPane messagePane, Controleur controleur) {
         this.nom = nom;
         this.listModel1 = listModel1;
@@ -47,6 +50,10 @@ public class ThreadAfficher extends Thread {
         this.identSalon = identSalon;
     }
 
+    /**
+     * Execute le thread en ecoutant les messages envoyer par l'utilisateur
+     * soit pour afficher un message, soit des smileys soit remplire ou supprimer des utilisateurs     *
+     */
     public void run() {
         try {
             // Récupération du flot d'entrée

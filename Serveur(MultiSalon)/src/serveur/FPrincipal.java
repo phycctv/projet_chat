@@ -10,8 +10,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * <p> FPrincipal est la classe qui créé la fenetre principal où l'ont peut
+ * atteindre les différentes fonction du serveur</p>
  *
- * @author zhangxi
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
 public class FPrincipal extends javax.swing.JFrame {
 

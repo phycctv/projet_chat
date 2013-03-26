@@ -8,8 +8,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
+ * <p> Salon est la classe permettant d'itentifier un salon côté serveur </p>
  *
- * @author zhangxi
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
 public class Salon implements Serializable {
 

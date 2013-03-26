@@ -1,9 +1,12 @@
 package projetclientserveur;
 
 import java.util.Date;
+
 /**
+ * <p> Utilisateur est la classe permettant d'itentifier un utilisateur </p>
  *
- * @author zhangxi
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
 public class Utilisateur {
 

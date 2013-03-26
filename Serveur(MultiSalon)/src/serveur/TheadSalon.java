@@ -9,8 +9,10 @@ package serveur;
 import java.net.ServerSocket;
 
 /**
+ * <p> TheadSalon est la classe qui execute un salon.</p>
  *
- * @author zhangxi
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
 public class TheadSalon extends Thread {
 

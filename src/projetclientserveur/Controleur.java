@@ -23,10 +23,11 @@ import javax.swing.JList;
 public class Controleur {
 
     /**
-     * Variable de la fenetre principal
+     * Variable de Controleur
      *
-     * @see Controleur#fenetrePrincipal()
+     * @see FSalon
      * @see FPrincipal
+     * @see DataOutputStream
      */
     private FPrincipal fp;
     private boolean connecter;
@@ -233,22 +234,6 @@ public class Controleur {
     }
 
     /**
-     * Cree une fenetre de la Liste des salons de discution et la rend visible
-     *
-     * @see FListeSalon
-     */
-    public void fenetreListeSalon() {
-        if (nomUtilisateur != null) {
-            FListeSalons fs = new FListeSalons(this);
-            fs.init();
-            fs.setVisible(true);
-        } else {
-            MessageBox mb = new MessageBox(fp, true, java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString("VOUS N'ETES PAS CONNECTÉ"));
-            mb.setVisible(true);
-        }
-    }
-
-    /**
      * Pour se connecter au serveur avec des identifiants valide
      *
      * @param nomUtilisateur0 Le nom de l'utilisateur souhaitant se connecter
@@ -278,6 +263,9 @@ public class Controleur {
         }
     }
 
+    /**
+     * Pour récupérer la liste des salons disponible *
+     */
     public void recupererListeSalon() {
 
         try {
@@ -300,7 +288,7 @@ public class Controleur {
                 System.out.println(nom);
             }
             fp.getjScrollPane1().setViewportView(fp.getjList1());
-            
+
             if (nb != 0) {
                 fp.getjButtonEntrer().setEnabled(true);
                 fp.getjList1().setSelectedIndex(0);
@@ -315,6 +303,11 @@ public class Controleur {
         }
     }
 
+    /**
+     * Pour actualiser la liste des salons disponible
+     *
+     * @see Controleur#recupererListeSalon()
+     */
     public void actualiser() {
         try {
             // Récupération du flot de sortie
@@ -328,6 +321,11 @@ public class Controleur {
         this.recupererListeSalon();
     }
 
+    /**
+     * Message si le salon a été fermé par le serveur
+     *
+     * @see FSalon#fermerParServeur()
+     */
     public void salonFermerParServeur() {
         MessageBox mb = new MessageBox(fSalon, true, "Désolé, Le salon est fermer par le serveur");
         mb.setVisible(true);

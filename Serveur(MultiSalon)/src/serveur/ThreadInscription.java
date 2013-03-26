@@ -8,8 +8,10 @@ import java.io.*;
 import java.net.Socket;
 
 /**
+ * <p> ThreadInscription est la classe qui permet l'inscription d'un nouvelle utilisateur.</p>
  *
- * @author zhangxi
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
 public class ThreadInscription extends Thread {
 

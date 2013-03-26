@@ -8,13 +8,19 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 /**
+ * <p> FGestionSalons est la classe qui créé la fenetre de gestion des salon
+ * c'est ici qu'on rajoute des salons et qu'on démarre ou stop des salons</p>
  *
- * @author zhangxi
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
 public class FGestionSalons extends javax.swing.JFrame {
 
     /**
-     * Creates new form FGestionSalons
+     * Variable de FGestionSalons
+     *
+     * @see Controleur
+     * @see DefaultListModel
      */
     private Controleur controleur;
     private java.awt.Frame parent;

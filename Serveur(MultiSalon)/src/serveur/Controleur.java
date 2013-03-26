@@ -5,16 +5,21 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 
-/*
- * To change this template, choose Tools | Templates and open the template in
- * the editor.
- */
 /**
+ * <p> Controleur est la classe qui regroupe toutes les méthodes principals du
+ * serveur </p>
  *
- * @author zhangxi
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
 public class Controleur implements Serializable {
 
+    /**
+     * Variable de Controleur
+     *
+     * @see Utilisateur
+     * @see Salon
+     */
     private static final long serialVersionUID = 1L;
     //private ServerSocket socket_ecoute;
     private HashMap<String, Utilisateur> utilisateurs;
@@ -25,6 +30,14 @@ public class Controleur implements Serializable {
     //ServerSocket socket_ecoute = null;
     //private FPrincipal fp;
 
+    /**
+     * Constructeur Controleur. <p> A la construction de l'objet Controleur, on
+     * initialise les différents HashMap. </p>
+     *
+     * @see Controleur#setSalon(serveur.Salon, java.lang.String)
+     * @see Controleur#setSalonNonLancer(serveur.Salon, java.lang.String)
+     * @see Controleur#setSalons(java.util.HashMap)
+     */
     public Controleur() {
         this.setUtilisateurs(new HashMap<String, Utilisateur>());
         this.setSalons(new HashMap<String, Salon>());
@@ -32,74 +45,164 @@ public class Controleur implements Serializable {
         this.setSalon(new Salon(nomPremierSalon), nomPremierSalon);
     }
 
+    /**
+     * Retourne le nom du premier salon
+     *
+     * @return nomPremierSalon
+     */
     public String getNomPremierSalon() {
         return nomPremierSalon;
     }
 
+    /**
+     * Met à jour le nom du premier salon
+     *
+     * @param nomPremierSalon Nom du premier salon
+     *
+     */
     public void setNomPremierSalon(String nomPremierSalon) {
         this.nomPremierSalon = nomPremierSalon;
     }
 
-    public void fenetrePrincipal() {
-        FPrincipal fp = new FPrincipal(this);
-        fp.setVisible(true);
-
-    }
-
-    private void setUtilisateurs(HashMap<String, Utilisateur> utilisateurs) {
-        this.utilisateurs = utilisateurs;
-    }
-
+    /**
+     * Retourne l'ensemble des utilisateurs
+     */
     private HashMap<String, Utilisateur> getUtilisateurs() {
         return utilisateurs;
     }
 
-    public void setUtilisateur(Utilisateur utilisateur, String login) {
-        this.getUtilisateurs().put(login, utilisateur);
+    /**
+     * Met à jour la liste des utilisateurs
+     *
+     * @param utilisateurs Liste utilisateur
+     *
+     */
+    private void setUtilisateurs(HashMap<String, Utilisateur> utilisateurs) {
+        this.utilisateurs = utilisateurs;
     }
 
+    /**
+     * Retourne un utilisateur suivant son nom de login
+     *
+     * @return Utilisateur
+     */
     public Utilisateur getUtilisateur(String login) {
         return this.getUtilisateurs().get(login);
     }
 
+    /**
+     * Rajoute un utilisateur à la liste d'utilisateur
+     *
+     * @param utilisateur L'utilisateur
+     * @param login Son login
+     *
+     */
+    public void setUtilisateur(Utilisateur utilisateur, String login) {
+        this.getUtilisateurs().put(login, utilisateur);
+    }
+
+    /**
+     * Retourne la liste des salons
+     */
     public HashMap<String, Salon> getSalons() {
         return salons;
     }
 
+    /**
+     * Met à jour la liste des salons
+     *
+     * @param salons
+     *
+     */
     public void setSalons(HashMap<String, Salon> salons) {
         this.salons = salons;
     }
 
-    public void setSalon(Salon salon, String identSalon) {
-        this.getSalons().put(identSalon, salon);
-    }
-
+    /**
+     * Retourne un salon suivant son nom
+     *
+     * @return Salon
+     */
     public Salon getSalon(String identSalon) {
         return this.getSalons().get(identSalon);
     }
 
+    /**
+     * Rajoute un salon à la liste des salons
+     *
+     * @param salon
+     * @param identSalon
+     *
+     */
+    public void setSalon(Salon salon, String identSalon) {
+        this.getSalons().put(identSalon, salon);
+    }
+
+    /**
+     * Retourne la liste des salons non lancer
+     */
     public HashMap<String, Salon> getSalonsNonLancer() {
         return salonsNonLancer;
     }
 
+    /**
+     * Met à jour la liste des salons non lancer
+     *
+     * @param salonsNonLancer
+     *
+     */
     public void setSalonsNonLancer(HashMap<String, Salon> salonsNonLancer) {
         this.salonsNonLancer = salonsNonLancer;
     }
 
-    public void setSalonNonLancer(Salon salon, String identSalon) {
-        this.getSalonsNonLancer().put(identSalon, salon);
-    }
-
+    /**
+     * Retourne un Salon suivant son identifiant
+     *
+     * @return Salon
+     */
     public Salon getSalonNonLancer(String identSalon) {
         return this.getSalonsNonLancer().get(identSalon);
     }
 
+    /**
+     * Rajoute un Salon non lancer à la liste
+     *
+     * @param salon
+     * @param identSalon
+     *
+     */
+    public void setSalonNonLancer(Salon salon, String identSalon) {
+        this.getSalonsNonLancer().put(identSalon, salon);
+    }
+
+    /**
+     * Retourne si le serveur est en ligne
+     *
+     * @return serveurEnLigne Vrais ou Faux
+     */
     public boolean isServeurEnLigne() {
         return serveurEnLigne;
     }
 
+    /**
+     * Met à jour le serveur est en ligne
+     *
+     * @param serveurEnLigne Vrais ou Faux
+     *
+     */
     public void setServeurEnLigne(boolean serveurEnLigne) {
         this.serveurEnLigne = serveurEnLigne;
+    }
+
+    /**
+     * Cree la fenetre principal et la rend visible
+     *
+     * @see FPrincipal
+     */
+    public void fenetrePrincipal() {
+        FPrincipal fp = new FPrincipal(this);
+        fp.setVisible(true);
+
     }
 
     //public ServerSocket getSocket_ecoute() {
@@ -108,6 +211,9 @@ public class Controleur implements Serializable {
     //public void setSocket_ecoute(ServerSocket socket_ecoute) {
     //    this.socket_ecoute = socket_ecoute;
     //}
+    /**
+     * Initialise le serveur avec le port 5015
+     */
     public ServerSocket init() {
         ServerSocket socket_ecoute = null;
         int port = 0;
@@ -130,21 +236,41 @@ public class Controleur implements Serializable {
         return socket_ecoute;
     }
 
+    /**
+     * Ouvre un salon
+     *
+     * @see Controleur#setSalon(serveur.Salon, java.lang.String)
+     */
     public void ouvrirUnSalon(String identSalon) {
         this.setSalon(getSalonsNonLancer().remove(identSalon), identSalon);
         notification();
     }
 
+    /**
+     * Ferme un salon
+     *
+     * @see Controleur#setSalonNonLancer(serveur.Salon, java.lang.String)
+     */
     public void fermerUnSalon(String identSalon) {
         notification(identSalon);
         this.setSalonNonLancer(getSalons().remove(identSalon), identSalon);
 
     }
 
+    /**
+     * Notifie
+     *
+     * @return Boolean
+     */
     public boolean notification() {
         return true;
     }
 
+    /**
+     * Notifie
+     *
+     * @return Boolean
+     */
     public boolean notification(String identSalon) {
         try {
             Salon s = getSalon(identSalon);
@@ -166,6 +292,12 @@ public class Controleur implements Serializable {
         return true;
     }
 
+    /**
+     * Lance le serveur pour un client, soit pour inscrire, soit pour connecter
+     * soit pour un salon
+     *
+     * @param socket_ecoute
+     */
     public void lancer(ServerSocket socket_ecoute) {
 
         System.out.println("J'attend les clients :)");
@@ -227,6 +359,9 @@ public class Controleur implements Serializable {
         }
     }
 
+    /**
+     * Permet de restaurer les données du serveur (Utilisateur, Salon)
+     */
     public Controleur restaure() {
         try {
             FileInputStream fichier = new FileInputStream("Fsauv.ser");
@@ -239,7 +374,7 @@ public class Controleur implements Serializable {
     }
 
     /**
-     * sauvegarde des objets de l'application
+     * Permet de sauvegarder les données du serveur (Utilisateur, Salon)
      */
     public void sauve() {
         try {

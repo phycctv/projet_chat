@@ -5,8 +5,11 @@
 package serveur;
 
 /**
+ * <p> MessageBox est la classe qui créé une boite de dialogue
+ * pour informer l'utilisateur suivant le message renseigné</p>
  *
- * @author zhangxi
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
 public class MessageBox extends javax.swing.JDialog {
 

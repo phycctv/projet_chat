@@ -35,7 +35,7 @@ public class FSalon extends javax.swing.JFrame {
 
         setBounds(400, 300, 391, 353);
         initComponents();
-        this.setTitle(this.getTitle() +" : " + identSalon);
+        this.setTitle(this.getTitle() + " : " + identSalon);
         // String[] data = {this.controleur.getNomUtilisateur(), "asd"};
 
         this.jLabel1.setText(this.controleur.getNomUtilisateur() + java.util.ResourceBundle.getBundle("projetclientserveur/Bundle").getString(" : "));
@@ -49,10 +49,22 @@ public class FSalon extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Retourne le controleur de l'application
+     *
+     * @return Le controleur
+     * @see Controleur
+     */
     public Controleur getControleur() {
         return controleur;
     }
 
+    /**
+     * Met à jour le controleur
+     *
+     * @param controleur Le controleur
+     * @see Controleur *
+     */
     public void setControleur(Controleur controleur) {
         this.controleur = controleur;
     }

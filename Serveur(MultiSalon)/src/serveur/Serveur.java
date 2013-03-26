@@ -7,12 +7,15 @@ package serveur;
 import javax.swing.UIManager;
 
 /**
+ * <p> Serveur est la classe qui contien le main qui permet d'exécuter l'application serveur.</p>
  *
- * @author zhangxi
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
 public class Serveur {
 
     /**
+     * Récupère le graphisme du systeme pour swing et créé un objet Controleur
      * @param args the command line arguments
      */
     public static void main(String[] args) {

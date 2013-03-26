@@ -8,8 +8,10 @@ import java.io.*;
 import java.net.Socket;
 
 /**
+ * <p> ThreadClient est la classe qui permet la gestion d'un client connecter.</p>
  *
- * @author zhangxi
+ * @author J. Bodin et X. Zhang
+ * @version 1.0
  */
 public class ThreadClient extends Thread {
 
