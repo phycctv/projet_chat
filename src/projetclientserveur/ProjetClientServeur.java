@@ -32,6 +32,5 @@ public class ProjetClientServeur {
             java.util.logging.Logger.getLogger(FPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         Controleur controleur = new Controleur();
-        //controleur.fenetrePrincipal();
     }
 }

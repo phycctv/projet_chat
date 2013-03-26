@@ -23,7 +23,6 @@ public class ThreadClient extends Thread {
     private Utilisateur utilisateur;
 
     public ThreadClient(int numClient, Socket socket_transfert, Controleur controleur, String nomClient) {
-        //this.salon = salon;
         this.numClient = numClient;
         this.controleur = controleur;
         this.socket_transfert = socket_transfert;

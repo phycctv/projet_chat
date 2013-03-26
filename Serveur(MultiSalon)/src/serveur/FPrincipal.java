@@ -19,13 +19,17 @@ import java.util.logging.Logger;
 public class FPrincipal extends javax.swing.JFrame {
 
     /**
-     * Creates new form FPrincipal
+     * Variable de FPrincipal
+     *
+     * @see Controleur
+     * @see FGestionSalons
+     * @see TheadSalon
+     * @see ServerSocket
      */
     private Controleur controleur;
     private FGestionSalons fGest;
     private TheadSalon ts;
     private ServerSocket socket_ecoute;
-    //ServerSocket socket_ecoute = null;
 
     public FPrincipal(Controleur controleur) {
         this.fGest = new FGestionSalons(this, controleur);
@@ -36,10 +40,22 @@ public class FPrincipal extends javax.swing.JFrame {
         initComponents();
     }
 
+    /**
+     * Retourne le controleur de l'application
+     *
+     * @return Le controleur
+     * @see Controleur
+     */
     public Controleur getControleur() {
         return controleur;
     }
 
+    /**
+     * Met à jour le controleur
+     *
+     * @param controleur Le controleur
+     * @see Controleur *
+     */
     public void setControleur(Controleur controleur) {
         this.controleur = controleur;
     }
@@ -199,7 +215,6 @@ public class FPrincipal extends javax.swing.JFrame {
             for (String identSalon : controleur.getSalons().keySet()) {
                 System.out.println("Le salon " + identSalon + " est lancé.");
             }
-            //fGest.setTheadSalon(ts,ts.getNomSalon());
             System.out.println("Le serveur est démarré.");
 
             this.jMenuItemDemarrer.setEnabled(false);

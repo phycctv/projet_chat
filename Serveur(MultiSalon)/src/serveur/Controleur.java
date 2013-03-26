@@ -21,14 +21,11 @@ public class Controleur implements Serializable {
      * @see Salon
      */
     private static final long serialVersionUID = 1L;
-    //private ServerSocket socket_ecoute;
     private HashMap<String, Utilisateur> utilisateurs;
     private HashMap<String, Salon> salons;
     private HashMap<String, Salon> salonsNonLancer;
     private String nomPremierSalon = "Premier Salon";
     private boolean serveurEnLigne;
-    //ServerSocket socket_ecoute = null;
-    //private FPrincipal fp;
 
     /**
      * Constructeur Controleur. <p> A la construction de l'objet Controleur, on
@@ -205,12 +202,6 @@ public class Controleur implements Serializable {
 
     }
 
-    //public ServerSocket getSocket_ecoute() {
-    //  return socket_ecoute;
-    //}
-    //public void setSocket_ecoute(ServerSocket socket_ecoute) {
-    //    this.socket_ecoute = socket_ecoute;
-    //}
     /**
      * Initialise le serveur avec le port 5015
      */
@@ -243,7 +234,6 @@ public class Controleur implements Serializable {
      */
     public void ouvrirUnSalon(String identSalon) {
         this.setSalon(getSalonsNonLancer().remove(identSalon), identSalon);
-        notification();
     }
 
     /**
@@ -258,18 +248,10 @@ public class Controleur implements Serializable {
     }
 
     /**
-     * Notifie
+     * Notifie les utilisateurs du salon en parametre qu'il a été fermé par le
+     * serveur.
      *
-     * @return Boolean
-     */
-    public boolean notification() {
-        return true;
-    }
-
-    /**
-     * Notifie
-     *
-     * @return Boolean
+     * @return identSalon
      */
     public boolean notification(String identSalon) {
         try {
@@ -283,7 +265,6 @@ public class Controleur implements Serializable {
                 sortie.writeUTF("notification");
                 sortie.writeUTF("le_serveur_ferme_le_salon");
                 socket_transfert.close();
-                //s.getListeClients().get(i).join();
             }
         } catch (Exception e) {
             System.out.println("Problème de notification : " + e.toString());
@@ -302,7 +283,6 @@ public class Controleur implements Serializable {
 
         System.out.println("J'attend les clients :)");
         int numClient = 0;
-        //this.getSalon(nomPremierSalon).setListeClients(new ArrayList<ThreadClient>());
         while (!socket_ecoute.isClosed()) {
             Socket socket_transfert = null;
             try {
@@ -336,7 +316,6 @@ public class Controleur implements Serializable {
                             sortie.writeInt(0);
                             ThreadClient client = new ThreadClient(numClient, socket_transfert, this, nomClient);
                             client.start();
-                            //this.getSalon(nomPremierSalon).getListeClients().remove(client);
                         }
                     } else if (parametre.equals("inscription")) {
                         ThreadInscription inscription = new ThreadInscription(numClient, socket_transfert, this);
@@ -354,7 +333,6 @@ public class Controleur implements Serializable {
                     System.out.println("Problème ouverture connection/inscription : " + e.toString());
                 }
             }
-            //System.out.println("mouahaha");
 
         }
     }

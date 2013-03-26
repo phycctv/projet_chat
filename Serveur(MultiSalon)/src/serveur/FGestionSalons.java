@@ -36,10 +36,22 @@ public class FGestionSalons extends javax.swing.JFrame {
         initComponents();
     }
 
+    /**
+     * Retourne le controleur de l'application
+     *
+     * @return Le controleur
+     * @see Controleur
+     */
     public Controleur getControleur() {
         return controleur;
     }
 
+    /**
+     * Met à jour le controleur
+     *
+     * @param controleur Le controleur
+     * @see Controleur *
+     */
     public void setControleur(Controleur controleur) {
         this.controleur = controleur;
     }
